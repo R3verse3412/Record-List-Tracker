@@ -66,63 +66,82 @@ include "../../header.php"
 </head>
 <body>
     
-<?php
-include "../../nav_user.php"
-?>
+<?php include "../../nav_user.php"?>
+
+<section class="section">
 <div class="container">
     <div class="text-center mb-4">
         <h3>Manhwa</h3>
     </div>
-</div>
 
-<div class="mb-5 container">
     <a href="Manhwa_add.php" class="btn btn-success mb-3">Add New Manhwa</a>
     <div class="alert alert-info text-center mb-4">
         <strong>Total Manhwa:</strong> <?php echo $total_records; ?>
     </div>
-    <table id="Manhwa" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th>Title</th>
-                <th>Author</th>
-                <th>Genre</th>
-                <th>Status</th>
-                <th>Release Date</th>
-                <th>Rating</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-          if ($result->num_rows > 0) {
-              while ($row = $result->fetch_assoc()) {
-                  echo "<tr>
-                          <td><img src='{$row['img']}' alt='Image' style='max-width: 100px;'></td>
-                          <td>{$row['title']}</td>
-                          <td>{$row['author']}</td>
-                          <td>{$row['genre']}</td>
-                          <td>{$row['status']}</td>
-                          <td>{$row['release_date']}</td>
-                          <td>{$row['rating']}</td>
-                          <td>
-                              <a href='Manhwa_edit.php?id={$row['id']}' class='btn btn-primary'>Edit</a>
-                              <a href='Manhwa_delete.php?id={$row['id']}' class='btn btn-danger'>Delete</a>
-                              <button class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#manhwaModal' 
-                                  data-id='{$row['id']}' data-title='{$row['title']}' data-description='{$row['description']}' 
-                                  data-genre='{$row['genre']}' data-rating='{$row['rating']}' data-release_date='{$row['release_date']}' 
-                                  data-img='{$row['img']}' data-author='{$row['author']}' data-status='{$row['status']}'>Show</button>
-                          </td>
-                        </tr>";
-              }
-          } else {
-              echo "<tr><td colspan='8' class='text-center'>No records found</td></tr>";
-          }
-          ?>
+    
+    
+    <!-- Filter Search and Entries Dropdown -->
+    <div class="row d-flex justify-content-between mb-4">
+            <div class="col-md-6">
+                <input type="text" id="filter-search" class="form-control" placeholder="Search for Manhwa by title or year...">
+            </div>
+            <div class="col-md-2">
+                <select id="entries-dropdown" class="form-select">
+                    <option value="4">4 entries</option>
+                    <option value="8">8 entries</option>
+                    <option value="12">12 entries</option>
+                    <option value="16">16 entries</option>
+                </select>
+            </div>
+        </div>
 
-        </tbody>
-    </table>
+        
+        <!-- Manhwa Cards -->
+        <div class="row d-flex justify-content-center" id="manhwa-container">
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<div class="col-md-auto mb-3 manhwa-card">
+                        <div class="card shadow">
+                            <div class="card-body d-flex justify-content-center img_manhwa a">
+                                <a>
+                                    <img src="' . $row['img'] . '" alt="" class="" style="height: 210px;">
+                                </a>
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="text-title fs-5">' . $row['title'] . '</p>
+                                <p class="text-year fs-8">' . $row['release_date'] . '</p>
+                                <a href="Manhwa.php?id=' . $row['id'] . '" class="btn btn-warning">Edit</a>
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#manhwaModal" 
+                                    data-id="' . $row['id'] . '" 
+                                    data-title="' . htmlspecialchars($row['title']) . '" 
+                                    data-author="' . htmlspecialchars($row['author']) . '"
+                                    data-description="' . htmlspecialchars($row['description']) . '" 
+                                    data-genre="' . htmlspecialchars($row['genre']) . '" 
+                                    data-rating="' . htmlspecialchars($row['rating']) . '" 
+                                    data-release_date="' . htmlspecialchars($row['release_date']) . '" 
+                                    data-status="' . htmlspecialchars($row['status']) . '"
+                                    data-img="' . htmlspecialchars($row['img']) . '">See</button>
+                                <a href="manhwa_delete.php?id=' . $row['id'] . '" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>';
+                }
+            }
+            ?>
+        </div>
+        
+        <!-- Previous and Next buttons -->
+        <div class="row  d-flex justify-content-center mt-4">
+            <div class="col-md-auto mb-5">
+                <button class="btn btn-primary" id="prev-button">Previous</button>
+                <button class="btn btn-primary" id="next-button">Next</button>
+            </div>
+        </div>
 </div>
+</section>
+
+
 <!-- Modal -->
 <div class="modal fade" id="manhwaModal" tabindex="-1" aria-labelledby="manhwaModalLabel" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog text-center">
@@ -133,11 +152,11 @@ include "../../nav_user.php"
             </div>
             <div class="modal-body">
                 <p><strong>Title:</strong> <span id="manhwaTitle"></span></p>
+                <p><strong>Author:</strong> <span id="manhwaAuthor"></span></p>
                 <p><strong>Description:</strong> <span id="manhwaDescription"></span></p>
                 <p><strong>Genre:</strong> <span id="manhwaGenre"></span></p>
                 <p><strong>Rating:</strong> <span id="manhwaRating"></span></p>
                 <p><strong>Release Date:</strong> <span id="manhwaRelease_Date"></span></p>
-                <p><strong>Author:</strong> <span id="manhwaAuthor"></span></p>
                 <p><strong>Status:</strong> <span id="manhwaStatus"></span></p>
                 <img id="manhwaImage" src="" alt="Image" style="max-width: 250px; max-height: 300px;">
             </div>

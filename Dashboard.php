@@ -211,11 +211,11 @@ $conn->close();
 
 </style>
 
-<body>
+<body style="background-color: #181818;">
     <?php include "nav.php"; ?>
  
     <div class="mb-5 container d-flex justify-content-left">
-        <div class="text-header">Dashboard</div>
+        <div class="text-header text-white">Dashboard</div>
     </div>
 
     <div class="container mb-5">
@@ -362,7 +362,7 @@ $conn->close();
                     </a>
                 </div>
                 </div>
-                    <div class="col-lg-3 col-sm-6 mb-3">
+                   <div class="col-lg-3 col-sm-6 mb-3">
                     <div class="card img gradient-2">
                     <a href="Manhwa_18/PAGES/Manhwa_18.php" id="tags">
                     <div class="card-body">

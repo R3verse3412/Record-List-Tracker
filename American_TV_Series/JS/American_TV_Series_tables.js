@@ -1,46 +1,112 @@
-new DataTable('#American_TV_Series');
+document.addEventListener('DOMContentLoaded', function() {
+    const filterInput = document.getElementById('filter-search');
+    const entriesDropdown = document.getElementById('entries-dropdown');
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+    const seriesContainer = document.getElementById('american-tv-series-container');
+    const seriesCards = document.querySelectorAll('.american-tv-series-card');
+    let currentPage = 1;
+    let entriesPerPage = parseInt(entriesDropdown.value);
+    let filteredCards = Array.from(seriesCards);
 
-$('#tvModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); // Button that triggered the modal
-    var name = button.data('name');
-    var summary = button.data('summary');
-    var genre = button.data('genre');
-    var director = button.data('director');
-    var rating = button.data('rating');
-    var year = button.data('year');
-    var img = button.data('img');
-    var cast = button.data('cast');
-
-    // Update the modal's content
-    var modal = $(this);
-    modal.find('#tvName').text(name);
-    modal.find('#tvSummary').text(summary);
-    modal.find('#tvGenre').text(genre);
-    modal.find('#tvDirector').text(director);
-    modal.find('#tvRating').text(rating);
-    modal.find('#tvYear').text(year);
-    modal.find('#tvImage').attr('src', img);
-
-    // Clear previous cast details in the carousel
-    modal.find('#tvCastCarousel').empty();
-
-    // Parse and display cast members in the carousel
-    if (cast) {
-        var castArray = cast.split(';');
-        castArray.forEach(function (castMember, index) {
-            var [castName, castImg] = castMember.split('|');
-            if (castName && castImg) {
-                var activeClass = index === 0 ? 'active' : '';
-                var castElement = `
-                    <div class="carousel-item ${activeClass}">
-                        <div>
-                            <p><strong>Name:</strong> ${castName}</p>
-                            <img src="${castImg}" alt="Cast Image" style="max-width: 100px; border: 2px solid black; border-radius: 50px;">
-                        </div>
-                    </div>
-                `;
-                modal.find('#tvCastCarousel').append(castElement);
-            }
+    function filterSeries() {
+        const filterValue = filterInput.value.toLowerCase();
+        filteredCards = Array.from(seriesCards).filter(card => {
+            const title = card.querySelector('.text-title').textContent.toLowerCase();
+            const year = card.querySelector('.text-year').textContent.toLowerCase();
+            return title.includes(filterValue) || year.includes(filterValue);
         });
     }
+
+    function renderPage() {
+        filterSeries();
+        const totalPages = Math.ceil(filteredCards.length / entriesPerPage);
+        currentPage = Math.min(currentPage, totalPages || 1);
+
+        seriesCards.forEach(card => card.style.display = 'none');
+        
+        filteredCards.slice((currentPage - 1) * entriesPerPage, currentPage * entriesPerPage)
+            .forEach(card => card.style.display = 'block');
+
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages || totalPages === 0;
+    }
+
+    filterInput.addEventListener('input', function() {
+        currentPage = 1;
+        renderPage();
+    });
+
+    entriesDropdown.addEventListener('change', function() {
+        entriesPerPage = parseInt(this.value);
+        currentPage = 1;
+        renderPage();
+    });
+
+    prevButton.addEventListener('click', function() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderPage();
+        }
+    });
+
+    nextButton.addEventListener('click', function() {
+        const totalPages = Math.ceil(filteredCards.length / entriesPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderPage();
+        }
+    });
+
+    renderPage();
+
+    // Modal functionality
+    var seriesModal = document.getElementById('seriesModal')
+    seriesModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget
+        
+        var seriesName = button.getAttribute('data-name')
+        var seriesSummary = button.getAttribute('data-summary')
+        var seriesGenre = button.getAttribute('data-genre')
+        var seriesDirector = button.getAttribute('data-director')
+        var seriesCast = button.getAttribute('data-cast')
+        var seriesRating = button.getAttribute('data-rating')
+        var seriesYear = button.getAttribute('data-year')
+        var seriesImage = button.getAttribute('data-img')
+
+        var modalTitle = seriesModal.querySelector('.modal-title')
+        var modalBodyName = seriesModal.querySelector('#seriesName')
+        var modalBodySummary = seriesModal.querySelector('#seriesSummary')
+        var modalBodyGenre = seriesModal.querySelector('#seriesGenre')
+        var modalBodyDirector = seriesModal.querySelector('#seriesDirector')
+        var modalBodyCast = seriesModal.querySelector('#seriesCast')
+        var modalBodyRating = seriesModal.querySelector('#seriesRating')
+        var modalBodyYear = seriesModal.querySelector('#seriesYear')
+        var modalBodyImage = seriesModal.querySelector('#seriesImage')
+
+        modalTitle.textContent = 'TV Series Details: ' + seriesName
+        modalBodyName.textContent = seriesName
+        modalBodySummary.textContent = seriesSummary
+        modalBodyGenre.textContent = seriesGenre
+        modalBodyDirector.textContent = seriesDirector
+        modalBodyCast.textContent = seriesCast
+        modalBodyRating.textContent = seriesRating
+        modalBodyYear.textContent = seriesYear
+        modalBodyImage.src = seriesImage
+
+        var castString = button.getAttribute('data-cast');
+        var castMembers = castString.split('|');
+        var carouselInner = seriesModal.querySelector('#seriesCastCarousel');
+        carouselInner.innerHTML = '';
+        castMembers.forEach(function(member, index) {
+            var [name, imgUrl] = member.split(',');
+            var div = document.createElement('div');
+            div.className = index === 0 ? 'carousel-item active' : 'carousel-item';
+            div.innerHTML = `
+                <h5>${name}</h5>
+                <img src="${imgUrl}" alt="${name}" style="max-width: 200px; max-height: 200px;">
+            `;
+            carouselInner.appendChild(div);
+        });
+    })
 });

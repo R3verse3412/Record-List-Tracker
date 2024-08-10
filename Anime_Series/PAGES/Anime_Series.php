@@ -71,73 +71,99 @@ $total_records = $row_count['count'];
 <?php
 include "../../nav_user.php"
 ?>
-<div class="container">
-    <div class="text-center mb-4">
-        <h3>Anime Series</h3>
-    </div>
-</div>
 
-<div class="mb-5 container">
-    <a href="Anime_Series_add.php" class="btn btn-success mb-3">Add New Anime Series</a>
-    <div class="alert alert-info text-center mb-4">
-        <strong>Total Anime Series:</strong> <?php echo $total_records; ?>
-    </div>
-    <table id="Anime_Series" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Genre</th>
-                <th>Ratings</th>
-                <th>Year</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>
-                        <td><img src='{$row['img']}' alt='Image' style='max-width: 100px;'></td>
-                        <td>{$row['name']}</td>
-                        <td>{$row['genre']}</td>
-                        <td>{$row['rating']}</td>
-                        <td>{$row['year']}</td>
-                        <td>
-                            <a href='Anime_Series_Edit.php?id={$row['id']}' class='btn btn-primary'>Edit</a>
-                            <a href='Anime_Series_Delete.php?id={$row['id']}' class='btn btn-danger'>Delete</a>
-                            <button class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#animeseriesModal' 
-                                data-id='{$row['id']}' data-name='{$row['name']}' data-summary='{$row['summary']}' 
-                                data-genre='{$row['genre']}' data-rating='{$row['rating']}' data-year='{$row['year']}' 
-                                data-img='{$row['img']}' data-episodes='{$row['episodes']}' data-studio='{$row['studio']}'>Show</button>
-                        </td>
-                      </tr>";
+
+<section class="section">
+    <div class="container">
+    <h2 class="text-center mb-5">Anime Series</h2>
+
+    <div class="mb-4">
+            <a href="Anime_Series_add.php" class="btn btn-success mb-3">Add New Anime Series</a>
+            <div class="alert alert-info text-center">
+                <strong>Total Series:</strong> <?php echo $total_records; ?>
+            </div>
+        </div>
+
+         <!-- Filter Search and Entries Dropdown -->
+         <div class="row d-flex justify-content-between mb-4">
+            <div class="col-md-6">
+                <input type="text" id="filter-search" class="form-control" placeholder="Search for Series by title or year...">
+            </div>
+            <div class="col-md-2">
+                <select id="entries-dropdown" class="form-select">
+                    <option value="4">4 entries</option>
+                    <option value="8">8 entries</option>
+                    <option value="12">12 entries</option>
+                    <option value="16">16 entries</option>
+                </select>
+            </div>
+        </div>
+
+          <!-- Movie Cards -->
+          <div class="row d-flex justify-content-center" id="movies-container">
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<div class="col-md-auto mb-3 anime-series-card">
+                        <div class="card shadow">
+                            <div class="card-body d-flex justify-content-center img_anime_series a">
+                                <a>
+                                    <img src="' . $row['img'] . '" alt="" class="" style="height: 210px;">
+                                </a>
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="text-title fs-5">' . $row['name'] . '</p>
+                                <p class="text-year fs-8">' . $row['year'] . '</p>
+                                <a href="Anime_Series_edit.php?id=' . $row['id'] . '" class="btn btn-warning">Edit</a>
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#movieModal" 
+                                    data-id="' . $row['id'] . '" 
+                                    data-name="' . htmlspecialchars($row['name']) . '" 
+                                    data-summary="' . htmlspecialchars($row['summary']) . '" 
+                                    data-genre="' . htmlspecialchars($row['genre']) . '" 
+                                    data-rating="' . htmlspecialchars($row['rating']) . '" 
+                                    data-year="' . htmlspecialchars($row['year']) . '" 
+                                    data-episodes="' . htmlspecialchars($row['episodes']) . '"
+                                    data-studio="' . htmlspecialchars($row['studio']) . '"
+                                    data-img="' . htmlspecialchars($row['img']) . '" >See</button>
+                                <a href="Anime_Series_delete.php?id=' . $row['id'] . '" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>';
+                }
             }
-        } else {
-            echo "<tr><td colspan='8' class='text-center'>No records found</td></tr>";
-        }
-        ?>
+            ?>
+        </div>
+        
+        <!-- Previous and Next buttons -->
+        <div class="row  d-flex justify-content-center mt-4">
+            <div class="col-md-auto mb-5">
+                <button class="btn btn-primary" id="prev-button">Previous</button>
+                <button class="btn btn-primary" id="next-button">Next</button>
+            </div>
+        </div>
+    </div>
 
-        </tbody>
-    </table>
-</div>
+
+    </div>
+</section>
+
 <!-- Modal -->
-<div class="modal fade" id="animeseriesModal" tabindex="-1" aria-labelledby="animeseriesModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog text-center">
+<div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true" data-bs-backdrop="static">
+    <div class="modal-dialog modal-lg text-center">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-center" id="animeseriesModalLabel">Anime Series Details</h5>
+                <h5 class="modal-title " id="movieModalLabel">Anime Series Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <p><strong>Name:</strong> <span id="animeseriesName"></span></p>
-                <p><strong>Summary:</strong> <span id="animeseriesSummary"></span></p>
-                <p><strong>Genre:</strong> <span id="animeseriesGenre"></span></p>
-                <p><strong>Rating:</strong> <span id="animeseriesRating"></span></p>
-                <p><strong>Year:</strong> <span id="animeseriesYear"></span></p>
-                <p><strong>Episodes:</strong> <span id="animeseriesEpisodes"></span></p>
-                <p><strong>Studio:</strong> <span id="animeseriesStudio"></span></p>
-                <img id="animeseriesImage" src="" alt="Image" style="max-width: 250px; max-height: 300px;">
+                <p><strong>Name:</strong> <span id="movieName"></span></p>
+                <p><strong>Summary:</strong> <span id="movieSummary"></span></p>
+                <p><strong>Genre:</strong> <span id="movieGenre"></span></p>
+                <p><strong>Rating:</strong> <span id="movieRating"></span></p>
+                <p><strong>Year:</strong> <span id="movieYear"></span></p>
+                <p><strong>Episodes:</strong> <span id="movieEpisodes"></span></p>
+                <p><strong>Studio:</strong> <span id="movieStudio"></span></p>
+                <img id="movieImage" src="" alt="Image" style="max-width: 250px; max-height: 300px;">
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -151,6 +177,105 @@ include "../../nav_user.php"
 
 <script src="../JS/Anime_Series_tables.js"></script>
 
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterInput = document.getElementById('filter-search');
+    const entriesDropdown = document.getElementById('entries-dropdown');
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+    const moviesContainer = document.getElementById('movies-container');
+    const movieCards = document.querySelectorAll('.anime-series-card');
+    let currentPage = 1;
+    let entriesPerPage = parseInt(entriesDropdown.value);
+
+    function filterMovies() {
+        const filterValue = filterInput.value.toLowerCase();
+        return Array.from(movieCards).filter(card => {
+            const title = card.querySelector('.text-title').textContent.toLowerCase();
+            const year = card.querySelector('.text-year').textContent.toLowerCase();
+            return title.includes(filterValue) || year.includes(filterValue);
+        });
+    }
+
+    function renderPage() {
+        const filteredCards = filterMovies();
+        const totalPages = Math.ceil(filteredCards.length / entriesPerPage);
+        currentPage = Math.min(currentPage, totalPages || 1);
+
+        movieCards.forEach(card => card.style.display = 'none');
+        
+        filteredCards.slice((currentPage - 1) * entriesPerPage, currentPage * entriesPerPage)
+            .forEach(card => card.style.display = 'block');
+
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages || totalPages === 0;
+    }
+
+    filterInput.addEventListener('input', function() {
+        currentPage = 1;
+        renderPage();
+    });
+
+    entriesDropdown.addEventListener('change', function() {
+        entriesPerPage = parseInt(this.value);
+        currentPage = 1;
+        renderPage();
+    });
+
+    prevButton.addEventListener('click', function() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderPage();
+        }
+    });
+
+    nextButton.addEventListener('click', function() {
+        const filteredCards = filterMovies();
+        const totalPages = Math.ceil(filteredCards.length / entriesPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderPage();
+        }
+    });
+
+    renderPage();
+
+    // Modal functionality
+    const movieModal = document.getElementById('movieModal');
+    movieModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+        
+        const movieName = button.getAttribute('data-name');
+        const movieSummary = button.getAttribute('data-summary');
+        const movieGenre = button.getAttribute('data-genre');
+        const movieRating = button.getAttribute('data-rating');
+        const movieYear = button.getAttribute('data-year');
+        const movieEpisodes = button.getAttribute('data-episodes');
+        const movieStudio = button.getAttribute('data-studio');
+        const movieImage = button.getAttribute('data-img');
+
+        const modalTitle = movieModal.querySelector('.modal-title');
+        const modalBodyName = movieModal.querySelector('#movieName');
+        const modalBodySummary = movieModal.querySelector('#movieSummary');
+        const modalBodyGenre = movieModal.querySelector('#movieGenre');
+        const modalBodyRating = movieModal.querySelector('#movieRating');
+        const modalBodyYear = movieModal.querySelector('#movieYear');
+        const modalBodyEpisodes = movieModal.querySelector('#movieEpisodes');
+        const modalBodyStudio = movieModal.querySelector('#movieStudio');
+        const modalBodyImage = movieModal.querySelector('#movieImage');
+
+        modalTitle.textContent = 'Anime Series Details: ' + movieName;
+        modalBodyName.textContent = movieName;
+        modalBodySummary.textContent = movieSummary;
+        modalBodyGenre.textContent = movieGenre;
+        modalBodyRating.textContent = movieRating;
+        modalBodyYear.textContent = movieYear;
+        modalBodyEpisodes.textContent = movieEpisodes;
+        modalBodyStudio.textContent = movieStudio;
+        modalBodyImage.src = movieImage;
+    });
+});
+</script>
 
 
 </body>

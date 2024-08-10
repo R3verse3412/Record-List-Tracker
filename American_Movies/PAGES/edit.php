@@ -188,9 +188,11 @@ include "../../nav_user.php"
                     <button type="button" class="btn btn-secondary" onclick="addCastMember()">Add Cast Member</button>
                 </div>
                 <div class="mb-5 d-flex justify-content-center">
+                    <div class="col-md-auto">
                     <button type="submit" class="btn btn-success" name="submit">Update</button>
-                    <a href="American_Movies.php" class="btn btn-danger">Cancel</a>
+                    <button href="American_Movies.php" class="btn btn-danger">Cancel</button>
                     <input type="hidden" name="id" value="<?php echo $id; ?>">
+                    </div>
                 </div>
             </form>
         </div>

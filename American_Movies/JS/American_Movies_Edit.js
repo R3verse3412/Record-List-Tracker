@@ -3,14 +3,26 @@ function addCastMember() {
     const div = document.createElement('div');
     div.classList.add('cast-member', 'mb-3');
     div.innerHTML = `
-        <input type="text" class="form-control mb-2" name="cast_name[]" placeholder="Cast Name">
-        <input type="file" class="form-control-file mb-2" name="cast_img[]">
-        <button type="button" class="btn btn-danger btn-sm" onclick="removeCastMember(this)">Delete</button>
+        <div class="input-group mb-2">
+            <input type="text" class="form-control" name="cast_name[]" placeholder="Cast Name" required>
+            <input type="file" class="form-control" name="cast_img[]" accept="image/*">
+            <button type="button" class="btn btn-danger" onclick="removeCastMember(this)">Delete</button>
+        </div>
     `;
     container.appendChild(div);
 }
 
 function removeCastMember(button) {
-    const div = button.parentElement;
-    div.remove();
+    const castMember = button.closest('.cast-member');
+    if (castMember) {
+        castMember.remove();
+    }
 }
+
+// Add event listener to the "Add Cast Member" button
+document.addEventListener('DOMContentLoaded', function() {
+    const addButton = document.getElementById('add-cast-member');
+    if (addButton) {
+        addButton.addEventListener('click', addCastMember);
+    }
+});

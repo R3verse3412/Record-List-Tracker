@@ -67,60 +67,81 @@ $total_records = $row_count['count'];
 </head>
 
 <body>
-<?php
-include "../../nav_user.php"
-?>
+<?php include "../../nav_user.php"?>
 
+<section class="section">
     <div class="container">
-        <div class="text-center mb-4">
-            <h3>Cartoon Movies</h3>
-        </div>
-    </div>
-
-    <div class="mb-5 container">
+    <h2 class="text-center mb-5">Cartoon Movies</h2>
         <a href="Cartoon_Movies_add.php" class="btn btn-success mb-3">Add New Cartoon Movies</a>
         <div class="alert alert-info text-center mb-4">
             <strong>Total Cartoon Movies:</strong> <?php echo $total_records; ?>
         </div>
-        <table id="Cartoon_Movies" class="table table-bordered table-striped">
-            <thead>
-                <tr>
-                    <th>Image</th>
-                    <th>Name</th>
-                    <th>Genre</th>
-                    <th>Ratings</th>
-                    <th>Year</th>
-                    <th>Cast</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        echo "<tr>
-                                <td><img src='{$row['img']}' alt='Image' style='max-width: 100px;'></td>
-                                <td>{$row['name']}</td>
-                                <td>{$row['genre']}</td>
-                                <td>{$row['rating']}</td>
-                                <td>{$row['year']}</td>
-                                 <td>{$row['cast']}</td>
-                                <td>
-                                    <a href='Cartoon_Movies_edit.php?id={$row['id']}' class='btn btn-primary'>Edit</a>
-                                    <a href='Cartoon_Movies_delete.php?id={$row['id']}' class='btn btn-danger'>Delete</a>
-                                    <button class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#cartoonmoviesModal' data-id='{$row['id']}' data-name='{$row['name']}' data-summary='{$row['summary']}' data-genre='{$row['genre']}' data-rating='{$row['rating']}' data-year='{$row['year']}' data-img='{$row['img']}' data-cast='" . htmlspecialchars($row['cast']) . "' data-director='{$row['director']}'>Show</button>
-                                </td>
-                              </tr>";
-                    }
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
 
-    <!-- Modal -->
+         <!-- Filter Search and Entries Dropdown -->
+         <div class="row d-flex justify-content-between mb-4">
+            <div class="col-md-6">
+                <input type="text" id="filter-search" class="form-control" placeholder="Search for Cartoon Movies by title or year...">
+            </div>
+            <div class="col-md-2">
+                <select id="entries-dropdown" class="form-select">
+                    <option value="4">4 entries</option>
+                    <option value="8">8 entries</option>
+                    <option value="12">12 entries</option>
+                    <option value="16">16 entries</option>
+                </select>
+            </div>
+        </div>
+
+              <!-- TV Series Cards -->
+              <div class="row d-flex justify-content-center" id="cartoon-movies-container">
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<div class="col-md-auto mb-3 cartoon-movies-card">
+                        <div class="card shadow">
+                            <div class="card-body d-flex justify-content-center img_american_tv_series a">
+                                <a>
+                                    <img src="' . $row['img'] . '" alt="" class="" style="height: 210px;">
+                                </a>
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="text-title fs-5">' . $row['name'] . '</p>
+                                <p class="text-year fs-8">' . $row['year'] . '</p>
+                                <a href="Cartoon_Movies_edit.php?id=' . $row['id'] . '" class="btn btn-warning">Edit</a>
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cartoonmoviesModal" 
+                                    data-id="' . $row['id'] . '" 
+                                    data-name="' . htmlspecialchars($row['name']) . '" 
+                                    data-summary="' . htmlspecialchars($row['summary']) . '" 
+                                    data-genre="' . htmlspecialchars($row['genre']) . '" 
+                                    data-rating="' . htmlspecialchars($row['rating']) . '" 
+                                    data-year="' . htmlspecialchars($row['year']) . '" 
+                                    data-img="' . htmlspecialchars($row['img']) . '" 
+                                    data-cast="' . htmlspecialchars($row['cast']) . '" 
+                                    data-director="' . htmlspecialchars($row['director']) . '">See</button>
+                                <a href="Cartoon_Movies_delete.php?id=' . $row['id'] . '" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>';
+                }
+            }
+            ?>
+        </div>
+        
+        <!-- Previous and Next buttons -->
+        <div class="row d-flex justify-content-center mt-4">
+            <div class="col-md-auto mb-5">
+                <button class="btn btn-primary" id="prev-button">Previous</button>
+                <button class="btn btn-primary" id="next-button">Next</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+  <!-- Modal -->
 <div class="modal fade" id="cartoonmoviesModal" tabindex="-1" aria-labelledby="cartoonmoviesModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog modal-lg text-center"> <!-- Increased modal size to accommodate the carousel -->
+    <div class="modal-dialog modal-lg text-center">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title " id="cartoonmoviesModalLabel">Cartoon Movie Details</h5>
@@ -161,8 +182,6 @@ include "../../nav_user.php"
 
 
     <script src="../JS/Cartoon_Movies_tables.js"> </script> 
-
-
 
 </body>
 

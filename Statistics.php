@@ -71,7 +71,7 @@ $conn->close();
     /* Your CSS styles here */
 </style>
 
-<body>
+<body style="background-color: #181818;">
     <?php include "nav.php"; ?>
     <section class="py-3 py-md-5">
         <div class="container">
@@ -81,7 +81,7 @@ $conn->close();
                         <div class="card-body p-4">
                             <div class="d-block d-sm-flex align-items-center justify-content-between mb-3">
                                 <div class="mb-3 mb-sm-0">
-                                    <h5 class="card-title widget-card-title">Record List</h5>
+                                    <h5 class="card-title widget-card-title">Statistics</h5>
                                 </div>
                                 <div>
                                     <form method="post" action="">

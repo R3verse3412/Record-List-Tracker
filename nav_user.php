@@ -2,7 +2,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-light justify-content-between fs-3 mb-5" style="background-color: #84eab3;">
   <div class="container-fluid">
-  <span onclick="window.location.href='../../Record_List_Page.php'" class="navbar-brand mx-auto" style="cursor: pointer;">Record List</span>
+  <span onclick="window.location.href='../../Record_List_Page.php'" class="navbar-brand mx-auto" style="cursor: pointer;">Record List Tracker</span>
  
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>

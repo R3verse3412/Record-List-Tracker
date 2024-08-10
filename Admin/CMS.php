@@ -156,7 +156,7 @@ if ($upload_result->num_rows > 0) {
             <div class="mb-3">
                 <textarea class="form-control" name="about" rows="3"><?php echo htmlspecialchars($about); ?></textarea>
             </div>
-            <div class="mb-3 d-flex justify-content-center">
+            <div class="mb-5 d-flex justify-content-center">
                 <button class="btn btn-success" type="submit">Save</button>
             </div>
         </form>

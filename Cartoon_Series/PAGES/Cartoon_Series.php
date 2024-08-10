@@ -70,62 +70,82 @@ include "../../header.php"
 <?php
 include "../../nav_user.php"
 ?>
-<div class="container">
-    <div class="text-center mb-4">
-        <h3>Cartoon Series</h3>
-    </div>
-</div>
 
-<div class="mb-5 container">
-    <a href="Cartoon_Series_add.php" class="btn btn-success mb-3">Add New Anime Series</a>
+<section class="section">
+    <div class="container">
+    <h2 class="text-center mb-5">Cartoon Series</h2>
+
+    <a href="Cartoon_Series_add.php" class="btn btn-success mb-3">Add New Cartoon Series</a>
     <div class="alert alert-info text-center mb-4">
         <strong>Total Cartoon Series:</strong> <?php echo $total_records; ?>
     </div>
-    <table id="Cartoon_Series" class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Genre</th>
-                <th>Ratings</th>
-                <th>Year</th>
-                <th>Actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        <?php
-        if ($result->num_rows > 0) {
-            while ($row = $result->fetch_assoc()) {
-                echo "<tr>
-                        <td><img src='{$row['img']}' alt='Image' style='max-width: 100px;'></td>
-                        <td>{$row['name']}</td>
-                        <td>{$row['genre']}</td>
-                        <td>{$row['rating']}</td>
-                        <td>{$row['year']}</td>
-                        <td>
-                            <a href='Cartoon_Series_edit.php?id={$row['id']}' class='btn btn-primary'>Edit</a>
-                            <a href='Cartoon_Series_delete.php?id={$row['id']}' class='btn btn-danger'>Delete</a>
-                            <button class='btn btn-warning' data-bs-toggle='modal' data-bs-target='#cartoonseriesModal' 
-                                data-id='{$row['id']}' data-name='{$row['name']}' data-summary='{$row['summary']}' 
-                                data-genre='{$row['genre']}' data-rating='{$row['rating']}' data-year='{$row['year']}' 
-                                data-img='{$row['img']}' data-episodes='{$row['episodes']}' data-studio='{$row['studio']}'>Show</button>
-                        </td>
-                      </tr>";
-            }
-        } else {
-            echo "<tr><td colspan='8' class='text-center'>No records found</td></tr>";
-        }
-        ?>
 
-        </tbody>
-    </table>
-</div>
+        <!-- Filter Search and Entries Dropdown -->
+        <div class="row d-flex justify-content-between mb-4">
+            <div class="col-md-6">
+                <input type="text" id="filter-search" class="form-control" placeholder="Search for Cartoon Series">
+            </div>
+            <div class="col-md-2">
+                <select id="entries-dropdown" class="form-select">
+                    <option value="4">4 entries</option>
+                    <option value="8">8 entries</option>
+                    <option value="12">12 entries</option>
+                    <option value="16">16 entries</option>
+                </select>
+            </div>
+        </div>
+
+      <!-- Movie Cards -->
+      <div class="row d-flex justify-content-center" id="cartoon-series-container">
+            <?php
+            if ($result->num_rows > 0) {
+                while ($row = $result->fetch_assoc()) {
+                    echo '<div class="col-md-auto mb-3 cartoon-series-card">
+                        <div class="card shadow">
+                            <div class="card-body d-flex justify-content-center img_cartoon_movies a">
+                                <a>
+                                    <img src="' . $row['img'] . '" alt="" class="" style="height: 210px;">
+                                </a>
+                            </div>
+                            <div class="card-body text-center">
+                                <p class="text-title fs-5">' . $row['name'] . '</p>
+                                <p class="text-year fs-8">' . $row['year'] . '</p>
+                                <a href="Cartoon_Series_edit.php?id=' . $row['id'] . '" class="btn btn-warning">Edit</a>
+                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#cartoonseriesModal" 
+                                    data-id="' . $row['id'] . '" 
+                                    data-name="' . htmlspecialchars($row['name']) . '" 
+                                    data-summary="' . htmlspecialchars($row['summary']) . '" 
+                                    data-genre="' . htmlspecialchars($row['genre']) . '" 
+                                    data-rating="' . htmlspecialchars($row['rating']) . '" 
+                                    data-year="' . htmlspecialchars($row['year']) . '" 
+                                    data-episodes="' . htmlspecialchars($row['episodes']) . '"
+                                    data-studio="' . htmlspecialchars($row['studio']) . '"
+                                    data-img="' . htmlspecialchars($row['img']) . '" >See</button>
+                                <a href="Anime_Series_delete.php?id=' . $row['id'] . '" class="btn btn-danger">Delete</a>
+                            </div>
+                        </div>
+                    </div>';
+                }
+            }
+            ?>
+        </div>
+        
+        <!-- Previous and Next buttons -->
+        <div class="row  d-flex justify-content-center mt-4">
+            <div class="col-md-auto mb-5">
+                <button class="btn btn-primary" id="prev-button">Previous</button>
+                <button class="btn btn-primary" id="next-button">Next</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
 <!-- Modal -->
 <div class="modal fade" id="cartoonseriesModal" tabindex="-1" aria-labelledby="cartoonseriesModalLabel" aria-hidden="true" data-bs-backdrop="static">
     <div class="modal-dialog text-center">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title text-center" id="cartoonseriesModalLabel">Anime Series Details</h5>
+                <h5 class="modal-title text-center" id="cartoonseriesModalLabel">Cartoon Series Details</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -144,11 +164,14 @@ include "../../nav_user.php"
         </div>
     </div>
 </div>
+
 <?php
     include "../../Footer.php"
 ?>
 
 <script src="../JS/Cartoon_Series_tables.js"></script> 
+
+
 
 </body>
 </html>

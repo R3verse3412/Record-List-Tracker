@@ -1,4 +1,4 @@
-    new DataTable('#Anime_Series');
+
 
 
 // Event listener for opening the modal

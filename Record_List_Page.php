@@ -42,12 +42,10 @@ $conn->close();
    
 </head>
 <style>
-    .LOGGED{
-        font-size: 20px;
-    }
     .bg{
         background-color: #181818;
     }
+    
 </style>
 <body class="bg">
 
@@ -56,7 +54,7 @@ $conn->close();
 ?>
 
    
-
+<section class="section">
     <div class="container">
         <div class="row mb-5">
             <div class="col mb-5 d-flex justify-content-center">
@@ -65,7 +63,7 @@ $conn->close();
             <div class="card-body">
                 <h5 class="card-title text-center">American Movies</h5>
                 <div class="mb-2">
-                <a href="American_Movies/PAGES/American_Movies.php" class="btn btn-primary d-flex justify-content-center">Go somewhere</a>
+                <a href="American_Movies/PAGES/American_Movies.php" class="btn btn-primary d-flex justify-content-center">OPEN</a>
                 </div>
             </div>
         </div>
@@ -76,7 +74,7 @@ $conn->close();
             <div class="card-body">
                 <h5 class="card-title text-center">American TV Series</h5>
                 <div class="mb-2">
-                <a href="American_TV_Series/PAGES/American_TV_Series.php" class="btn btn-primary d-flex justify-content-center">Go somewhere</a>
+                <a href="American_TV_Series/PAGES/American_TV_Series.php" class="btn btn-primary d-flex justify-content-center">OPEN</a>
                 </div>
             </div>
         </div>
@@ -87,12 +85,15 @@ $conn->close();
             <div class="card-body">
             <h5 class="card-title text-center">Anime Movies</h5>
             <div class="mb-2">
-                <a href="Anime_Movies/PAGES/Anime_Movies.php" class="btn btn-primary d-flex justify-content-center">Go somewhere</a>
+                <a href="Anime_Movies/PAGES/Anime_Movies.php" class="btn btn-primary d-flex justify-content-center">OPEN</a>
             </div>
             </div>
         </div>
         </div>
         </div>
+        </section>
+        <section class="section">
+            <div class="container">
         <div class="row mb-5">
         <div class="col mb-5 d-flex justify-content-center">
         <div class="card img" style="width: 18rem;">
@@ -100,7 +101,7 @@ $conn->close();
             <div class="card-body">
             <h5 class="card-title text-center">Anime Series</h5>
             <div class="mb-2">
-                <a href="Anime_Series/PAGES/Anime_Series.php" class="btn btn-primary d-flex justify-content-center">Go somewhere</a>
+                <a href="Anime_Series/PAGES/Anime_Series.php" class="btn btn-primary d-flex justify-content-center">OPEN</a>
             </div>
             </div>
         </div>
@@ -111,7 +112,7 @@ $conn->close();
             <div class="card-body">
             <h5 class="card-title text-center">Cartoon Movies</h5>
             <div class="mb-2">
-                <a href="Cartoon_Movies/PAGES/Cartoon_Movies.php" class="btn btn-primary d-flex justify-content-center">Go somewhere</a>
+                <a href="Cartoon_Movies/PAGES/Cartoon_Movies.php" class="btn btn-primary d-flex justify-content-center">OPEN</a>
             </div>
             </div>
         </div>
@@ -122,12 +123,16 @@ $conn->close();
             <div class="card-body">
             <h5 class="card-title text-center">Cartoon Series</h5>
             <div class="mb-2">
-                <a href="Cartoon_Series/PAGES/Cartoon_Series.php" class="btn btn-primary d-flex justify-content-center">Go somewhere</a>
+                <a href="Cartoon_Series/PAGES/Cartoon_Series.php" class="btn btn-primary d-flex justify-content-center">OPEN</a>
             </div>
             </div>
         </div>
         </div>
         </div>
+        </div>
+        </section>
+        <section class="section">
+        <div class="container">
         <div class="row mb-5">
         <div class="col mb-5 d-flex justify-content-center">
         <div class="card img" style="width: 18rem;">
@@ -135,7 +140,18 @@ $conn->close();
             <div class="card-body">
             <h5 class="card-title text-center">Games</h5>
             <div class="mb-2">
-                <a href="Games/PAGES/Games.php" class="btn btn-primary d-flex justify-content-center">Go somewhere</a>
+                <a href="Games/PAGES/Games.php" class="btn btn-primary d-flex justify-content-center">OPEN</a>
+            </div>
+            </div>
+        </div>
+</div>
+        <div class="col mb-5 d-flex justify-content-center">
+        <div class="card img" style="width: 18rem;">
+            <img class="card-img-top" src="img/OPM.jpg" alt="Card image cap"  style=" height: 420px;">
+            <div class="card-body">
+            <h5 class="card-title text-center">Manga</h5>
+            <div class="mb-2">
+                <a href="Manga/PAGES/Manga.php" class="btn btn-primary d-flex justify-content-center">OPEN</a>
             </div>
             </div>
         </div>
@@ -146,34 +162,29 @@ $conn->close();
             <div class="card-body">
             <h5 class="card-title text-center">Manhwa</h5>
             <div class="mb-2">
-                <a href="Manhwa/PAGES/Manhwa.php" class="btn btn-primary d-flex justify-content-center">Go somewhere</a>
+                <a href="Manhwa/PAGES/Manhwa.php" class="btn btn-primary d-flex justify-content-center">OPEN</a>
             </div>
             </div>
         </div>
         </div>
-        <div class="col mb-5 d-flex justify-content-center">
-        <div class="card img" style="width: 18rem;">
-            <img class="card-img-top" src="img/OPM.jpg" alt="Card image cap"  style=" height: 420px;">
-            <div class="card-body">
-            <h5 class="card-title text-center">Manga</h5>
-            <div class="mb-2">
-                <a href="Manga/PAGES/Manga.php" class="btn btn-primary d-flex justify-content-center">Go somewhere</a>
-            </div>
-            </div>
         </div>
-        </div>
+        </section>
+        <section class="section">
+        <div class="container">
         <div class="col mb-5 d-flex justify-content-center">
         <div class="card img" style="width: 18rem;">
             <img class="card-img-top" src="..." alt="Card image cap">
             <div class="card-body">
             <h5 class="card-title text-center">Manhwa 18</h5>
             <div class="mb-2">
-                <a href="Manhwa_18/PAGES/Manhwa_18.php" class="btn btn-primary d-flex justify-content-center">Go somewhere</a>
+                <a href="Manhwa_18/PAGES/Manhwa_18.php" class="btn btn-primary d-flex justify-content-center">OPEN</a>
             </div>
             </div>
         </div>
         </div>
         </div>
+        </div>
+        </section>
         
       
 
@@ -182,10 +193,6 @@ $conn->close();
   <?php
     include "Footer.php"
   ?>
-
-
-
-   
 </body>
 
 </html>
