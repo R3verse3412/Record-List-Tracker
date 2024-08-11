@@ -59,29 +59,28 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     renderPage();
-// Event listener for opening the modal
-$('#mangaModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); // Button that triggered the modal
-    var name = button.data('name');
-    var author = button.data('author');
-    var summary = button.data('summary');
-    var genre = button.data('genre');
-    var rating = button.data('rating');
-    var year = button.data('year');
-    var img = button.data('img');
-    var device = button.data('device');
-    var studio = button.data('studio');
 
-    // Update the modal's content
-    var modal = $(this);
-    modal.find('#mangaName').text(name);
-    modal.find('#mangaAuthor').text(author);
-    modal.find('#mangaSummary').text(summary);
-    modal.find('#mangaGenre').text(genre);
-    modal.find('#mangaRating').text(rating);
-    modal.find('#mangaYear').text(year);
-    modal.find('#mangaImage').attr('src', img);
-    modal.find('#mangaDevice').text(device);
-    modal.find('#mangaStudio').text(studio);
-});
+    // Event listener for opening the modal
+    $('#mangaModal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget); // Button that triggered the modal
+        var title = button.data('title');
+        var author = button.data('author');
+        var description = button.data('description');
+        var genre = button.data('genre');
+        var rating = button.data('rating');
+        var release_date = button.data('release_date');
+        var img = button.data('img');
+        var status = button.data('status');
+
+        // Update the modal's content
+        var modal = $(this);
+        modal.find('#mangaTitle').text(title);
+        modal.find('#mangaAuthor').text(author);
+        modal.find('#mangaDescription').text(description);
+        modal.find('#mangaGenre').text(genre);
+        modal.find('#mangaRating').text(rating);
+        modal.find('#mangarelease_date').text(release_date);
+        modal.find('#mangaImage').attr('src', img);
+        modal.find('#mangaStatus').text(status);
+    });
 });

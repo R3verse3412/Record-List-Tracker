@@ -79,7 +79,7 @@ $total_records = $row_count['count'];
     <?php include "../../header.php" ?>
 </head>
 
-<body style="background-color: #181818;">
+<body >
 <?php include "../../nav_user.php" ?>
 
 <section class="section">

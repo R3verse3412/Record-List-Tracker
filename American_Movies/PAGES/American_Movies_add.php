@@ -126,8 +126,10 @@ include "../../nav_user.php"
                     <input type="file" class="form-control-file" id="img" name="img" required>
                 </div>
                 <div class="mb-5 d-flex justify-content-center">
+                <div class="col-md-auto">
                     <button type="submit" class="btn btn-success" name="submit">Save</button>
                     <a href="American_Movies.php" class="btn btn-danger">Cancel</a>
+                </div>
                 </div>
             </form>
         </div>

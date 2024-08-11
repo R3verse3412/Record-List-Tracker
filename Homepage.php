@@ -70,6 +70,7 @@ if ($upload_result->num_rows > 0) {
     
 </style>
 <body style="background-color: #181818;">
+
 <nav class="navbar navbar-expand-lg navbar-light justify-content-between fs-3 mb-5" style="background-color: #84eab3;">
   <div class="container-fluid">
     <a class="navbar-brand">Record List Tracker</a>
@@ -90,6 +91,7 @@ if ($upload_result->num_rows > 0) {
     </div>
   </div>
 </nav>
+
 
 <section class="section">
   <div class="container">
@@ -166,9 +168,8 @@ if ($upload_result->num_rows > 0) {
     </div>
   </section>
 
-  <div class="footer">
     <?php include "Footer.php";?>
-  </div>
+
 </body>
 
 </html>
