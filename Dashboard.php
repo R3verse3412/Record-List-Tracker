@@ -139,7 +139,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Settings</title>
+    <title>Dashboard</title>
     <?php include "header.php"; ?>
 </head>
 <style>
@@ -178,14 +178,53 @@ $conn->close();
         text-decoration: none;
         color:none;
     }
+    .gradient-1 {
+        background: linear-gradient(to bottom, #ee9ca7 , #ffdde1);
+        color: #fff;
+    }
 
     .gradient-2 {
-        background: linear-gradient(to bottom, #ff7e5f, #feb47b);
+        background: linear-gradient(to bottom, #cc2b5e , #753a88);
         color: #fff;
     }
 
     .gradient-3 {
-    background: linear-gradient(to bottom, #a1c4fd, #c2e9fb);
+    background: linear-gradient(to bottom, #2193b0 , #6dd5ed);
+    color: #333;
+    }
+
+    .gradient-4 {
+    background: linear-gradient(to bottom, #ffafbd , #ffc3a0);
+    color: #333;
+    }
+
+    .gradient-5 {
+    background: linear-gradient(to bottom,  #42275a , #734b6d);
+    color: #333;
+    }
+
+    .gradient-6 {
+    background: linear-gradient(to bottom,  #bdc3c7 , #2c3e50);
+    color: #333;
+    }
+
+    .gradient-7 {
+    background: linear-gradient(to bottom,  #de6262 , #ffb88c);
+    color: #333;
+    }
+
+    .gradient-8 {
+    background: linear-gradient(to bottom,  #06beb6 , #48b1bf);
+    color: #333;
+    }
+
+    .gradient-9 {
+    background: linear-gradient(to bottom,   #eb3349 , #f45c43);
+    color: #333;
+    }
+
+    .gradient-10 {
+    background: linear-gradient(to bottom,  #dd5e89 , #f7bb97);
     color: #333;
     }
 
@@ -221,7 +260,7 @@ $conn->close();
     <div class="container mb-5">
         <div class="row mb-3">
             <div class="col mb-3">
-            <div class="card img gradient-2">
+            <div class="card img gradient-1">
                     <a href="American_Movies/PAGES/American_Movies.php" id="tags">
                     <div class="card-body">
                         <h3 class="card-title text-black">American Movies</h3>
@@ -266,7 +305,7 @@ $conn->close();
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 mb-3">
-            <div class="card img gradient-3">
+            <div class="card img gradient-4">
                     <a href="Anime_Series/PAGES/Anime_Series.php" id="tags">
                     <div class="card-body">
                         <h3 class="card-title text-black">Anime Series</h3>
@@ -283,7 +322,7 @@ $conn->close();
             </div>
             <div class="row mb-3">
             <div class="col-lg-3 col-sm-6 mb-3">
-            <div class="card img gradient-2">
+            <div class="card img gradient-5">
                     <a href="Cartoon_Movies/PAGES/Cartoon_Movies.php" id="tags">
                     <div class="card-body">
                         <h3 class="card-title text-black">Cartoon Movies</h3>
@@ -298,7 +337,7 @@ $conn->close();
                 </div>
             </div>
             <div class="col-lg-3 col-sm-6 mb-3">
-            <div class="card img gradient-2">
+            <div class="card img gradient-6">
                     <a href="Cartoon_Series/PAGES/Cartoon_Series.php" id="tags">
                     <div class="card-body">
                         <h3 class="card-title text-black">Cartoon Series</h3>
@@ -313,7 +352,7 @@ $conn->close();
                 </div>
             </div>
                 <div class="col-lg-3 col-sm-6 mb-3">
-                <div class="card img gradient-2">
+                <div class="card img gradient-7">
                     <a href="Games/PAGES/Games.php" id="tags">
                     <div class="card-body">
                         <h3 class="card-title text-black">Games</h3>
@@ -328,7 +367,7 @@ $conn->close();
                 </div>
                 </div>
                 <div class="col-lg-3 col-sm-6 mb-3">
-                <div class="card img gradient-2">
+                <div class="card img gradient-8">
                     <a href="Manga/PAGES/Manga.php" id="tags">
                     <div class="card-body">
                         <h3 class="card-title text-black">Manga</h3>
@@ -348,7 +387,7 @@ $conn->close();
 
                     </div>
                 <div class="col-lg-3 col-sm-6 mb-3">
-                <div class="card img gradient-2">
+                <div class="card img gradient-9">
                     <a href="Manhwa/PAGES/Manhwa.php" id="tags">
                     <div class="card-body">
                         <h3 class="card-title text-black">Manhwa</h3>
@@ -363,7 +402,7 @@ $conn->close();
                 </div>
                 </div>
                    <div class="col-lg-3 col-sm-6 mb-3">
-                    <div class="card img gradient-2">
+                    <div class="card img gradient-10">
                     <a href="Manhwa_18/PAGES/Manhwa_18.php" id="tags">
                     <div class="card-body">
                         <h3 class="card-title text-black">Manhwa 18</h3>

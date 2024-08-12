@@ -68,6 +68,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 }
 
+
+
 // Close connection
 $conn->close();
 ?>
@@ -125,8 +127,10 @@ include "../../nav_user.php"
                     <input type="file" class="form-control-file" id="img" name="img" required>
                 </div>
                 <div class="mb-5 d-flex justify-content-center">
+                <div class="">
                     <button type="submit" class="btn btn-success" name="submit">Save</button>
                     <a href="American_TV_Series.php" class="btn btn-danger">Cancel</a>
+                    </div>
                 </div>
             </form>
         </div>

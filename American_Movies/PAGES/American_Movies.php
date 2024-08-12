@@ -84,7 +84,7 @@ $total_records = $row_count['count'];
 
 <section class="section">
     <div class="container">
-        <h2 class="text-center mb-5 text-white">American Movies</h2>
+        <h2 class="text-center mb-5 ">American Movies</h2>
         
         <div class="mb-4">
             <a href="American_Movies_add.php" class="btn btn-success mb-3">Add New American Movies</a>

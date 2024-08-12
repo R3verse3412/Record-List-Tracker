@@ -243,9 +243,10 @@ $conn->close();
         transition: transform 0.3s ease-out;
     }
 
-    .a{
-        text-decoration: none;
-    }
+    .card.a,
+    .card {
+    text-decoration: none;
+}
 
  
 </style>
@@ -261,7 +262,7 @@ $conn->close();
         <div class="container ">
             <div class="row ">
                 <div class="col mb-5 d-flex justify-content-center">
-                    <a href="American_Movies/PAGES/American_Movies.php" class="card American_Movies">
+                    <a href="American_Movies/PAGES/American_Movies.php" class="card a American_Movies">
                         <div class="overlay"></div>
                         <div class="circle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
@@ -274,7 +275,7 @@ $conn->close();
                     </a>
                 </div>
                 <div class="col mb-5 d-flex justify-content-center">
-                    <a href="American_TV_Series/PAGES/American_TV_Series.php" class="card American_TV_Series">
+                    <a href="American_TV_Series/PAGES/American_TV_Series.php" class="card a American_TV_Series">
                         <div class="overlay"></div>
                         <div class="circle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
@@ -287,7 +288,7 @@ $conn->close();
                     </a>
                 </div>
                 <div class="col mb-5 d-flex justify-content-center">
-                    <a href="Anime_Movies/PAGES/Anime_Movies.php" class="card Anime_Movies">
+                    <a href="Anime_Movies/PAGES/Anime_Movies.php" class="card a Anime_Movies">
                         <div class="overlay"></div>
                         <div class="circle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
@@ -299,7 +300,7 @@ $conn->close();
                     </a>
                 </div>
                 <div class="col mb-5 d-flex justify-content-center">
-                    <a href="Anime_Series/PAGES/Anime_Series.php" class="card Anime_Series">
+                    <a href="Anime_Series/PAGES/Anime_Series.php" class="card a Anime_Series">
                         <div class="overlay"></div>
                         <div class="circle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
@@ -315,7 +316,7 @@ $conn->close();
             </div>
             <div class="row">
             <div class="col mb-5 d-flex justify-content-center">
-                    <a href="Cartoon_Movies/PAGES/Cartoon_Movies.php" class="card Cartoon_Movies">
+                    <a href="Cartoon_Movies/PAGES/Cartoon_Movies.php" class="card a Cartoon_Movies">
                         <div class="overlay"></div>
                         <div class="circle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
@@ -328,7 +329,7 @@ $conn->close();
                     </a>
                 </div>
                 <div class="col mb-5 d-flex justify-content-center">
-                    <a href="Cartoon_Series/PAGES/Cartoon_Series.php" class="card Cartoon_Movies">
+                    <a href="Cartoon_Series/PAGES/Cartoon_Series.php" class="card a Cartoon_Movies">
                         <div class="overlay"></div>
                         <div class="circle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
@@ -341,7 +342,7 @@ $conn->close();
                     </a>
                 </div>
                 <div class="col mb-5 d-flex justify-content-center">
-                    <a href="Games/PAGES/Games.php" class="card Games">
+                    <a href="Games/PAGES/Games.php" class="card a Games">
                         <div class="overlay"></div>
                         <div class="circle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
@@ -354,7 +355,7 @@ $conn->close();
                     </a>
                 </div>
                 <div class="col mb-5 d-flex justify-content-center">
-                    <a href="Manhwa/PAGES/Manhwa.php" class="card Manhwa">
+                    <a href="Manhwa/PAGES/Manhwa.php" class="card a Manhwa">
                         <div class="overlay"></div>
                         <div class="circle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
@@ -369,7 +370,7 @@ $conn->close();
                 </div>
                 <div class="row">
                 <div class="col mb-5 d-flex justify-content-center">
-                    <a href="Manhwa_18/PAGES/Manhwa_18.php" class="card Manhwa">
+                    <a href="Manhwa_18/PAGES/Manhwa_18.php" class="card a Manhwa">
                         <div class="overlay"></div>
                         <div class="circle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
