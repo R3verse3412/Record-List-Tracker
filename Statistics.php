@@ -143,7 +143,7 @@ $conn->close();
     </section>
     <script>
         const chartData = {
-            labels: ['American Movies', 'American Series', 'Anime Movies', 'Anime Series', 'Cartoon Movies', 'Cartoon Series', 'Games', 'Manga', 'Manhwa', 'Manhwa 18'],
+            labels: ['American Movies', 'American TV Series', 'Anime Movies', 'Anime Series', 'Cartoon Movies', 'Cartoon Series', 'Games', 'Manga', 'Manhwa', 'Manhwa 18'],
             datasets: [{
                 label: 'Total Records',
                 data: [

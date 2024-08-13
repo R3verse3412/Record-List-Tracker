@@ -69,6 +69,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var seriesSummary = button.getAttribute('data-summary')
         var seriesGenre = button.getAttribute('data-genre')
         var seriesDirector = button.getAttribute('data-director')
+        var seriesSeason = button.getAttribute('data-season')
         var seriesCast = button.getAttribute('data-cast')
         var seriesRating = button.getAttribute('data-rating')
         var seriesYear = button.getAttribute('data-year')
@@ -79,6 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         var modalBodySummary = seriesModal.querySelector('#seriesSummary')
         var modalBodyGenre = seriesModal.querySelector('#seriesGenre')
         var modalBodyDirector = seriesModal.querySelector('#seriesDirector')
+        var modalBodySeason = seriesModal.querySelector('#seriesSeason')
         var modalBodyCast = seriesModal.querySelector('#seriesCast')
         var modalBodyRating = seriesModal.querySelector('#seriesRating')
         var modalBodyYear = seriesModal.querySelector('#seriesYear')
@@ -89,6 +91,7 @@ document.addEventListener('DOMContentLoaded', function() {
         modalBodySummary.textContent = seriesSummary
         modalBodyGenre.textContent = seriesGenre
         modalBodyDirector.textContent = seriesDirector
+        modalBodySeason.textContent = seriesSeason
         modalBodyCast.textContent = seriesCast
         modalBodyRating.textContent = seriesRating
         modalBodyYear.textContent = seriesYear

@@ -278,7 +278,7 @@ $conn->close();
                 <div class="card img gradient-2">
                     <a href="American_TV_Series/PAGES/American_TV_Series.php" id="tags">
                     <div class="card-body">
-                        <h3 class="card-title text-black">American Series</h3>
+                        <h3 class="card-title text-black">American TV Series</h3>
                         <div class="d-inline-block">
                             <h2 class="text-black ovarallSales"></h2>
                               <p class="text-body d-flex justify-content-center"><?php echo $total_american_tv_series; ?></p>

@@ -29,6 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $genre = $_POST['genre'];
     $rating = $_POST['rating'];
     $director = $_POST['director']; // New field for director
+    $season = $_POST['season']; // New field for director
     $user_id = $_SESSION['user_id']; // Retrieve user ID from session
 
     // Handle file upload
@@ -43,12 +44,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (move_uploaded_file($img_tmp_name, $img_path)) {
             // File successfully uploaded, continue with SQL insert
-            $sql = "INSERT INTO american_tv_series (user_id, name, summary, year, genre, rating, director, img, date_added) VALUES (?, ?, ?, ?, ?, ?, ?, ?, NOW())";
+            $sql = "INSERT INTO american_tv_series (user_id, name, summary, year, genre, rating, director, img, season,  date_added) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, NOW())";
 
             $stmt = $conn->prepare($sql);
 
             // Bind parameters
-            $stmt->bind_param("ississss", $user_id, $name, $summary, $year, $genre, $rating, $director, $img_path);
+            $stmt->bind_param("ississsss", $user_id, $name, $summary, $year, $genre, $rating, $director, $img_path, $season);
 
             if ($stmt->execute()) {
                 // Redirect after successful insertion
@@ -117,6 +118,10 @@ include "../../nav_user.php"
                 <div class="mb-3">
                     <label class="form-label">Rating</label>
                     <input type="number" class="form-control" name="rating" min="1" max="10">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">season</label>
+                    <input type="text" class="form-control" name="season" placeholder="season" required>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Director</label>

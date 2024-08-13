@@ -21,6 +21,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $summary = $_POST['summary'];
     $year = $_POST['year'];
     $genre = $_POST['genre'];
+    $season = $_POST['season'];
     $rating = $_POST['rating'];
     $director = $_POST['director'];
 
@@ -53,9 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $cast_str = implode(';', $cast);
 
-    $sql = "UPDATE american_tv_series SET name=?, summary=?, year=?, img=?, genre=?, rating=?, cast=?, director=? WHERE id=?";
+    $sql = "UPDATE american_tv_series SET name=?, summary=?, year=?, img=?, genre=?, rating=?, season=?, cast=?, director=? WHERE id=?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssisssssi", $name, $summary, $year, $img, $genre, $rating, $cast_str, $director, $id);
+    $stmt->bind_param("ssissssssi", $name, $summary, $year, $img, $genre, $rating, $season, $cast_str, $director, $id);
     
     if ($stmt->execute()) {
         header("Location: American_TV_Series.php");
@@ -82,6 +83,7 @@ if ($result->num_rows > 0) {
     $img = $row['img'];
     $genre = $row['genre'];
     $rating = $row['rating'];
+    $season = $row['season'];
     $cast = $row['cast'];
     $director = $row['director'];
 } else {
@@ -154,6 +156,10 @@ include "../../nav_user.php"
                 <div class="mb-3">
                     <label class="form-label">Rating</label>
                     <input type="number" class="form-control" name="rating" value="<?php echo htmlspecialchars($rating); ?>" min="1" max="10">
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Season</label>
+                    <input type="text" class="form-control" name="season" value="<?php echo htmlspecialchars($season); ?>">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Director</label>
