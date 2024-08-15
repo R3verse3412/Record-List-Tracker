@@ -1,26 +1,97 @@
-new DataTable('#Anime_Movies');
+document.addEventListener('DOMContentLoaded', function () {
+    const filterInput = document.getElementById('filter-search');
+    const entriesDropdown = document.getElementById('entries-dropdown');
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+    const moviesContainer = document.getElementById('anime-movies-container');
+    const movieCards = document.querySelectorAll('.anime-movie-card');
+    let currentPage = 1;
+    let entriesPerPage = parseInt(entriesDropdown.value);
 
+    function filterMovies() {
+        const filterValue = filterInput.value.toLowerCase();
+        return Array.from(movieCards).filter(card => {
+            const title = card.querySelector('.text-title').textContent.toLowerCase();
+            const year = card.querySelector('.text-year').textContent.toLowerCase();
+            return title.includes(filterValue) || year.includes(filterValue);
+        });
+    }
 
-// Event listener for opening the modal
-$('#animemoviesModal').on('show.bs.modal', function (event) {
-    var button = $(event.relatedTarget); // Button that triggered the modal
-    var name = button.data('name');
-    var summary = button.data('summary');
-    var genre = button.data('genre');
-    var rating = button.data('rating');
-    var year = button.data('year');
-    var img = button.data('img');
-    var episodes = button.data('duration');
-    var studio = button.data('studio');
+    function renderPage() {
+        const filteredCards = filterMovies();
+        const totalPages = Math.ceil(filteredCards.length / entriesPerPage);
+        currentPage = Math.min(currentPage, totalPages || 1);
 
-    // Update the modal's content
-    var modal = $(this);
-    modal.find('#animemoviesName').text(name);
-    modal.find('#animemoviesSummary').text(summary);
-    modal.find('#animemoviesGenre').text(genre);
-    modal.find('#animemoviesRating').text(rating);
-    modal.find('#animemoviesYear').text(year);
-    modal.find('#animemoviesImage').attr('src', img);
-    modal.find('#animemoviesDuration').text(episodes);
-    modal.find('#animemoviesStudio').text(studio);
+        movieCards.forEach(card => card.style.display = 'none');
+
+        filteredCards.slice((currentPage - 1) * entriesPerPage, currentPage * entriesPerPage)
+            .forEach(card => card.style.display = 'block');
+
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages || totalPages === 0;
+    }
+
+    filterInput.addEventListener('input', function () {
+        currentPage = 1;
+        renderPage();
+    });
+
+    entriesDropdown.addEventListener('change', function () {
+        entriesPerPage = parseInt(this.value);
+        currentPage = 1;
+        renderPage();
+    });
+
+    prevButton.addEventListener('click', function () {
+        if (currentPage > 1) {
+            currentPage--;
+            renderPage();
+        }
+    });
+
+    nextButton.addEventListener('click', function () {
+        const filteredCards = filterMovies();
+        const totalPages = Math.ceil(filteredCards.length / entriesPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderPage();
+        }
+    });
+
+    renderPage();
+
+    // Modal functionality
+    const movieModal = document.getElementById('movieModal');
+    movieModal.addEventListener('show.bs.modal', function (event) {
+        const button = event.relatedTarget;
+
+        const movieName = button.getAttribute('data-name');
+        const movieSummary = button.getAttribute('data-summary');
+        const movieGenre = button.getAttribute('data-genre');
+        const movieRating = button.getAttribute('data-rating');
+        const movieYear = button.getAttribute('data-year');
+        const movieDuration = button.getAttribute('data-duration');
+        const movieStudio = button.getAttribute('data-studio');
+        const movieImage = button.getAttribute('data-img');
+
+        const modalTitle = movieModal.querySelector('.modal-title');
+        const modalBodyName = movieModal.querySelector('#movieName');
+        const modalBodySummary = movieModal.querySelector('#movieSummary');
+        const modalBodyGenre = movieModal.querySelector('#movieGenre');
+        const modalBodyRating = movieModal.querySelector('#movieRating');
+        const modalBodyYear = movieModal.querySelector('#movieYear');
+        const modalBodyDuration = movieModal.querySelector('#movieDuration');
+        const modalBodyStudio = movieModal.querySelector('#movieStudio');
+        const modalBodyImage = movieModal.querySelector('#movieImage');
+
+        modalTitle.textContent = 'Movie Details: ' + movieName;
+        modalBodyName.textContent = movieName;
+        modalBodySummary.textContent = movieSummary;
+        modalBodyGenre.textContent = movieGenre;
+        modalBodyRating.textContent = movieRating;
+        modalBodyYear.textContent = movieYear;
+        modalBodyDuration.textContent = movieDuration;
+        modalBodyStudio.textContent = movieStudio;
+        modalBodyImage.src = movieImage;
+    });
 });

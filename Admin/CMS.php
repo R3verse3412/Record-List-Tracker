@@ -43,6 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->bind_param("i", $file_id);
         $stmt->execute();
         $stmt->close();
+    } elseif (isset($_POST['update_file'])) {
+        // Handle file update
+        $file_id = $_POST['file_id'];
+        $new_text = $_POST['new_upload_text'];
+        
+        $stmt = $conn->prepare("UPDATE uploads SET upload_text = ? WHERE id = ?");
+        $stmt->bind_param("si", $new_text, $file_id);
+        $stmt->execute();
+        $stmt->close();
     } else {
         // Handle other form submissions
         $title = $_POST['title'];
@@ -134,23 +143,22 @@ if ($upload_result->num_rows > 0) {
                     <label class="input-group-text" for="inputGroupFile02">Upload</label>
                     <span class="input-group-text">@</span>
                     <input type="text" class="form-control" name="upload_text[]" value="">
-
                 </div>
             </div>
             <div class="mb-3">
-                
-    <!-- Display uploaded files with delete buttons -->
-<h2>Uploaded Files</h2>
-<?php foreach ($uploads as $upload): ?>
-    <div class="upload-item">
-        <span><?php echo htmlspecialchars($upload['file_path']); ?> - <?php echo htmlspecialchars($upload['upload_text']); ?></span>
-        <form method="POST" style="display:inline;">
-            <input type="hidden" name="delete_file_id" value="<?php echo $upload['id']; ?>">
-            <button class="btn btn-danger" type="submit">Delete</button>
-        </form>
-    </div>
-<?php endforeach; ?>
-
+                <!-- Display uploaded files with edit and delete buttons -->
+                <h2>Uploaded Files</h2>
+                <?php foreach ($uploads as $upload): ?>
+                    <div class="upload-item" id="upload-<?php echo $upload['id']; ?>">
+                        <span class="file-path"><?php echo htmlspecialchars($upload['file_path']); ?></span>
+                        <span class="upload-text"><?php echo htmlspecialchars($upload['upload_text']); ?></span>
+                        <button type="button" class="btn btn-primary edit-btn" onclick="editUpload(<?php echo $upload['id']; ?>)">Edit</button>
+                        <form method="POST" style="display:inline;">
+                            <input type="hidden" name="delete_file_id" value="<?php echo $upload['id']; ?>">
+                            <button class="btn btn-danger" type="submit">Delete</button>
+                        </form>
+                    </div>
+                <?php endforeach; ?>
             </div>
             <p class="text-header">About:</p>
             <div class="mb-3">
@@ -174,6 +182,31 @@ if ($upload_result->num_rows > 0) {
                 <input type="text" class="form-control" name="upload_text[]" value="">`;
             uploadsContainer.appendChild(newUploadDiv);
         });
+
+        function editUpload(id) {
+            var uploadItem = document.getElementById('upload-' + id);
+            var uploadText = uploadItem.querySelector('.upload-text');
+            var currentText = uploadText.textContent;
+            
+            uploadText.innerHTML = `
+                <form method="POST" class="edit-form">
+                    <input type="hidden" name="update_file" value="1">
+                    <input type="hidden" name="file_id" value="${id}">
+                    <input type="text" name="new_upload_text" value="${currentText}">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <button type="button" class="btn btn-secondary" onclick="cancelEdit(${id}, '${currentText}')">Cancel</button>
+                </form>
+            `;
+            
+            uploadItem.querySelector('.edit-btn').style.display = 'none';
+        }
+
+        function cancelEdit(id, originalText) {
+            var uploadItem = document.getElementById('upload-' + id);
+            var uploadText = uploadItem.querySelector('.upload-text');
+            uploadText.textContent = originalText;
+            uploadItem.querySelector('.edit-btn').style.display = 'inline-block';
+        }
     </script>
 </body>
 

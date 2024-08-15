@@ -31,7 +31,7 @@ $stmt->close();
 // Fetch total records for different categories
 $categories = [
     'american_movies' => 'American Movies',
-    'american_tv_series' => 'American Series',
+    'american_tv_series' => 'American TV Series',
     'anime_movies' => 'Anime Movies',
     'anime_series' => 'Anime Series',
     'cartoon_movies' => 'Cartoon Movies',
@@ -99,7 +99,6 @@ $conn->close();
     <?php include "../header.php"; ?>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
-    
     <link rel="stylesheet" href="Admin.css">
 </head>
 <body>
@@ -167,95 +166,84 @@ $conn->close();
         </div>
     </div>
     <div class="container mb-5">
-            <div class="row justify-content-center">
-                <div class="col-12 col-lg-9 col-xl-10">
-                    <div class="card widget-card border-light shadow-sm">
-                        <div class="card-body p-4">
-                            <div class="d-block d-sm-flex align-items-center justify-content-between mb-3">
-                                <div class="mb-3 mb-sm-0">
-                                    <h5 class="card-title widget-card-title">Record List</h5>
-                                </div>
-                                <div>
-                                    <form method="post" action="">
-                                        <div class="row">
-                                            <div class="col">
-                                                <select name="year" class="form-select text-secondary border-light-subtle">
-                                                    <?php
-                                                    // Populate year dropdown dynamically
-                                                    for ($year = 2020; $year <= date('Y'); $year++) {
-                                                        echo "<option value=\"$year\" " . ($selected_year == $year ? "selected" : "") . ">$year</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <div class="col">
-                                                <select name="month" class="form-select text-secondary border-light-subtle">
-                                                    <?php
-                                                    $months = [
-                                                        1 => "January",
-                                                        2 => "February",
-                                                        3 => "March",
-                                                        4 => "April",
-                                                        5 => "May",
-                                                        6 => "June",
-                                                        7 => "July",
-                                                        8 => "August",
-                                                        9 => "September",
-                                                        10 => "October",
-                                                        11 => "November",
-                                                        12 => "December"
-                                                    ];
-                                                    foreach ($months as $num => $name) {
-                                                        echo "<option value=\"$num\" " . ($selected_month == $num ? "selected" : "") . ">$name</option>";
-                                                    }
-                                                    ?>
-                                                </select>
-                                            </div>
-                                            <div class="col">
-                                                <select id="chartType" class="form-select text-secondary border-light-subtle">
-                                                    <option value="bar" selected>Bar</option>
-                                                    <option value="line">Line</option>
-                                                    <option value="pie">Pie</option>
-                                                    <option value="doughnut">Doughnut</option>
-                                                </select>
-                                            </div>
-                                            <div class="col">
-                                                <button type="submit" class="btn btn-primary">Filter</button>
-                                            </div>
+        <div class="row justify-content-center">
+            <div class="col-12 col-lg-9 col-xl-10">
+                <div class="card widget-card border-light shadow-sm">
+                    <div class="card-body p-4">
+                        <div class="d-block d-sm-flex align-items-center justify-content-between mb-3">
+                            <div class="mb-3 mb-sm-0">
+                                <h5 class="card-title widget-card-title">Record List</h5>
+                            </div>
+                            <div>
+                                <form method="post" action="">
+                                    <div class="row">
+                                        <div class="col">
+                                            <select name="year" class="form-select text-secondary border-light-subtle">
+                                                <?php
+                                                // Populate year dropdown dynamically
+                                                for ($year = 2020; $year <= date('Y'); $year++) {
+                                                    echo "<option value=\"$year\" " . (isset($selected_year) && $selected_year == $year ? "selected" : "") . ">$year</option>";
+                                                }
+                                                ?>
+                                            </select>
                                         </div>
-                                    </form>
-                                </div>
+                                        <div class="col">
+                                            <select name="month" class="form-select text-secondary border-light-subtle">
+                                                <?php
+                                                $months = [
+                                                    1 => "January",
+                                                    2 => "February",
+                                                    3 => "March",
+                                                    4 => "April",
+                                                    5 => "May",
+                                                    6 => "June",
+                                                    7 => "July",
+                                                    8 => "August",
+                                                    9 => "September",
+                                                    10 => "October",
+                                                    11 => "November",
+                                                    12 => "December"
+                                                ];
+                                                foreach ($months as $num => $name) {
+                                                    echo "<option value=\"$num\" " . (isset($selected_month) && $selected_month == $num ? "selected" : "") . ">$name</option>";
+                                                }
+                                                ?>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <select id="chartType" class="form-select text-secondary border-light-subtle">
+                                                <option value="bar" selected>Bar</option>
+                                                <option value="line">Line</option>
+                                                <option value="pie">Pie</option>
+                                                <option value="doughnut">Doughnut</option>
+                                            </select>
+                                        </div>
+                                        <div class="col">
+                                            <button type="submit" class="btn btn-primary">Filter</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                            <div class="chartjs-size-monitor">
-                                <div class="chartjs-size-monitor-expand">
-                                    <div class=""></div>
-                                </div>
-                                <div class="chartjs-size-monitor-shrink">
-                                    <div class=""></div>
-                                </div>
-                            </div>
-                            <canvas id="chart" width="509" height="254" class="chartjs-render-monitor" style="display: block; width: 509px; height: 254px;"></canvas>
                         </div>
+                        <canvas id="chart"></canvas>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
 </div>
-<script src="Admin.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.0.1/chart.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function () {
     var ctx = document.getElementById('chart').getContext('2d');
 
-    // Initial Chart Type
-    var chartType = document.getElementById('chartType').value;
-
-    // Generate the chart data dynamically
+    // Ensure your PHP data is correctly converted to JSON for JavaScript use
     var chartData = {
         labels: <?php echo json_encode(array_values($categories)); ?>,
         datasets: [{
             label: 'Records',
-            data: <?php echo json_encode(array_values(isset($user_data) && !empty($user_data) ? $user_data : $total_data)); ?>,
+            data: <?php echo json_encode(array_values(!empty($user_data) ? $user_data : $total_data)); ?>,
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
@@ -276,6 +264,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }]
     };
 
+    var chartType = 'bar'; // Set default chart type
     var myChart = new Chart(ctx, {
         type: chartType,
         data: chartData,
@@ -288,9 +277,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 
-    // Update chart type dynamically
+    // Listen for chart type change
     document.getElementById('chartType').addEventListener('change', function () {
-        myChart.destroy(); // Destroy current chart instance
+        myChart.destroy();
         chartType = this.value;
         myChart = new Chart(ctx, {
             type: chartType,
@@ -306,7 +295,5 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
-
-
 </body>
 </html>

@@ -136,6 +136,7 @@ $total_records = $row_count['count'];
                     <option value="128">128 entries</option>
                 </select>
             </div>
+          
         </div>
         <div class="container" id="movies-container">
         <?php

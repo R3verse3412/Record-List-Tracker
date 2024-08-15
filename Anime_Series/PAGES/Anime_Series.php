@@ -66,6 +66,42 @@ $total_records = $row_count['count'];
     include "../../header.php"
     ?>
 </head>
+<style>
+       .card {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .movie-poster {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover .movie-poster {
+        transform: scale(1.05);
+    }
+
+    .text-title {
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 1rem;
+    }
+
+    .text-year {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
+</style>
 <body>
     
 <?php
@@ -100,38 +136,50 @@ include "../../nav_user.php"
         </div>
 
           <!-- Movie Cards -->
-          <div class="row d-flex justify-content-center" id="movies-container">
-            <?php
-            if ($result->num_rows > 0) {
-                while ($row = $result->fetch_assoc()) {
-                    echo '<div class="col-md-auto mb-3 anime-series-card">
-                        <div class="card shadow">
-                            <div class="card-body d-flex justify-content-center img_anime_series a">
-                                <a>
-                                    <img src="' . $row['img'] . '" alt="" class="" style="height: 210px;">
-                                </a>
-                            </div>
-                            <div class="card-body text-center">
-                                <p class="text-title fs-5">' . $row['name'] . '</p>
-                                <p class="text-year fs-8">' . $row['year'] . '</p>
-                                <a href="Anime_Series_edit.php?id=' . $row['id'] . '" class="btn btn-warning">Edit</a>
-                                <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#movieModal" 
-                                    data-id="' . $row['id'] . '" 
-                                    data-name="' . htmlspecialchars($row['name']) . '" 
-                                    data-summary="' . htmlspecialchars($row['summary']) . '" 
-                                    data-genre="' . htmlspecialchars($row['genre']) . '" 
-                                    data-rating="' . htmlspecialchars($row['rating']) . '" 
-                                    data-year="' . htmlspecialchars($row['year']) . '" 
-                                    data-episodes="' . htmlspecialchars($row['episodes']) . '"
-                                    data-studio="' . htmlspecialchars($row['studio']) . '"
-                                    data-img="' . htmlspecialchars($row['img']) . '" >See</button>
-                                <a href="Anime_Series_delete.php?id=' . $row['id'] . '" class="btn btn-danger">Delete</a>
-                            </div>
-                        </div>
-                    </div>';
+          <div class="row d-flex justify-content-center" id="series-container">
+          <?php
+            // ... (previous code remains the same)
+
+            function truncateTitle($title, $limit = 25) {
+                if (strlen($title) > $limit) {
+                    return substr($title, 0, $limit) . '...';
                 }
+                return $title;
             }
-            ?>
+            // Inside the loop where we generate the cards:
+if ($result->num_rows > 0) {
+    echo '<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">';
+    while ($row = $result->fetch_assoc()) {
+        echo '<div class="col anime-series-card">
+            <div class="card h-100 shadow">
+                <div class="card-img-top d-flex justify-content-center align-items-center" style="height: 250px;">
+                    <img src="' . htmlspecialchars($row['img']) . '" alt="" class="img-fluid movie-poster" style="max-height: 100%; max-width: 100%; object-fit: contain;">
+                </div>
+                <div class="card-body d-flex flex-column">
+                    <h5 class="card-title text-title" title="' . htmlspecialchars($row['name']) . '">' . truncateTitle($row['name']) . '</h5>
+                    <p class="card-text text-year">' . htmlspecialchars($row['year']) . '</p>
+                    <div class="mt-auto d-flex justify-content-evenly">
+                        <a href="Anime_Series_edit.php?id=' . $row['id'] . '" class="btn btn-warning btn-sm">Edit</a>
+                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#movieModal" 
+                            data-id="' . $row['id'] . '" 
+                            data-name="' . htmlspecialchars($row['name']) . '" 
+                            data-summary="' . htmlspecialchars($row['summary']) . '" 
+                            data-genre="' . htmlspecialchars($row['genre']) . '" 
+                            data-rating="' . htmlspecialchars($row['rating']) . '" 
+                            data-year="' . htmlspecialchars($row['year']) . '" 
+                            data-episodes="' . htmlspecialchars($row['episodes']) . '"
+                            data-studio="' . htmlspecialchars($row['studio']) . '"
+                            data-img="' . htmlspecialchars($row['img']) . '" >See</button>
+                        <a href="Anime_Series_delete.php?id=' . $row['id'] . '" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>';
+    }
+    echo '</div>';
+}
+?>
+           
         </div>
         
         <!-- Previous and Next buttons -->
@@ -183,14 +231,14 @@ document.addEventListener('DOMContentLoaded', function() {
     const entriesDropdown = document.getElementById('entries-dropdown');
     const prevButton = document.getElementById('prev-button');
     const nextButton = document.getElementById('next-button');
-    const moviesContainer = document.getElementById('movies-container');
-    const movieCards = document.querySelectorAll('.anime-series-card');
+    const seriesContainer = document.getElementById('series-container');
+    const seriesCards = document.querySelectorAll('.anime-series-card');
     let currentPage = 1;
     let entriesPerPage = parseInt(entriesDropdown.value);
 
     function filterMovies() {
         const filterValue = filterInput.value.toLowerCase();
-        return Array.from(movieCards).filter(card => {
+        return Array.from(seriesCards).filter(card => {
             const title = card.querySelector('.text-title').textContent.toLowerCase();
             const year = card.querySelector('.text-year').textContent.toLowerCase();
             return title.includes(filterValue) || year.includes(filterValue);
@@ -202,7 +250,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const totalPages = Math.ceil(filteredCards.length / entriesPerPage);
         currentPage = Math.min(currentPage, totalPages || 1);
 
-        movieCards.forEach(card => card.style.display = 'none');
+        seriesCards.forEach(card => card.style.display = 'none');
         
         filteredCards.slice((currentPage - 1) * entriesPerPage, currentPage * entriesPerPage)
             .forEach(card => card.style.display = 'block');
