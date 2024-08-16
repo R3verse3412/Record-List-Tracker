@@ -1,3 +1,4 @@
+<script src="https://unpkg.com/boxicons@2.1.4/dist/boxicons.js"></script>
 <body id="body-pd">
 <header class="header" id="header">
     <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
@@ -12,9 +13,9 @@
                 <a href="Admin.php" class="nav_link"> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a>
                 <a href="Admin_Users.php" class="nav_link"> <i class='bx bx-user nav_icon'></i> <span class="nav_name">Users</span> </a>
                 <a href="CMS.php" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">CMS</span> </a>
-                <!--<a href="#" class="nav_link"> <i class='bx bx-bookmark nav_icon'></i> <span class="nav_name">Bookmark</span> </a>-->
                 <!--<a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">File Management</span> -->
                 <a href="Admin_Statistics.php" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span>
+                <a href="#" class="nav_link"> <i class='bx bxs-cog' style='color:#f7f4f4'  ></i> <span class="nav_name">Settings</span> </a>
                </a>
             </div>
         </div>

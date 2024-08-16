@@ -130,6 +130,13 @@ $conn->close();
         --box-shadow-color: rgba(63, 70, 78 );
     }
 
+    .Manga{
+        --bg-color: #0a0809;
+        --bg-color-light: #0a0809;
+        --text-color-hover: #4C5656;
+        --box-shadow-color: rgba(10, 8, 9);
+    }
+
     
     .Manhwa{
         --bg-color: #ae9bc9;
@@ -139,10 +146,10 @@ $conn->close();
     }
 
     .Manhwa_18{
-        --bg-color: #3f464e;
-        --bg-color-light: #3f464e;
+        --bg-color: #e8c3b0;
+        --bg-color-light: #e8c3b0;
         --text-color-hover: #4C5656;
-        --box-shadow-color: rgba(63, 70, 78 );
+        --box-shadow-color: rgba(232, 195, 176 );
     }
 
     .card {
@@ -355,6 +362,22 @@ $conn->close();
                     </a>
                 </div>
                 <div class="col mb-5 d-flex justify-content-center">
+                    <a href="Manga/PAGES/Manga.php" class="card a Manga">
+                        <div class="overlay"></div>
+                        <div class="circle">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
+
+                                <image href="img/Saitama.png"
+                                    width="131" height="121"  />
+                            </svg>
+                        </div>
+                        <p>Manga</p>
+                    </a>
+                </div>
+              
+                </div>
+                <div class="row justify-content-center align-item-center">
+                <div class="col-md-auto mb-5 d-flex justify-content-center">
                     <a href="Manhwa/PAGES/Manhwa.php" class="card a Manhwa">
                         <div class="overlay"></div>
                         <div class="circle">
@@ -367,15 +390,13 @@ $conn->close();
                         <p>Manhwa</p>
                     </a>
                 </div>
-                </div>
-                <div class="row">
-                <div class="col mb-5 d-flex justify-content-center">
-                    <a href="Manhwa_18/PAGES/Manhwa_18.php" class="card a Manhwa">
+                <div class="col-md-auto mb-5 d-flex justify-content-center ">
+                    <a href="Manhwa_18/PAGES/Manhwa_18.php" class="card a Manhwa_18">
                         <div class="overlay"></div>
                         <div class="circle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
 
-                                <image href="img/COD.png"
+                                <image href="img/Young Boss.png"
                                     width="131" height="121"  />
                             </svg>
                         </div>

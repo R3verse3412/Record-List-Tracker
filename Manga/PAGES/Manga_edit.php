@@ -108,8 +108,8 @@ include "../../nav_user.php"
 ?>
     <div class="container">
         <div class="text-center mb-4">
-            <h3>Edit Anime Series</h3>
-            <p class="text-muted">Update the details of the anime series</p>
+            <h3>Edit Manga</h3>
+            <p class="text-muted">Update the details of the Manga</p>
         </div>
 
         <div class="container d-flex justify-content-center">

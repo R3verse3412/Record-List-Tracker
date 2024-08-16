@@ -1,42 +1,4 @@
-<?php
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "crud_db";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-// Fetch the homepage content
-$sql = "SELECT * FROM homepage_content WHERE id = 1";
-$result = $conn->query($sql);
-$row = $result->fetch_assoc();
-
-// Initialize variables to avoid undefined index warnings
-$title = 'Record List Tracker';
-$genre = 'Anime • Manga • Movies • Manhwa • Series';
-$about = 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Error eveniet aperiam qui recusandae dolorem. Quaerat quas quisquam necessitatibus aperiam illo, sed ea voluptatum dolorem omnis? Amet beatae magni non dolore.';
-
-if ($row) {
-    $title = $row['title'];
-    $genre = $row['genre'];
-    $about = $row['about'];
-}
-
-// Fetch the uploads content
-$upload_sql = "SELECT file_path, upload_text FROM uploads";
-$upload_result = $conn->query($upload_sql);
-$uploads = [];
-if ($upload_result->num_rows > 0) {
-    while ($upload_row = $upload_result->fetch_assoc()) {
-        $uploads[] = $upload_row;
-    }
-}
-
-?>
+<?php include "Homepagephp.php";?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -45,31 +7,13 @@ if ($upload_result->num_rows > 0) {
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Home Page</title>
   <link rel="stylesheet" href="Homepage.css">
+
   <?php include "header.php";?>
 
 </head>
-<style>
-  .navbar{
-    position: fixed;
-    width: 100%;
-    z-index: 1000; /* Ensure navbar is always on top */
-    transition: top 0.5s;
-}
 
-.navbar-transparent {
-    background-color: rgba(200, 234, 179, 0);
-  }
-
-  .navbar-hidden {
-    top: -80px; /* Adjust based on your navbar height */
-  }
-
-  .navbar:hover {
-    top: 0;
-  }
-    
-</style>
 <body style="background-color: #181818;">
+<link rel="stylesheet" href="Homepage-1.css">
 
 <nav class="navbar navbar-expand-lg navbar-light justify-content-between fs-3 mb-5" style="background-color: #84eab3;">
   <div class="container-fluid">
@@ -118,33 +62,30 @@ if ($upload_result->num_rows > 0) {
         </div>
         <div class="row">
           <div class="row mx-auto my-auto justify-content-center">
-            <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-              <div class="carousel-inner" role="listbox">
-                <?php foreach ($uploads as $index => $upload) { ?>
-                <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
-                  <div class="col-md-3">
-                    <div class="card mx-1">
-                      <div class="card-img card-img-top">
-                        <div class="card-img-container">
-                          <img alt="Slide <?php echo $index + 1; ?>"
-                            src="<?php echo htmlspecialchars($upload['file_path']); ?>">
-                        </div>
-                      </div>
-                      <div class="card-img-overlay"><?php echo htmlspecialchars($upload['upload_text']); ?> </div>
-                    </div>
-                  </div>
-                </div>
-                <?php } ?>
-              </div>
-              <a class="carousel-control-prev bg-transparent w-aut" href="#myCarousel" role="button"
-                data-bs-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-              </a>
-              <a class="carousel-control-next bg-transparent w-aut" href="#myCarousel" role="button"
-                data-bs-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-              </a>
-            </div>
+          <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+  <div class="carousel-inner" role="listbox">
+    <?php foreach ($uploads as $index => $upload) { ?>
+    <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
+      <div class="col-md-3">
+        <div class="card mx-1">
+          <div class="card-img">
+            <img src="<?php echo htmlspecialchars($upload['file_path']); ?>" class="d-block w-100" alt="Slide <?php echo $index + 1; ?>">
+          </div>
+          <div class="card-img-overlay"><?php echo htmlspecialchars($upload['upload_text']); ?></div>
+        </div>
+      </div>
+    </div>
+    <?php } ?>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
           </div>
         </div>
       </div>
@@ -166,9 +107,7 @@ if ($upload_result->num_rows > 0) {
       </div>
     </div>
     </div>
-  </section>
-
-    <?php include "Footer.php";?>
+ 
 
 </body>
 

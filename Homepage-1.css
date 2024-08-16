@@ -1,0 +1,18 @@
+.navbar{
+    position: fixed;
+    width: 100%;
+    z-index: 1000; /* Ensure navbar is always on top */
+    transition: top 0.5s;
+}
+
+.navbar-transparent {
+    background-color: rgba(200, 234, 179, 0);
+  }
+
+  .navbar-hidden {
+    top: -80px; /* Adjust based on your navbar height */
+  }
+
+  .navbar:hover {
+    top: 0;
+  }

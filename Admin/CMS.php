@@ -186,7 +186,7 @@ if ($upload_result->num_rows > 0) {
         function editUpload(id) {
             var uploadItem = document.getElementById('upload-' + id);
             var uploadText = uploadItem.querySelector('.upload-text');
-            var currentText = uploadText.textContent;
+            var currentText = uploadText.textContent.trim();
             
             uploadText.innerHTML = `
                 <form method="POST" class="edit-form">
