@@ -15,7 +15,7 @@
                 <a href="CMS.php" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">CMS</span> </a>
                 <!--<a href="#" class="nav_link"> <i class='bx bx-folder nav_icon'></i> <span class="nav_name">File Management</span> -->
                 <a href="Admin_Statistics.php" class="nav_link"> <i class='bx bx-bar-chart-alt-2 nav_icon'></i> <span class="nav_name">Stats</span>
-                <a href="#" class="nav_link"> <i class='bx bxs-cog' style='color:#f7f4f4'  ></i> <span class="nav_name">Settings</span> </a>
+                <a href="Settings.php" class="nav_link"> <i class='bx bxs-cog' style='color:#f7f4f4'  ></i> <span class="nav_name">Settings</span> </a>
                </a>
             </div>
         </div>

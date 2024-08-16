@@ -127,10 +127,10 @@ include "../../nav_user.php"
             </div>
             <div class="col-md-2">
                 <select id="entries-dropdown" class="form-select">
-                    <option value="4">4 entries</option>
-                    <option value="8">8 entries</option>
-                    <option value="12">12 entries</option>
-                    <option value="16">16 entries</option>
+                    <option value="32">32 entries</option>
+                    <option value="64">64 entries</option>
+                    <option value="128">128 entries</option>
+                    <option value="256">256 entries</option>
                 </select>
             </div>
         </div>

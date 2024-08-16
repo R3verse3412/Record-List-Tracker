@@ -133,8 +133,10 @@ include "../../nav_user.php"
                     <input type="file" class="form-control-file" id="img" name="img" required>
                 </div>
                 <div class="mb-5 d-flex justify-content-center">
+                    <div class="">
                     <button type="submit" class="btn btn-success" name="submit">Save</button>
                     <a href="Anime_Series.php" class="btn btn-danger">Cancel</a>
+                    </div>
                 </div>
             </form>
         </div>
