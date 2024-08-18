@@ -138,10 +138,10 @@ include "../../nav_user.php"
             </div>
             <div class="col-md-2">
                 <select id="entries-dropdown" class="form-select">
-                    <option value="4">4 entries</option>
-                    <option value="8">8 entries</option>
-                    <option value="12">12 entries</option>
-                    <option value="16">16 entries</option>
+                    <option value="20">20 entries</option>
+                    <option value="40">40 entries</option>
+                    <option value="80">80 entries</option>
+                    <option value="160">160 entries</option>
                 </select>
             </div>
         </div>
@@ -159,7 +159,7 @@ include "../../nav_user.php"
             }
             // Inside the loop where we generate the cards:
 if ($result->num_rows > 0) {
-    echo '<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">';
+    echo '<div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">';
     while ($row = $result->fetch_assoc()) {
         echo '<div class="col games-card">
             <div class="card h-100 shadow">
