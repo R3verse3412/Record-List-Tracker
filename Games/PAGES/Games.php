@@ -106,6 +106,37 @@ include "../../nav_user.php"
                 <input type="text" id="filter-search" class="form-control" placeholder="Search for Games by title or year...">
             </div>
             <div class="col-md-2">
+                <select id="entries-Alpahabetical" class="form-select">
+                    <option value="ALL">ALL</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                    <option value="I">I</option>
+                    <option value="J">J</option>
+                    <option value="K">K</option>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                    <option value="N">N</option>
+                    <option value="O">O</option>
+                    <option value="P">P</option>
+                    <option value="Q">Q</option>
+                    <option value="R">R</option>
+                    <option value="S">S</option>
+                    <option value="T">T</option>
+                    <option value="U">U</option>
+                    <option value="V">V</option>
+                    <option value="W">W</option>
+                    <option value="X">X</option>
+                    <option value="Y">Y</option>
+                    <option value="Z">Z</option>
+                </select>
+            </div>
+            <div class="col-md-2">
                 <select id="entries-dropdown" class="form-select">
                     <option value="4">4 entries</option>
                     <option value="8">8 entries</option>
@@ -174,7 +205,7 @@ if ($result->num_rows > 0) {
 
 <!-- Modal -->
 <div class="modal fade" id="gamesModal" tabindex="-1" aria-labelledby="gamesModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog text-center">
+    <div class="modal-dialog modal-lg text-center">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="gamesModalLabel">Games Details</h5>
@@ -206,66 +237,78 @@ include "../../Footer.php"
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const filterInput = document.getElementById('filter-search');
-        const entriesDropdown = document.getElementById('entries-dropdown');
-        const prevButton = document.getElementById('prev-button');
-        const nextButton = document.getElementById('next-button');
-        const gamesContainer = document.getElementById('games-container');
-        const gamesCards = document.querySelectorAll('.games-card');
-        let currentPage = 1;
-        let entriesPerPage = parseInt(entriesDropdown.value);
+    const filterInput = document.getElementById('filter-search');
+    const entriesDropdown = document.getElementById('entries-dropdown');
+    const alphabeticalDropdown = document.getElementById('entries-Alpahabetical');
+    const prevButton = document.getElementById('prev-button');
+    const nextButton = document.getElementById('next-button');
+    const gamesContainer = document.getElementById('games-container');
+    const gamesCards = document.querySelectorAll('.games-card');
+    let currentPage = 1;
+    let entriesPerPage = parseInt(entriesDropdown.value);
+    let filteredCards = Array.from(gamesCards); // Initialize filteredCards
 
-        function filterGames() {
-            const filterValue = filterInput.value.toLowerCase();
-            return Array.from(gamesCards).filter(card => {
-                const title = card.querySelector('.text-title').textContent.toLowerCase();
-                const year = card.querySelector('.text-year').textContent.toLowerCase();
-                return title.includes(filterValue) || year.includes(filterValue);
-            });
-        }
+    function filterGames() {
+        const filterValue = filterInput.value.toLowerCase();
+        const alphabeticalValue = alphabeticalDropdown.value.toLowerCase();
 
-        function renderPage() {
-            const filteredCards = filterGames();
-            const totalPages = Math.ceil(filteredCards.length / entriesPerPage);
-            currentPage = Math.min(currentPage, totalPages || 1);
+        return Array.from(gamesCards).filter(card => {
+            const title = card.querySelector('.text-title').textContent.toLowerCase();
+            const year = card.querySelector('.text-year').textContent.toLowerCase();
+            const matchesSearch = title.includes(filterValue) || year.includes(filterValue);
+            const matchesAlphabetical = alphabeticalValue === 'all' || title.startsWith(alphabeticalValue);
 
-            gamesCards.forEach(card => card.style.display = 'none');
-            
-            filteredCards.slice((currentPage - 1) * entriesPerPage, currentPage * entriesPerPage)
-                .forEach(card => card.style.display = 'block');
-
-            prevButton.disabled = currentPage === 1;
-            nextButton.disabled = currentPage === totalPages || totalPages === 0;
-        }
-
-        filterInput.addEventListener('input', function() {
-            currentPage = 1;
-            renderPage();
+            return matchesSearch && matchesAlphabetical;
         });
+    }
 
-        entriesDropdown.addEventListener('change', function() {
-            entriesPerPage = parseInt(this.value);
-            currentPage = 1;
-            renderPage();
-        });
+    function renderPage() {
+        filteredCards = filterGames(); // Update filteredCards based on the current filters
+        const totalPages = Math.ceil(filteredCards.length / entriesPerPage);
+        currentPage = Math.min(currentPage, totalPages || 1);
 
-        prevButton.addEventListener('click', function() {
-            if (currentPage > 1) {
-                currentPage--;
-                renderPage();
-            }
-        });
+        gamesCards.forEach(card => card.style.display = 'none'); // Hide all cards initially
 
-        nextButton.addEventListener('click', function() {
-            const filteredCards = filterGames();
-            const totalPages = Math.ceil(filteredCards.length / entriesPerPage);
-            if (currentPage < totalPages) {
-                currentPage++;
-                renderPage();
-            }
-        });
+        filteredCards.slice((currentPage - 1) * entriesPerPage, currentPage * entriesPerPage)
+            .forEach(card => card.style.display = 'block'); // Show the relevant cards for the current page
 
+        prevButton.disabled = currentPage === 1;
+        nextButton.disabled = currentPage === totalPages || totalPages === 0;
+    }
+
+    filterInput.addEventListener('input', function() {
+        currentPage = 1;
         renderPage();
+    });
+
+    alphabeticalDropdown.addEventListener('change', function() {
+        currentPage = 1;
+        renderPage();
+    });
+
+    entriesDropdown.addEventListener('change', function() {
+        entriesPerPage = parseInt(this.value);
+        currentPage = 1;
+        renderPage();
+    });
+
+    prevButton.addEventListener('click', function() {
+        if (currentPage > 1) {
+            currentPage--;
+            renderPage();
+        }
+    });
+
+    nextButton.addEventListener('click', function() {
+        const totalPages = Math.ceil(filteredCards.length / entriesPerPage);
+        if (currentPage < totalPages) {
+            currentPage++;
+            renderPage();
+        }
+    });
+
+    renderPage(); // Initial rendering of the page
+
 
         // Event listener for opening the modal
         $('#gamesModal').on('show.bs.modal', function (event) {

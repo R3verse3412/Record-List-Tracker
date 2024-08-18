@@ -126,11 +126,42 @@ include "../../nav_user.php"
                 <input type="text" id="filter-search" class="form-control" placeholder="Search for Series by title or year...">
             </div>
             <div class="col-md-2">
+                <select id="entries-Alpahabetical" class="form-select">
+                    <option value="ALL">ALL</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                    <option value="E">E</option>
+                    <option value="F">F</option>
+                    <option value="G">G</option>
+                    <option value="H">H</option>
+                    <option value="I">I</option>
+                    <option value="J">J</option>
+                    <option value="K">K</option>
+                    <option value="L">L</option>
+                    <option value="M">M</option>
+                    <option value="N">N</option>
+                    <option value="O">O</option>
+                    <option value="P">P</option>
+                    <option value="Q">Q</option>
+                    <option value="R">R</option>
+                    <option value="S">S</option>
+                    <option value="T">T</option>
+                    <option value="U">U</option>
+                    <option value="V">V</option>
+                    <option value="W">W</option>
+                    <option value="X">X</option>
+                    <option value="Y">Y</option>
+                    <option value="Z">Z</option>
+                </select>
+            </div>
+            <div class="col-md-2">
                 <select id="entries-dropdown" class="form-select">
-                    <option value="32">32 entries</option>
-                    <option value="64">64 entries</option>
-                    <option value="128">128 entries</option>
-                    <option value="256">256 entries</option>
+                    <option value="20">20 entries</option>
+                    <option value="40">40 entries</option>
+                    <option value="80">80 entries</option>
+                    <option value="160">160 entries</option>
                 </select>
             </div>
         </div>
@@ -148,7 +179,7 @@ include "../../nav_user.php"
             }
             // Inside the loop where we generate the cards:
 if ($result->num_rows > 0) {
-    echo '<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">';
+    echo '<div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">';
     while ($row = $result->fetch_assoc()) {
         echo '<div class="col anime-series-card">
             <div class="card h-100 shadow">
@@ -229,6 +260,7 @@ if ($result->num_rows > 0) {
 document.addEventListener('DOMContentLoaded', function() {
     const filterInput = document.getElementById('filter-search');
     const entriesDropdown = document.getElementById('entries-dropdown');
+    const alphabeticalDropdown = document.getElementById('entries-Alpahabetical');
     const prevButton = document.getElementById('prev-button');
     const nextButton = document.getElementById('next-button');
     const seriesContainer = document.getElementById('series-container');
@@ -238,10 +270,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function filterMovies() {
         const filterValue = filterInput.value.toLowerCase();
+        const alphabeticalValue = alphabeticalDropdown.value.toLowerCase();
+
         return Array.from(seriesCards).filter(card => {
             const title = card.querySelector('.text-title').textContent.toLowerCase();
             const year = card.querySelector('.text-year').textContent.toLowerCase();
-            return title.includes(filterValue) || year.includes(filterValue);
+            const matchesSearch = title.includes(filterValue) || year.includes(filterValue);
+            const matchesAlphabetical = alphabeticalValue === 'all' || title.startsWith(alphabeticalValue);
+
+            return matchesSearch && matchesAlphabetical;
         });
     }
 
@@ -251,7 +288,7 @@ document.addEventListener('DOMContentLoaded', function() {
         currentPage = Math.min(currentPage, totalPages || 1);
 
         seriesCards.forEach(card => card.style.display = 'none');
-        
+
         filteredCards.slice((currentPage - 1) * entriesPerPage, currentPage * entriesPerPage)
             .forEach(card => card.style.display = 'block');
 
@@ -260,6 +297,11 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     filterInput.addEventListener('input', function() {
+        currentPage = 1;
+        renderPage();
+    });
+
+    alphabeticalDropdown.addEventListener('change', function() {
         currentPage = 1;
         renderPage();
     });
@@ -292,7 +334,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const movieModal = document.getElementById('movieModal');
     movieModal.addEventListener('show.bs.modal', function (event) {
         const button = event.relatedTarget;
-        
+
         const movieName = button.getAttribute('data-name');
         const movieSummary = button.getAttribute('data-summary');
         const movieGenre = button.getAttribute('data-genre');
@@ -323,6 +365,7 @@ document.addEventListener('DOMContentLoaded', function() {
         modalBodyImage.src = movieImage;
     });
 });
+
 </script>
 
 

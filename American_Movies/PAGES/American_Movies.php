@@ -1,73 +1,4 @@
-<?php
-session_start();
-
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit();
-}
-
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "crud_db";
-
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
-$user_id = $_SESSION['user_id'];
-
-// Fetch American movies for the logged-in user
-$sql = "SELECT * FROM american_movies WHERE user_id = ?";
-$stmt = $conn->prepare($sql);
-if (!$stmt) {
-    die("Prepare failed: " . $conn->error);
-}
-
-$stmt->bind_param("i", $user_id);
-if (!$stmt->execute()) {
-    die("Execute failed: " . $stmt->error);
-}
-
-$result = $stmt->get_result();
-if ($result === false) {
-    die("Get result failed: " . $stmt->error);
-}
-
-// Count the number of records for the logged-in user
-$count_sql = "SELECT COUNT(*) as count FROM american_movies WHERE user_id = ?";
-$count_stmt = $conn->prepare($count_sql);
-if (!$count_stmt) {
-    die("Prepare failed: " . $conn->error);
-}
-
-$count_stmt->bind_param("i", $user_id);
-if (!$count_stmt->execute()) {
-    die("Execute failed: " . $count_stmt->error);
-}
-
-$count_result = $count_stmt->get_result();
-if ($count_result === false) {
-    die("Get result failed: " . $count_stmt->error);
-}
-
-$row_count = $count_result->fetch_assoc();
-$total_records = $row_count['count'];
-
-
-// Count the number of records for the logged-in user
-$count_sql = "SELECT COUNT(*) as count FROM american_movies WHERE user_id = ?";
-$count_stmt = $conn->prepare($count_sql);
-$count_stmt->bind_param("i", $user_id);
-$count_stmt->execute();
-$count_result = $count_stmt->get_result();
-$row_count = $count_result->fetch_assoc();
-$total_records = $row_count['count'];
-?>
+<?php include "../PHP/American_Movies.php";?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -79,102 +10,105 @@ $total_records = $row_count['count'];
     <?php include "../../header.php" ?>
 </head>
 <style>
-.card {
-    transition: transform 0.3s ease-in-out;
-}
-.card:hover {
-    transform: translateY(-5px);
-}
-.movie-poster {
-    transition: transform 0.3s ease-in-out;
-}
-.card:hover .movie-poster {
-    transform: scale(1.05);
-}
-.text-title {
-    text-align: center;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    font-size: 1rem;
-}
-.text-year {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #6c757d;
-}
-.btn-sm {
-    padding: 0.25rem 0.5rem;
-    font-size: 0.75rem;
-}
+    .card {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+    }
+
+    .movie-poster {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .card:hover .movie-poster {
+        transform: scale(1.05);
+    }
+
+    .text-title {
+        text-align: center;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-size: 1rem;
+    }
+
+    .text-year {
+        text-align: center;
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+    .btn-sm {
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+    }
 </style>
 
-<body >
-<?php include "../../nav_user.php" ?>
+<body>
+    <?php include "../../nav_user.php" ?>
 
-<section class="section">
-    <div class="container">
-        <h2 class="text-center mb-5 ">American Movies</h2>
-        
-        <div class="mb-4">
-            <a href="American_Movies_add.php" class="btn btn-success mb-3">Add New American Movies</a>
-            <div class="alert alert-info text-center">
-                <strong>Total Movies:</strong> <?php echo $total_records; ?>
-            </div>
-        </div>
+    <section class="section">
+        <div class="container">
+            <h2 class="text-center mb-5 ">American Movies</h2>
 
-      
-        
-   
+            <div class="mb-4">
+                <a href="American_Movies_add.php" class="btn btn-success mb-3">Add New American Movies</a>
+                <div class="alert alert-info text-center">
+                    <strong>Total Movies:</strong> <?php echo $total_records; ?>
+                </div>
+            </div>
 
-        <!-- Filter Search and Entries Dropdown -->
-        <div class="row d-flex justify-content-between mb-4">
-            <div class="col-md-6">
-                <input type="text" id="filter-search" class="form-control" placeholder="Search for movies by title or year...">
+            <!-- Filter Search and Entries Dropdown -->
+            <div class="row d-flex justify-content-between mb-4">
+                <div class="col-md-6">
+                    <input type="text" id="filter-search" class="form-control"
+                        placeholder="Search for movies by title or year...">
+                </div>
+                <div class="col-md-2">
+                    <select id="entries-Alpahabetical" class="form-select">
+                        <option value="ALL">ALL</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                        <option value="I">I</option>
+                        <option value="J">J</option>
+                        <option value="K">K</option>
+                        <option value="L">L</option>
+                        <option value="M">M</option>
+                        <option value="N">N</option>
+                        <option value="O">O</option>
+                        <option value="P">P</option>
+                        <option value="Q">Q</option>
+                        <option value="R">R</option>
+                        <option value="S">S</option>
+                        <option value="T">T</option>
+                        <option value="U">U</option>
+                        <option value="V">V</option>
+                        <option value="W">W</option>
+                        <option value="X">X</option>
+                        <option value="Y">Y</option>
+                        <option value="Z">Z</option>
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <select id="entries-dropdown" class="form-select">
+                        <option value="20">20 entries</option>
+                        <option value="40">40 entries</option>
+                        <option value="80">80 entries</option>
+                        <option value="160">160 entries</option>
+                    </select>
+                </div>
+
             </div>
-            <div class="col-md-2">
-                <select id="entries-Alpahabetical" class="form-select">
-                    <option value="ALL">ALL</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
-                    <option value="F">F</option>
-                    <option value="G">G</option>
-                    <option value="H">H</option>
-                    <option value="I">I</option>
-                    <option value="J">J</option>
-                    <option value="K">K</option>
-                    <option value="L">L</option>
-                    <option value="M">M</option>
-                    <option value="N">N</option>
-                    <option value="O">O</option>
-                    <option value="P">P</option>
-                    <option value="Q">Q</option>
-                    <option value="R">R</option>
-                    <option value="S">S</option>
-                    <option value="T">T</option>
-                    <option value="U">U</option>
-                    <option value="V">V</option>
-                    <option value="W">W</option>
-                    <option value="X">X</option>
-                    <option value="Y">Y</option>
-                    <option value="Z">Z</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <select id="entries-dropdown" class="form-select">
-                    <option value="16">16 entries</option>
-                    <option value="32">32 entries</option>
-                    <option value="64">64 entries</option>
-                    <option value="128">128 entries</option>
-                </select>
-            </div>
-          
-        </div>
-        <div class="container" id="movies-container">
-        <?php
+            <div class="container" id="movies-container">
+                <?php
         
 // ... (previous code remains the same)
 
@@ -189,7 +123,7 @@ function truncateTitle($title, $limit = 25) {
 
 // Inside the loop where we generate the cards:
 if ($result->num_rows > 0) {
-    echo '<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">';
+    echo '<div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">';
     while ($row = $result->fetch_assoc()) {
         echo '<div class="col movie-card">
             <div class="card h-100 shadow">
@@ -220,191 +154,66 @@ if ($result->num_rows > 0) {
     echo '</div>';
 }
 ?>
-        </div>
-        
-        <!-- Previous and Next buttons -->
-        <div class="row  d-flex justify-content-center mt-4">
-            <div class="col-md-auto mb-5 ">
-                <button class="btn btn-primary" id="prev-button">Previous</button>
-                <button class="btn btn-primary" id="next-button">Next</button>
-            </div>
-        </div>
-    </div>
-</section>
-
-<!-- Modal -->
-<div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog modal-lg text-center">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title " id="movieModalLabel">Movie Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Name:</strong> <span id="movieName"></span></p>
-                <p><strong>Summary:</strong> <span id="movieSummary"></span></p>
-                <p><strong>Genre:</strong> <span id="movieGenre"></span></p>
-                <p><strong>Director:</strong> <span id="movieDirector"></span></p>
-                <p><strong>Cast</strong> <span id="movieCast"></span></p>
-                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner mb-5" id="movieCastCarousel">
-                        <!-- Carousel items will be dynamically added here -->
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" style="background-color: black;">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next" style="background-color: black;">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-                <p><strong>Rating:</strong> <span id="movieRating"></span></p>
-                <p><strong>Year:</strong> <span id="movieYear"></span></p>
-                <img id="movieImage" src="" alt="Image" style="max-width: 250px; max-height: 300px;">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
 </div>
 
-<?php include "../../Footer.php" ?>
+            <!-- Previous and Next buttons -->
+            <div class="row  d-flex justify-content-center mt-4">
+                <div class="col-md-auto mb-5 ">
+                    <button class="btn btn-primary" id="prev-button">Previous</button>
+                    <button class="btn btn-primary" id="next-button">Next</button>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-    const filterInput = document.getElementById('filter-search');
-    const entriesDropdown = document.getElementById('entries-dropdown');
-    const alphabeticalDropdown = document.getElementById('entries-Alpahabetical');
-    const prevButton = document.getElementById('prev-button');
-    const nextButton = document.getElementById('next-button');
-    const moviesContainer = document.getElementById('movies-container');
-    const movieCards = document.querySelectorAll('.movie-card');
-    let currentPage = 1;
-    let entriesPerPage = parseInt(entriesDropdown.value);
+    <!-- Modal -->
+    <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true"
+        data-bs-backdrop="static">
+        <div class="modal-dialog modal-lg text-center">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title " id="movieModalLabel">Movie Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p><strong>Name:</strong> <span id="movieName"></span></p>
+                    <p><strong>Summary:</strong> <span id="movieSummary"></span></p>
+                    <p><strong>Genre:</strong> <span id="movieGenre"></span></p>
+                    <p><strong>Director:</strong> <span id="movieDirector"></span></p>
+                    <p><strong>Cast</strong> <span id="movieCast"></span></p>
+                    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-inner mb-5" id="movieCastCarousel">
+                            <!-- Carousel items will be dynamically added here -->
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
+                            data-bs-slide="prev" style="background-color: black;">
+                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
+                            data-bs-slide="next" style="background-color: black;">
+                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                            <span class="visually-hidden">Next</span>
+                        </button>
+                    </div>
+                    <p><strong>Rating:</strong> <span id="movieRating"></span></p>
+                    <p><strong>Year:</strong> <span id="movieYear"></span></p>
+                    <img id="movieImage" src="" alt="Image" style="max-width: 250px; max-height: 300px;">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    function filterMovies() {
-    const filterValue = filterInput.value.toLowerCase();
-    const alphabeticalValue = alphabeticalDropdown.value.toLowerCase();
+    <?php include "../../Footer.php" ?>
 
-    return Array.from(movieCards).filter(card => {
-        const title = card.querySelector('.text-title').textContent.toLowerCase();
-        const year = card.querySelector('.text-year').textContent.toLowerCase();
-        const matchesSearch = title.includes(filterValue) || year.includes(filterValue);
-
-        // Check if the movie card should be shown based on the alphabetical filter
-        const matchesAlphabetical = alphabeticalValue === 'all' || title.startsWith(alphabeticalValue);
-
-        return matchesSearch && matchesAlphabetical;
-    });
-}
-
-
-
-    function renderPage() {
-        let filteredCards = filterMovies();
-
-        const totalPages = Math.ceil(filteredCards.length / entriesPerPage);
-        currentPage = Math.min(currentPage, totalPages || 1);
-
-        movieCards.forEach(card => card.style.display = 'none');
-
-        filteredCards.slice((currentPage - 1) * entriesPerPage, currentPage * entriesPerPage)
-            .forEach(card => card.style.display = 'block');
-
-        prevButton.disabled = currentPage === 1;
-        nextButton.disabled = currentPage === totalPages || totalPages === 0;
-    }
-
-    filterInput.addEventListener('input', function() {
-        currentPage = 1;
-        renderPage();
-    });
-
-    alphabeticalDropdown.addEventListener('change', function() {
-        currentPage = 1;
-        renderPage();
-    });
-
-    entriesDropdown.addEventListener('change', function() {
-        entriesPerPage = parseInt(this.value);
-        currentPage = 1;
-        renderPage();
-    });
-
-    prevButton.addEventListener('click', function() {
-        if (currentPage > 1) {
-            currentPage--;
-            renderPage();
-        }
-    });
-
-    nextButton.addEventListener('click', function() {
-        const totalPages = Math.ceil(filterMovies().length / entriesPerPage);
-        if (currentPage < totalPages) {
-            currentPage++;
-            renderPage();
-        }
-    });
-
-    renderPage();
-
-    // Modal functionality
-    var movieModal = document.getElementById('movieModal');
-    movieModal.addEventListener('show.bs.modal', function(event) {
-        var button = event.relatedTarget;
-
-        var movieName = button.getAttribute('data-name');
-        var movieSummary = button.getAttribute('data-summary');
-        var movieGenre = button.getAttribute('data-genre');
-        var movieDirector = button.getAttribute('data-director');
-        var movieCast = button.getAttribute('data-cast');
-        var movieRating = button.getAttribute('data-rating');
-        var movieYear = button.getAttribute('data-year');
-        var movieImage = button.getAttribute('data-img');
-
-        var modalTitle = movieModal.querySelector('.modal-title');
-        var modalBodyName = movieModal.querySelector('#movieName');
-        var modalBodySummary = movieModal.querySelector('#movieSummary');
-        var modalBodyGenre = movieModal.querySelector('#movieGenre');
-        var modalBodyDirector = movieModal.querySelector('#movieDirector');
-        var modalBodyCast = movieModal.querySelector('#movieCast');
-        var modalBodyRating = movieModal.querySelector('#movieRating');
-        var modalBodyYear = movieModal.querySelector('#movieYear');
-        var modalBodyImage = movieModal.querySelector('#movieImage');
-
-        modalTitle.textContent = 'Movie Details: ' + movieName;
-        modalBodyName.textContent = movieName;
-        modalBodySummary.textContent = movieSummary;
-        modalBodyGenre.textContent = movieGenre;
-        modalBodyDirector.textContent = movieDirector;
-        modalBodyCast.textContent = movieCast;
-        modalBodyRating.textContent = movieRating;
-        modalBodyYear.textContent = movieYear;
-        modalBodyImage.src = movieImage;
-
-        var castString = button.getAttribute('data-cast');
-        var castMembers = castString.split('|');
-        var carouselInner = movieModal.querySelector('#movieCastCarousel');
-        carouselInner.innerHTML = '';
-        castMembers.forEach(function(member, index) {
-            var [name, imgUrl] = member.split(',');
-            var div = document.createElement('div');
-            div.className = index === 0 ? 'carousel-item active' : 'carousel-item';
-            div.innerHTML = `
-                <h5>${name}</h5>
-                <img src="${imgUrl}" alt="${name}" style="max-width: 200px; max-height: 200px;">
-            `;
-            carouselInner.appendChild(div);
-        });
-    });
-});
-
-</script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../JS/American_Movies_table.js"></script>
 
 </body>
+
 </html>
 
 <?php
