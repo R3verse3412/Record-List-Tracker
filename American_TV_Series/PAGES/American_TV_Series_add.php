@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("ississsss", $user_id, $name, $summary, $year, $genre, $rating, $director, $img_path, $season);
 
             if ($stmt->execute()) {
-                // Redirect after successful insertion
+                $_SESSION['success_message'] = "TV Series added successfully!";
                 header("Location: American_TV_Series.php");
                 exit();
             } else {

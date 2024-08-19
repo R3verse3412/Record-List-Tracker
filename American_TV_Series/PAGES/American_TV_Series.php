@@ -58,6 +58,8 @@
                 <div class="alert alert-info text-center">
                     <strong>Total TV Series:</strong> <?php echo $total_records; ?>
                 </div>
+
+                <?php include "../PHP/American_TV_Series_notif.php" ?>
             </div>
 
             <!-- Filter Search and Entries Dropdown -->
@@ -211,6 +213,7 @@ if ($result->num_rows > 0) {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../JS/American_TV_Series_tables.js"></script>
+    <script src="../JS/American_TV_Series_notif.js"></script>
 </body>
 
 </html>

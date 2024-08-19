@@ -58,6 +58,7 @@
                 <div class="alert alert-info text-center">
                     <strong>Total Movies:</strong> <?php echo $total_records; ?>
                 </div>
+                <?php include "../PHP/Anime_Movies_notif.php"?>
             </div>
 
             <!-- Filter Search and Entries Dropdown -->
@@ -197,6 +198,7 @@ if ($result->num_rows > 0) {
     <?php include "../../Footer.php"?>
 
     <script src="../JS/Anime_Movies_tables.js"> </script>
+    <script src="../JS/Anime_Movies_notif.js"></script>
 
 </body>
 

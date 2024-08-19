@@ -67,4 +67,7 @@ $count_stmt->execute();
 $count_result = $count_stmt->get_result();
 $row_count = $count_result->fetch_assoc();
 $total_records = $row_count['count'];
+
+
 ?>
+
