@@ -108,9 +108,13 @@ $total_records = $row_count['count'];
 <section class="section">
     <div class="container">
     <h2 class="text-center mb-5">Cartoon Movies</h2>
-        <a href="Cartoon_Movies_add.php" class="btn btn-success mb-3">Add New Cartoon Movies</a>
-        <div class="alert alert-info text-center mb-4">
-            <strong>Total Cartoon Movies:</strong> <?php echo $total_records; ?>
+   
+    <div class="mb-4">
+            <a href="Cartoon_Movies_add.php" class="btn btn-success mb-3">Add New Cartoon Movies</a>
+            <div class="alert alert-info text-center">
+                <strong>Total Cartoon Movies:</strong> <?php echo $total_records; ?>
+            </div>
+            <?php include "../PHP/Cartoon_Movies_notif.php"?>
         </div>
 
          <!-- Filter Search and Entries Dropdown -->
@@ -263,6 +267,7 @@ if ($result->num_rows > 0) {
 
 
     <script src="../JS/Cartoon_Movies_tables.js"> </script> 
+    <script src="../JS/Cartoon_Movies_notif.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
     const filterInput = document.getElementById('filter-search');

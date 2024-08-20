@@ -52,13 +52,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("ississsis", $user_id, $name, $summary, $year, $genre, $rating, $img_path, $episodes, $studio);
 
             if ($stmt->execute()) {
-                // Redirect to index.php after successful insertion
+                $_SESSION['success_message'] = "Series added successfully!";
                 header("Location: Cartoon_Series.php");
                 exit();
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
-
             // Close statement
             $stmt->close();
         } else {
@@ -131,8 +130,10 @@ include "../../nav_user.php"
                     <input type="file" class="form-control-file" id="img" name="img" required>
                 </div>
                 <div class="mb-5 d-flex justify-content-center">
+                    <div class="">
                     <button type="submit" class="btn btn-success" name="submit">Save</button>
                     <a href="Cartoon_Series.php" class="btn btn-danger">Cancel</a>
+                    </div>
                 </div>
             </form>
         </div>

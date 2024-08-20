@@ -118,6 +118,7 @@ include "../../nav_user.php"
             <div class="alert alert-info text-center">
                 <strong>Total Series:</strong> <?php echo $total_records; ?>
             </div>
+            <?php include "../PHP/Anime_Series_notif.php"?>
         </div>
 
          <!-- Filter Search and Entries Dropdown -->
@@ -255,6 +256,7 @@ if ($result->num_rows > 0) {
 ?>
 
 <script src="../JS/Anime_Series_tables.js"></script>
+<script src="../JS/Anime_Series_notif.js"></script>
 
 <script>
 document.addEventListener('DOMContentLoaded', function() {

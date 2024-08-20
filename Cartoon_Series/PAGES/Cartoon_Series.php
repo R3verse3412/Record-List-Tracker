@@ -114,9 +114,12 @@ include "../../nav_user.php"
     <div class="container">
     <h2 class="text-center mb-5">Cartoon Series</h2>
 
+<div class="mb-4">
     <a href="Cartoon_Series_add.php" class="btn btn-success mb-3">Add New Cartoon Series</a>
     <div class="alert alert-info text-center mb-4">
         <strong>Total Cartoon Series:</strong> <?php echo $total_records; ?>
+    </div>
+    <?php include "../PHP/Cartoon_Series_notif.php"?>
     </div>
 
         <!-- Filter Search and Entries Dropdown -->
@@ -226,7 +229,7 @@ if ($result->num_rows > 0) {
 </section>
 <!-- Modal -->
 <div class="modal fade" id="cartoonseriesModal" tabindex="-1" aria-labelledby="cartoonseriesModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog text-center">
+    <div class="modal-dialog modal-lg text-center">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-center" id="cartoonseriesModalLabel">Cartoon Series Details</h5>
@@ -254,6 +257,7 @@ if ($result->num_rows > 0) {
 ?>
 
 <script src="../JS/Cartoon_Series_tables.js"></script> 
+<script src="../JS/Cartoon_Series_notif.js"></script> 
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {

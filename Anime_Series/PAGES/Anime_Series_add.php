@@ -54,13 +54,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("ississsis",$user_id, $name, $summary, $year, $genre, $rating, $img_path, $episodes, $studio);
 
             if ($stmt->execute()) {
-                // Redirect to index.php after successful insertion
+                $_SESSION['success_message'] = "Series added successfully!";
                 header("Location: Anime_Series.php");
                 exit();
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
-
             // Close statement
             $stmt->close();
         } else {

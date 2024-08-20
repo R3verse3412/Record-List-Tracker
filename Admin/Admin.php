@@ -39,6 +39,7 @@ $categories = [
     'games' => 'Games',
     'manga' => 'Manga',
     'manhwa' => 'Manhwa',
+    'manhwa_18' => 'Manhwa_18'
    
 ];
 
