@@ -52,15 +52,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("ississsss", $user_id, $name, $summary, $year, $genre, $rating, $img_path, $studio, $device);
 
             if ($stmt->execute()) {
-                // Redirect to index.php after successful insertion
+                $_SESSION['success_message'] = "Game added successfully!";
                 header("Location: Games.php");
                 exit();
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
-
             // Close statement
             $stmt->close();
+
         } else {
             echo "Failed to move uploaded file.";
         }

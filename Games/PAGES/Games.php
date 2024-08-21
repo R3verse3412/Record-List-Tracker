@@ -95,9 +95,12 @@ include "../../nav_user.php"
             <h3>Games</h3>
         </div>
 
+        <div class="mb-4">
         <a href="Games_add.php" class="btn btn-success mb-3">Add New Games</a>
         <div class="alert alert-info text-center mb-4">
             <strong>Total Games:</strong> <?php echo $total_records; ?>
+        </div>
+        <?php include "../PHP/games_notif.php" ?>
         </div>
 
         <!-- Filter Search and Entries Dropdown -->
@@ -234,6 +237,7 @@ include "../../Footer.php"
 ?>
 
 <script src="../JS/Games_tables.js"></script> 
+<script src="../JS/Games_notif.js"></script>
 
 <script>
     document.addEventListener('DOMContentLoaded', function() {
