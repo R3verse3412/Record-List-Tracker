@@ -116,9 +116,12 @@ include "../../nav_user.php"
         <h3>Manga</h3>
     </div>
 
+    <div class="mb-4">
     <a href="Manga_Add.php" class="btn btn-success mb-3">Add New Manga</a>
     <div class="alert alert-info text-center mb-4">
         <strong>Total Manga:</strong> <?php echo $total_records; ?>
+    </div>
+    <?php include "../PHP/Manga_notif.php" ?> 
     </div>
 
     <!-- Filter Search and Entries Dropdown -->
@@ -222,6 +225,7 @@ if ($result->num_rows > 0) {
 <?php include "../../Footer.php" ?>
 
 <script src="../JS/Manga_Tables.js"></script>
+<script src="../JS/Manga_notif.js"></script>
 
 </body>
 </html>

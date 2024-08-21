@@ -52,7 +52,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("ississsss", $user_id, $name, $summary, $year, $genre, $rating, $img_path, $studio, $device);
 
             if ($stmt->execute()) {
-                $_SESSION['success_message'] = "Game added successfully!";
+                $_SESSION['success_message'] = "Manga added successfully!";
                 header("Location: Games.php");
                 exit();
             } else {
