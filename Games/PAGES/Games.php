@@ -82,6 +82,10 @@ $total_records = $row_count['count'];
         padding: 0.25rem 0.5rem;
         font-size: 0.75rem;
     }
+
+    .text-studio {
+        display: none;
+    }
 </style>
 <body>
     
@@ -172,6 +176,7 @@ if ($result->num_rows > 0) {
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title text-title" title="' . htmlspecialchars($row['name']) . '">' . truncateTitle($row['name']) . '</h5>
                     <p class="card-text text-year">' . htmlspecialchars($row['year']) . '</p>
+                      <p class="card-text text-studio">' . htmlspecialchars($row['studio']) . '</p>
                     <div class="mt-auto d-flex justify-content-evenly">
                         <a href="Games_edit.php?id=' . $row['id'] . '" class="btn btn-warning btn-sm">Edit</a>
                         <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#gamesModal" 
@@ -222,7 +227,7 @@ if ($result->num_rows > 0) {
                 <p><strong>Year:</strong> <span id="gamesYear"></span></p>
                 <p><strong>Publisher:</strong> <span id="gamesPublisher"></span></p>
                 <p><strong>Device:</strong> <span id="gamesDevice"></span></p>
-                <p><strong>Studio:</strong> <span id="gamesStudio"></span></p>
+                <p><strong>Developer:</strong> <span id="gamesStudio"></span></p>
                 <img id="gamesImage" src="" alt="Image" style="max-width: 250px; max-height: 300px;">
             </div>
             <div class="modal-footer">
@@ -259,8 +264,9 @@ include "../../Footer.php"
         return Array.from(gamesCards).filter(card => {
             const title = card.querySelector('.text-title').textContent.toLowerCase();
             const year = card.querySelector('.text-year').textContent.toLowerCase();
-            const matchesSearch = title.includes(filterValue) || year.includes(filterValue);
-            const matchesAlphabetical = alphabeticalValue === 'all' || title.startsWith(alphabeticalValue);
+            const studio = card.querySelector('.text-studio').textContent.toLowerCase();
+            const matchesSearch = title.includes(filterValue) || year.includes(filterValue) || studio.includes(filterValue);
+            const matchesAlphabetical = alphabeticalValue === 'all' || title.startsWith(alphabeticalValue) ;
 
             return matchesSearch && matchesAlphabetical;
         });
