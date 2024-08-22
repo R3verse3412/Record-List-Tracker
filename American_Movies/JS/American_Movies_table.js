@@ -10,22 +10,23 @@ document.addEventListener('DOMContentLoaded', function() {
     let entriesPerPage = parseInt(entriesDropdown.value);
 
     function filterMovies() {
-    const filterValue = filterInput.value.toLowerCase();
-    const alphabeticalValue = alphabeticalDropdown.value.toLowerCase();
-
-    return Array.from(movieCards).filter(card => {
-        const title = card.querySelector('.text-title').textContent.toLowerCase();
-        const year = card.querySelector('.text-year').textContent.toLowerCase();
-        const matchesSearch = title.includes(filterValue) || year.includes(filterValue);
-
-        // Check if the movie card should be shown based on the alphabetical filter
-        const matchesAlphabetical = alphabeticalValue === 'all' || title.startsWith(alphabeticalValue);
-
-        return matchesSearch && matchesAlphabetical;
-    });
-}
-
-
+        const filterValue = filterInput.value.toLowerCase();
+        const alphabeticalValue = alphabeticalDropdown.value.toLowerCase();
+        
+        return Array.from(movieCards).filter(card => {
+            const title = card.querySelector('.text-title').textContent.toLowerCase();
+            const year = card.querySelector('.text-year').textContent.toLowerCase();
+            const director = card.querySelector('.text-director').textContent.toLowerCase();
+            
+            console.log(`Title: ${title}, Year: ${year}, Director: ${director}`); // Add this line for debugging
+    
+            const matchesSearch = title.includes(filterValue) || year.includes(filterValue) || director.includes(filterValue);
+            const matchesAlphabetical = alphabeticalValue === 'all' || title.startsWith(alphabeticalValue);
+    
+            return matchesSearch && matchesAlphabetical;
+        });
+    }
+    
 
     function renderPage() {
         let filteredCards = filterMovies();

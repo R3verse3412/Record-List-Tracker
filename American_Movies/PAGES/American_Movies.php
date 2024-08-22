@@ -44,6 +44,11 @@
         padding: 0.25rem 0.5rem;
         font-size: 0.75rem;
     }
+
+    .text-director{
+        display: none;
+    }
+
 </style>
 
 <body>
@@ -70,7 +75,7 @@
             <div class="row d-flex justify-content-between mb-4">
                 <div class="col-md-6">
                     <input type="text" id="filter-search" class="form-control"
-                        placeholder="Search for movies by title or year...">
+                        placeholder="Search for movies by title, year and director...">
                 </div>
                 <div class="col-md-2">
                     <select id="entries-Alpahabetical" class="form-select">
@@ -139,6 +144,7 @@
                                 <div class="card-body d-flex flex-column">
                                     <h5 class="card-title text-title" title="' . htmlspecialchars($row['name']) . '">' . truncateTitle($row['name']) . '</h5>
                                     <p class="card-text text-year">' . htmlspecialchars($row['year']) . '</p>
+                               <p class="text-director">'. htmlspecialchars($row['director']) .'</p>
                                     <div class="mt-auto d-flex justify-content-evenly">
                                         <a href="edit.php?id=' . $row['id'] . '" class="btn btn-warning btn-sm">Edit</a>
                                         <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#movieModal" 
