@@ -101,9 +101,12 @@ $total_records = $row_count['count'];
         <h3>Manhwa 18</h3>
     </div>
 
+    <div class="mb-4">
     <a href="Manhwa_18_add.php" class="btn btn-success mb-3">Add New Manhwa</a>
     <div class="alert alert-info text-center mb-4">
         <strong>Total Manhwa 18:</strong> <?php echo $total_records; ?>
+    </div>
+    <?php include "../PHP/Manhwa_18_notif.php" ?>
     </div>
     
     <!-- Filter Search and Entries Dropdown -->
@@ -207,6 +210,7 @@ if ($result->num_rows > 0) {
 <?php include "../../Footer.php" ?>
 
 <script src="../JS/Manhwa_18_tables.js"></script>
+<script src="../JS/Manhwa_18_notif.js"></script>
 
 </body>
 </html>

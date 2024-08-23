@@ -52,15 +52,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bind_param("issssisss",$user_id, $title, $author, $genre, $status, $release_date, $description, $rating, $img_path);
 
             if ($stmt->execute()) {
-                // Redirect to Manhwa.php after successful insertion
+                $_SESSION['success_message'] = "Manhwa added successfully!";
                 header("Location: Manhwa.php");
                 exit();
             } else {
                 echo "Error: " . $sql . "<br>" . $conn->error;
             }
-
             // Close statement
             $stmt->close();
+
         } else {
             echo "Failed to move uploaded file.";
         }

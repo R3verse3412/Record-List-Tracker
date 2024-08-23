@@ -113,9 +113,12 @@ include "../../header.php"
         <h3>Manhwa</h3>
     </div>
 
+    <div class="mb-4">
     <a href="Manhwa_add.php" class="btn btn-success mb-3">Add New Manhwa</a>
     <div class="alert alert-info text-center mb-4">
         <strong>Total Manhwa:</strong> <?php echo $total_records; ?>
+    </div>
+    <?php include "../PHP/Manhwa_notif.php" ?>
     </div>
     
     
@@ -148,7 +151,7 @@ include "../../header.php"
             }
             // Inside the loop where we generate the cards:
 if ($result->num_rows > 0) {
-    echo '<div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4">';
+    echo '<div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">';
     while ($row = $result->fetch_assoc()) {
         echo '<div class="col manhwa-card">
             <div class="card h-100 shadow">
@@ -222,7 +225,7 @@ if ($result->num_rows > 0) {
 ?>
 
 <script src="../JS/Manhwa_tables.js"></script>
-
+<script src="../JS/Manhwa_notif.js"></script>
 
 </body>
 </html>
