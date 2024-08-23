@@ -16,7 +16,8 @@ document.addEventListener('DOMContentLoaded', function() {
         return Array.from(movieCards).filter(card => {
             const title = card.querySelector('.text-title').textContent.toLowerCase();
             const year = card.querySelector('.text-year').textContent.toLowerCase();
-            const matchesSearch = title.includes(filterValue) || year.includes(filterValue);
+            const studio = card.querySelector('.text-studio').textContent.toLowerCase();
+            const matchesSearch = title.includes(filterValue) || year.includes(filterValue) || studio.includes(filterValue);
             const matchesAlphabetical = alphabeticalValue === 'all' || title.startsWith(alphabeticalValue);
 
             return matchesSearch && matchesAlphabetical;

@@ -43,6 +43,10 @@
         padding: 0.25rem 0.5rem;
         font-size: 0.75rem;
     }
+
+    .text-studio{
+        display: none;
+    }
 </style>
 
 <body>
@@ -131,6 +135,7 @@ if ($result->num_rows > 0) {
                 <div class="card-body d-flex flex-column">
                     <h5 class="card-title text-title" title="' . htmlspecialchars($row['name']) . '">' . truncateTitle($row['name']) . '</h5>
                     <p class="card-text text-year">' . htmlspecialchars($row['year']) . '</p>
+                      <p class="card-text text-studio">' . htmlspecialchars($row['studio']) . '</p>
                     <div class="mt-auto d-flex justify-content-evenly">
                         <a href="Anime_Movies_edit.php?id=' . $row['id'] . '" class="btn btn-warning btn-sm">Edit</a>
                         <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#movieModal" 
@@ -199,7 +204,7 @@ if ($result->num_rows > 0) {
 
     <script src="../JS/Anime_Movies_tables.js"> </script>
     <script src="../JS/Anime_Movies_notif.js"></script>
-
+   
 </body>
 
 </html>
