@@ -8,48 +8,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP CRUD</title>
     <?php include "../../header.php" ?>
+    <link href="../CSS/American_Movies.css" rel="stylesheet">
 </head>
-<style>
-    .card {
-        transition: transform 0.3s ease-in-out;
-    }
 
-    .card:hover {
-        transform: translateY(-5px);
-    }
-
-    .movie-poster {
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .card:hover .movie-poster {
-        transform: scale(1.05);
-    }
-
-    .text-title {
-        text-align: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 1rem;
-    }
-
-    .text-year {
-        text-align: center;
-        font-size: 0.9rem;
-        color: #6c757d;
-    }
-
-    .btn-sm {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.75rem;
-    }
-
-    .text-director{
-        display: none;
-    }
-
-</style>
 
 <body>
     <?php include "../../nav_user.php" ?>
@@ -119,53 +80,7 @@
 
             </div>
             <div class="container" id="movies-container">
-                <?php
-                        
-                // ... (previous code remains the same)
-
-                function truncateTitle($title, $limit = 25) {
-                    if (strlen($title) > $limit) {
-                        return substr($title, 0, $limit) . '...';
-                    }
-                    return $title;
-                }
-
-                // ... (database connection and query code remains the same)
-
-                // Inside the loop where we generate the cards:
-                if ($result->num_rows > 0) {
-                    echo '<div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">';
-                    while ($row = $result->fetch_assoc()) {
-                        echo '<div class="col movie-card">
-                            <div class="card h-100 shadow">
-                                <div class="card-img-top d-flex justify-content-center align-items-center" style="height: 250px;">
-                                    <img src="' . htmlspecialchars($row['img']) . '" alt="" class="img-fluid movie-poster" style="max-height: 100%; max-width: 100%; object-fit: contain;">
-                                </div>
-                                <div class="card-body d-flex flex-column">
-                                    <h5 class="card-title text-title" title="' . htmlspecialchars($row['name']) . '">' . truncateTitle($row['name']) . '</h5>
-                                    <p class="card-text text-year">' . htmlspecialchars($row['year']) . '</p>
-                               <p class="text-director">'. htmlspecialchars($row['director']) .'</p>
-                                    <div class="mt-auto d-flex justify-content-evenly">
-                                        <a href="edit.php?id=' . $row['id'] . '" class="btn btn-warning btn-sm">Edit</a>
-                                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#movieModal" 
-                                            data-id="' . $row['id'] . '" 
-                                            data-name="' . htmlspecialchars($row['name']) . '" 
-                                            data-summary="' . htmlspecialchars($row['summary']) . '" 
-                                            data-genre="' . htmlspecialchars($row['genre']) . '" 
-                                            data-rating="' . htmlspecialchars($row['rating']) . '" 
-                                            data-year="' . htmlspecialchars($row['year']) . '" 
-                                            data-img="' . htmlspecialchars($row['img']) . '" 
-                                            data-cast="' . htmlspecialchars($row['cast']) . '" 
-                                            data-director="' . htmlspecialchars($row['director']) . '">See</button>
-                                        <a href="delete.php?id=' . $row['id'] . '" class="btn btn-danger btn-sm">Delete</a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>';
-                    }
-                    echo '</div>';
-                }
-                ?>
+             <?php include "../PHP/American_Movies_Card.php" ?>
             </div>
 
             <!-- Previous and Next buttons -->

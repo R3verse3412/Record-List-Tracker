@@ -47,9 +47,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt = $conn->prepare($sql);
             $stmt->bind_param("isssiisss", $user_id, $name, $summary, $genre, $rating, $year, $cast, $img_path, $director);
             
-
             if ($stmt->execute()) {
-                // Redirect after successful insertion
+                $_SESSION['success_message'] = "Movie added successfully!";
                 header("Location: American_Movies.php");
                 exit();
             } else {
