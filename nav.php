@@ -41,6 +41,9 @@
                 <li class="nav-item">
                     <a class="nav-link" href="Statistics.php">Statistics</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="To-Do-List.php">To-Do-List</a>
+                </li>
             </ul>
             <div class="d-flex">
                 <?php if (isset($_SESSION['user_id'])): ?>

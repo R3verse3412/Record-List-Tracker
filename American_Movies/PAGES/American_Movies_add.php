@@ -1,6 +1,7 @@
 <?php include "../PHP/American_Movies_add.php" ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,9 +11,10 @@
     ?>
 
 </head>
+
 <body>
 
-<?php
+    <?php
 include "../../nav_user.php"
 ?>
 
@@ -48,23 +50,24 @@ include "../../nav_user.php"
                     <label class="form-label">Director</label>
                     <input type="text" class="form-control" name="director" placeholder="Director" required>
                 </div>
-                <div class="mb-3">
-                    <label for="img" class="form-label">Choose Image</label>
-                    <input type="file" class="form-control-file" id="img" name="img" required>
+                <div class="mb-3 ">
+                    <label class="input-group-text" for="inputGroupFile01">Choose Image</label>
+                    <input type="file" class="form-control" id="img" name="img" required>
                 </div>
                 <div class="mb-5 d-flex justify-content-center">
-                <div class="col-md-auto">
-                    <button type="submit" class="btn btn-success" name="submit">Save</button>
-                    <a href="American_Movies.php" class="btn btn-danger">Cancel</a>
-                </div>
+                    <div class="col-md-auto">
+                        <button type="submit" class="btn btn-success" name="submit">Save</button>
+                        <a href="American_Movies.php" class="btn btn-danger">Cancel</a>
+                    </div>
                 </div>
             </form>
         </div>
     </div>
-    
-<?php
+
+    <?php
     include "../../Footer.php"
 ?>
 
 </body>
+
 </html>

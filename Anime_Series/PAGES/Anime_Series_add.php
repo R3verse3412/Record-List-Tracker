@@ -128,8 +128,8 @@ include "../../nav_user.php"
                     <input type="text" class="form-control" name="studio" placeholder="Studio" required>
                 </div>
                 <div class="mb-3">
-                    <label for="img" class="form-label">Choose Image</label>
-                    <input type="file" class="form-control-file" id="img" name="img" required>
+                    <label for="img" class="input-group-text d-flex justify-content-center">Choose Image</label>
+                    <input type="file" class="form-control" id="img" name="img" required>
                 </div>
                 <div class="mb-5 d-flex justify-content-center">
                     <div class="">
