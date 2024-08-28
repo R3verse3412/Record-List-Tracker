@@ -7,48 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anime Series</title>
     <?php include "../../header.php"?>
+    <link href="../CSS/Anime_Movies.css" rel="stylesheet">
 </head>
-<style>
-    .card {
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .card:hover {
-        transform: translateY(-5px);
-    }
-
-    .movie-poster {
-        transition: transform 0.3s ease-in-out;
-    }
-
-    .card:hover .movie-poster {
-        transform: scale(1.05);
-    }
-
-    .text-title {
-        text-align: center;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        font-size: 1rem;
-    }
-
-    .text-year {
-        text-align: center;
-        font-size: 0.9rem;
-        color: #6c757d;
-    }
-
-    .btn-sm {
-        padding: 0.25rem 0.5rem;
-        font-size: 0.75rem;
-    }
-
-    .text-studio{
-        display: none;
-    }
-</style>
-
 <body>
 
     <?php include "../../nav_user.php"?>
