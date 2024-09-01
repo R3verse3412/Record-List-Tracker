@@ -63,7 +63,7 @@
                             <?php if (!empty($cast_imgs[$index])): ?>
                             <img src="<?php echo htmlspecialchars($cast_imgs[$index]); ?>" alt="Cast Image" style="max-width: 100px;"><br>
                             <?php endif; ?>
-                            <input type="file" class="form-control-file mb-2" name="cast_img[]">
+                            <input type="file" class="form-control mb-2" name="cast_img[]">
                             <input type="hidden" name="current_cast_img[]" value="<?php echo htmlspecialchars($cast_imgs[$index]); ?>">
                             <button type="button" class="btn btn-danger" onclick="removeCastMember(this)">Delete</button>
                         </div>
