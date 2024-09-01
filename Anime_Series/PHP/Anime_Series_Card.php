@@ -1,7 +1,7 @@
 <?php
             // ... (previous code remains the same)
 
-            function truncateTitle($title, $limit = 25) {
+            function truncateTitle($title, $limit = 50) {
                 if (strlen($title) > $limit) {
                     return substr($title, 0, $limit) . '...';
                 }
