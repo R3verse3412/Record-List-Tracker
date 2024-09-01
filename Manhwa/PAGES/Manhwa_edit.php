@@ -6,19 +6,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP CRUD - Edit Anime Series</title>
-    <?php
-include "../../header.php"
-?>
+    <?php include "../../header.php" ?>
 </head>
-
 <body>
-    <?php
-include "../../nav_user.php"
-?>
+    <?php include "../../nav_user.php" ?>
     <div class="container">
         <div class="text-center mb-4">
-            <h3>Edit Anime Series</h3>
-            <p class="text-muted">Update the details of the anime series</p>
+            <h3>Edit Manhwa</h3>
+            <p class="text-muted">Update the details of the Manhwa</p>
         </div>
 
         <div class="container d-flex justify-content-center">
@@ -56,12 +51,9 @@ include "../../nav_user.php"
                 <div class="mb-3">
                     <label class="form-label">Status</label>
                     <select class="form-control" name="status">
-                        <option value="Mobile Phone" <?php if ($status == 'Mobile Phone') echo 'selected'; ?>>Mobile
-                            Phone</option>
-                        <option value="PC" <?php if ($status == 'PC') echo 'selected'; ?>>PC</option>
-                        <option value="Playstation" <?php if ($status == 'Playstation') echo 'selected'; ?>>Playstation
-                        </option>
-                        <option value="Xbox" <?php if ($status == 'Xbox') echo 'selected'; ?>>Xbox</option>
+                        <option value="Complete" <?php if ($status == 'Mobile Phone') echo 'selected'; ?>>Complete</option>
+                        <option value="Ongoing" <?php if ($status == 'PC') echo 'selected'; ?>>Ongoing</option>
+                       
                     </select>
                 </div>
 
@@ -82,9 +74,7 @@ include "../../nav_user.php"
             </form>
         </div>
     </div>
-    <?php
-    include "../../Footer.php"
-?>
+    <?php include "../../Footer.php" ?>
 </body>
 
 </html>

@@ -58,7 +58,7 @@
 
 <!-- Modal -->
 <div class="modal fade" id="mangaModal" tabindex="-1" aria-labelledby="mangaModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog text-center">
+    <div class="modal-dialog modal-lg text-center">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title text-center" id="mangaModalLabel">Manga Details</h5>

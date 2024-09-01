@@ -75,9 +75,11 @@
                     <input type="hidden" name="current_img" value="<?php echo htmlspecialchars($img); ?>">
                 </div>
                 <div class="mb-5 d-flex justify-content-center">
+                    <div class="">
                     <button type="submit" class="btn btn-success" name="submit">Update</button>
                     <a href="Games.php" class="btn btn-danger">Cancel</a>
                     <input type="hidden" name="id" value="<?php echo htmlspecialchars($id); ?>">
+                    </div>
                 </div>
             </form>
         </div>
