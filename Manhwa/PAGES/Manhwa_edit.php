@@ -63,7 +63,7 @@
                     <img src="<?php echo htmlspecialchars($img); ?>" alt="Current Image" style="max-width: 200px;"><br>
                     <?php endif; ?>
                     <label class="form-label">Update Image</label>
-                    <input type="file" class="form-control-file" name="img">
+                    <input type="file" class="form-control" name="img">
                     <input type="hidden" name="current_img" value="<?php echo htmlspecialchars($img); ?>">
                 </div>
                 <div class="mb-5 d-flex justify-content-center">

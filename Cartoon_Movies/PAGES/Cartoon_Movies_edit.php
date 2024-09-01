@@ -1,19 +1,14 @@
 <?php include "../PHP/Cartoon_Movies_edit.php" ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP CRUD - Edit American Movie</title>
-    <?php
-    include "../../header.php"
-    ?>
+    <?php include "../../header.php" ?>
 </head>
 <body>
-<?php
-include "../../nav_user.php"
-?>
+<?php include "../../nav_user.php" ?>
     <div class="container">
         <div class="text-center mb-4">
             <h3>Edit American Movie</h3>
@@ -52,7 +47,7 @@ include "../../nav_user.php"
                     <img src="<?php echo htmlspecialchars($img); ?>" alt="Current Image" style="max-width: 200px;"><br>
                     <?php endif; ?>
                     <label class="form-label">Update Image</label>
-                    <input type="file" class="form-control-file" name="img">
+                    <input type="file" class="form-control" name="img">
                     <input type="hidden" name="current_img" value="<?php echo htmlspecialchars($img); ?>">
                 </div>
                 <div class="mb-3">
@@ -82,10 +77,7 @@ include "../../nav_user.php"
             </form>
         </div>
     </div>
-    <?php
-    include "../../Footer.php"
-?>
-
+    <?php include "../../Footer.php"?>
     <script src="../JS/Cartoon_Movies_Edit.js"></script>
 </body>
 </html>

@@ -5,14 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP CRUD</title>
-    <?php
-include "../../header.php"
-?>
+    <?php include "../../header.php" ?>
 </head>
 <body>
-<?php
-include "../../nav_user.php"
-?>
+<?php include "../../nav_user.php" ?>
 
 <div class="container">
     <div class="text-center mb-4">
@@ -59,7 +55,7 @@ include "../../nav_user.php"
             </div>
             <div class="mb-3">
                 <label for="img" class="form-label">Choose Image</label>
-                <input type="file" class="form-control-file" id="img" name="img" required>
+                <input type="file" class="form-control" id="img" name="img" required>
             </div>
             <div class="mb-5 d-flex justify-content-center">
                 <div class="">
@@ -70,8 +66,6 @@ include "../../nav_user.php"
         </form>
     </div>
 </div>
-<?php
-    include "../../Footer.php"
-?>
+<?php include "../../Footer.php" ?>
 </body>
 </html>
