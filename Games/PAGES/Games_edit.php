@@ -49,7 +49,7 @@
                         value="<?php echo htmlspecialchars($publisher); ?>">
                 </div>
                 <div class="mb-3">
-                    <label class="form-label">Studio</label>
+                    <label class="form-label">Developer</label>
                     <input type="text" class="form-control" name="studio"
                         value="<?php echo htmlspecialchars($studio); ?>">
                 </div>

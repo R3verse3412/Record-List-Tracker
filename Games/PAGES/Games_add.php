@@ -50,8 +50,8 @@
                 </select>
             </div>
             <div class="mb-3">
-                <label class="form-label">Studio</label>
-                <input type="text" class="form-control" name="studio" placeholder="Studio" required>
+                <label class="form-label">Developer</label>
+                <input type="text" class="form-control" name="studio" placeholder="Developer" required>
             </div>
             <div class="mb-3">
                 <label for="img" class="form-label">Choose Image</label>
