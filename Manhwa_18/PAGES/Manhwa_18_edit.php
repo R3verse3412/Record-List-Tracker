@@ -52,12 +52,8 @@
                 <div class="mb-3">
                     <label class="form-label">Status</label>
                     <select class="form-control" name="status">
-                        <option value="Mobile Phone" <?php if ($status == 'Mobile Phone') echo 'selected'; ?>>Mobile
-                            Phone</option>
-                        <option value="PC" <?php if ($status == 'PC') echo 'selected'; ?>>PC</option>
-                        <option value="Playstation" <?php if ($status == 'Playstation') echo 'selected'; ?>>Playstation
-                        </option>
-                        <option value="Xbox" <?php if ($status == 'Xbox') echo 'selected'; ?>>Xbox</option>
+                        <option value="Mobile Phone" <?php if ($status == 'Complete') echo 'selected'; ?>>Complete</option>
+                        <option value="Ongoing" <?php if ($status == 'Ongoing') echo 'selected'; ?>>Ongoing</option>
                     </select>
                 </div>
 
@@ -67,7 +63,7 @@
                     <img src="<?php echo htmlspecialchars($img); ?>" alt="Current Image" style="max-width: 200px;"><br>
                     <?php endif; ?>
                     <label class="form-label">Update Image</label>
-                    <input type="file" class="form-control-file" name="img">
+                    <input type="file" class="form-control" name="img">
                     <input type="hidden" name="current_img" value="<?php echo htmlspecialchars($img); ?>">
                 </div>
                 <div class="mb-5 d-flex justify-content-center">
