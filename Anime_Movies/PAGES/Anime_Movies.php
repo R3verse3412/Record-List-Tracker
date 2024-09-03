@@ -90,32 +90,7 @@
     </section>
 
 
-    <!-- Modal -->
-    <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true"
-        data-bs-backdrop="static">
-        <div class="modal-dialog modal-lg text-center">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title " id="movieModalLabel">Movie Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Name:</strong> <span id="movieName"></span></p>
-                    <p><strong>Summary:</strong> <span id="movieSummary"></span></p>
-                    <p><strong>Genre:</strong> <span id="movieGenre"></span></p>
-                    <p><strong>Rating:</strong> <span id="movieRating"></span></p>
-                    <p><strong>Year:</strong> <span id="movieYear"></span></p>
-                    <p><strong>Duration:</strong> <span id="movieDuration"></span></p>
-                    <p><strong>Studio:</strong> <span id="movieStudio"></span></p>
-                    <img id="movieImage" src="" alt="Image" style="max-width: 250px; max-height: 300px;">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
+   
 
     <?php include "../../Footer.php"?>
 

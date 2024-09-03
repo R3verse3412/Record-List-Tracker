@@ -76,54 +76,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     renderPage();
 
-    // Modal functionality
-    var movieModal = document.getElementById('movieModal');
-    movieModal.addEventListener('show.bs.modal', function(event) {
-        var button = event.relatedTarget;
-
-        var movieName = button.getAttribute('data-name');
-        var movieSummary = button.getAttribute('data-summary');
-        var movieGenre = button.getAttribute('data-genre');
-        var movieDirector = button.getAttribute('data-director');
-        var movieCast = button.getAttribute('data-cast');
-        var movieRating = button.getAttribute('data-rating');
-        var movieYear = button.getAttribute('data-year');
-        var movieImage = button.getAttribute('data-img');
-
-        var modalTitle = movieModal.querySelector('.modal-title');
-        var modalBodyName = movieModal.querySelector('#movieName');
-        var modalBodySummary = movieModal.querySelector('#movieSummary');
-        var modalBodyGenre = movieModal.querySelector('#movieGenre');
-        var modalBodyDirector = movieModal.querySelector('#movieDirector');
-        var modalBodyCast = movieModal.querySelector('#movieCast');
-        var modalBodyRating = movieModal.querySelector('#movieRating');
-        var modalBodyYear = movieModal.querySelector('#movieYear');
-        var modalBodyImage = movieModal.querySelector('#movieImage');
-
-        modalTitle.textContent = 'Movie Details: ' + movieName;
-        modalBodyName.textContent = movieName;
-        modalBodySummary.textContent = movieSummary;
-        modalBodyGenre.textContent = movieGenre;
-        modalBodyDirector.textContent = movieDirector;
-        modalBodyCast.textContent = movieCast;
-        modalBodyRating.textContent = movieRating;
-        modalBodyYear.textContent = movieYear;
-        modalBodyImage.src = movieImage;
-
-        var castString = button.getAttribute('data-cast');
-        var castMembers = castString.split('|');
-        var carouselInner = movieModal.querySelector('#movieCastCarousel');
-        carouselInner.innerHTML = '';
-        castMembers.forEach(function(member, index) {
-            var [name, imgUrl] = member.split(',');
-            var div = document.createElement('div');
-            div.className = index === 0 ? 'carousel-item active' : 'carousel-item';
-            div.innerHTML = `
-                <h5>${name}</h5>
-                <img src="${imgUrl}" alt="${name}" style="max-width: 200px; max-height: 200px;">
-            `;
-            carouselInner.appendChild(div);
-        });
-    });
+  
 });
-

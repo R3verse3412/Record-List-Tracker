@@ -26,16 +26,7 @@
                                        <p class="text-director">'. htmlspecialchars($row['director']) .'</p>
                                             <div class="mt-auto d-flex justify-content-evenly">
                                                 <a href="edit.php?id=' . $row['id'] . '" class="btn btn-warning btn-sm">Edit</a>
-                                                <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#movieModal" 
-                                                    data-id="' . $row['id'] . '" 
-                                                    data-name="' . htmlspecialchars($row['name']) . '" 
-                                                    data-summary="' . htmlspecialchars($row['summary']) . '" 
-                                                    data-genre="' . htmlspecialchars($row['genre']) . '" 
-                                                    data-rating="' . htmlspecialchars($row['rating']) . '" 
-                                                    data-year="' . htmlspecialchars($row['year']) . '" 
-                                                    data-img="' . htmlspecialchars($row['img']) . '" 
-                                                    data-cast="' . htmlspecialchars($row['cast']) . '" 
-                                                    data-director="' . htmlspecialchars($row['director']) . '">See</button>
+                                                <a href="details.php?id=' . $row['id'] . '" class="btn btn-success btn-sm">See</a>
                                                 <a href="delete.php?id=' . $row['id'] . '" class="btn btn-danger btn-sm">Delete</a>
                                             </div>
                                         </div>
@@ -45,4 +36,3 @@
                             echo '</div>';
                         }
                         ?>
-

@@ -93,53 +93,12 @@
         </div>
     </section>
 
-    <!-- Modal -->
-    <div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true"
-        data-bs-backdrop="static">
-        <div class="modal-dialog modal-lg text-center">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title " id="movieModalLabel">Movie Details</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p><strong>Name:</strong> <span id="movieName"></span></p>
-                    <p><strong>Summary:</strong> <span id="movieSummary"></span></p>
-                    <p><strong>Genre:</strong> <span id="movieGenre"></span></p>
-                    <p><strong>Director:</strong> <span id="movieDirector"></span></p>
-                    <p><strong>Cast</strong> <span id="movieCast"></span></p>
-                    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-                        <div class="carousel-inner mb-5" id="movieCastCarousel">
-                            <!-- Carousel items will be dynamically added here -->
-                        </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample"
-                            data-bs-slide="prev" style="background-color: black;">
-                            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Previous</span>
-                        </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample"
-                            data-bs-slide="next" style="background-color: black;">
-                            <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                            <span class="visually-hidden">Next</span>
-                        </button>
-                    </div>
-                    <p><strong>Rating:</strong> <span id="movieRating"></span></p>
-                    <p><strong>Year:</strong> <span id="movieYear"></span></p>
-                    <img id="movieImage" src="" alt="Image" style="max-width: 250px; max-height: 300px;">
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <?php include "../../Footer.php" ?>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../JS/American_Movies_table.js"></script>
     <script src="../JS/American_Movies_Notif.js"></script>
-
+ 
 </body>
 
 </html>

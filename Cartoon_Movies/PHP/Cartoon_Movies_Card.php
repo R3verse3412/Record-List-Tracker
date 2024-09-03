@@ -22,17 +22,7 @@ if ($result->num_rows > 0) {
                       <p class="card-text text-genre">' . htmlspecialchars($row['genre']) . '</p>
                     <div class="mt-auto d-flex justify-content-evenly">
                         <a href="Cartoon_Movies_edit.php?id=' . $row['id'] . '" class="btn btn-warning btn-sm">Edit</a>
-                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#cartoonmoviesModal" 
-                            data-id="' . $row['id'] . '" 
-                            data-name="' . htmlspecialchars($row['name']) . '" 
-                            data-summary="' . htmlspecialchars($row['summary']) . '" 
-                            data-genre="' . htmlspecialchars($row['genre']) . '" 
-                            data-rating="' . htmlspecialchars($row['rating']) . '" 
-                            data-year="' . htmlspecialchars($row['year']) . '" 
-                             data-img="' . htmlspecialchars($row['img']) . '"
-                            data-cast="' . htmlspecialchars($row['cast']) . '" 
-                           data-director="' . htmlspecialchars($row['director']) . '"
-                            >See</button>
+                        <a href="Cartoon_Movies_Details.php?id=' . $row['id'] . '" class="btn btn-success btn-sm">See</a>
                         <a href="Cartoon_Movies_delete.php?id=' . $row['id'] . '" class="btn btn-danger btn-sm">Delete</a>
                     </div>
                 </div>

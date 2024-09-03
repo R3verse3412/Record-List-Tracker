@@ -72,38 +72,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     renderPage();
 
-    // Modal functionality
-    const movieModal = document.getElementById('movieModal');
-    movieModal.addEventListener('show.bs.modal', function (event) {
-        const button = event.relatedTarget;
-
-        const movieName = button.getAttribute('data-name');
-        const movieSummary = button.getAttribute('data-summary');
-        const movieGenre = button.getAttribute('data-genre');
-        const movieRating = button.getAttribute('data-rating');
-        const movieYear = button.getAttribute('data-year');
-        const movieDuration = button.getAttribute('data-duration');
-        const movieStudio = button.getAttribute('data-studio');
-        const movieImage = button.getAttribute('data-img');
-
-        const modalTitle = movieModal.querySelector('.modal-title');
-        const modalBodyName = movieModal.querySelector('#movieName');
-        const modalBodySummary = movieModal.querySelector('#movieSummary');
-        const modalBodyGenre = movieModal.querySelector('#movieGenre');
-        const modalBodyRating = movieModal.querySelector('#movieRating');
-        const modalBodyYear = movieModal.querySelector('#movieYear');
-        const modalBodyDuration = movieModal.querySelector('#movieDuration');
-        const modalBodyStudio = movieModal.querySelector('#movieStudio');
-        const modalBodyImage = movieModal.querySelector('#movieImage');
-
-        modalTitle.textContent = 'Movie Details: ' + movieName;
-        modalBodyName.textContent = movieName;
-        modalBodySummary.textContent = movieSummary;
-        modalBodyGenre.textContent = movieGenre;
-        modalBodyRating.textContent = movieRating;
-        modalBodyYear.textContent = movieYear;
-        modalBodyDuration.textContent = movieDuration;
-        modalBodyStudio.textContent = movieStudio;
-        modalBodyImage.src = movieImage;
-    });
+  
 });
