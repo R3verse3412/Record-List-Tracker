@@ -60,26 +60,4 @@ document.addEventListener('DOMContentLoaded', function() {
 
     renderPage(); // Call renderPage initially to set up the initial view
 
-    // Event listener for opening the modal
-    $('#manhwaModal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-        var title = button.data('title');
-        var author = button.data('author');
-        var description = button.data('description');
-        var genre = button.data('genre');
-        var rating = button.data('rating');
-        var release_date = button.data('release_date');
-        var img = button.data('img');
-        var status = button.data('status');
-
-        var modal = $(this);
-        modal.find('#manhwaTitle').text(title);
-        modal.find('#manhwaAuthor').text(author);
-        modal.find('#manhwaDescription').text(description);
-        modal.find('#manhwaGenre').text(genre);
-        modal.find('#manhwaRating').text(rating);
-        modal.find('#manhwaRelease_Date').text(release_date);
-        modal.find('#manhwaImage').attr('src', img);
-        modal.find('#manhwaStatus').text(status);
-    });
 });

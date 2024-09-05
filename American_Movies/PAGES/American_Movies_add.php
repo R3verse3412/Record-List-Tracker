@@ -6,17 +6,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP CRUD - Add New American Movie</title>
-    <?php
-    include "../../header.php"
-    ?>
-
+    <?php include "../../header.php" ?>
 </head>
 
 <body>
 
-    <?php
-include "../../nav_user.php"
-?>
+    <?php include "../../nav_user.php" ?>
 
     <div class="container">
         <div class="text-center mb-4">

@@ -22,18 +22,7 @@ if ($result->num_rows > 0) {
                       <p class="card-text text-studio">' . htmlspecialchars($row['studio']) . '</p>
                     <div class="mt-auto d-flex justify-content-evenly">
                         <a href="Games_edit.php?id=' . $row['id'] . '" class="btn btn-warning btn-sm">Edit</a>
-                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#gamesModal" 
-                            data-id="' . $row['id'] . '" 
-                            data-name="' . htmlspecialchars($row['name']) . '" 
-                            data-summary="' . htmlspecialchars($row['summary']) . '" 
-                            data-genre="' . htmlspecialchars($row['genre']) . '" 
-                            data-rating="' . htmlspecialchars($row['rating']) . '" 
-                            data-year="' . htmlspecialchars($row['year']) . '" 
-                        data-publisher="' . htmlspecialchars($row['publisher']) . '"
-                           data-device="' . htmlspecialchars($row['device']) . '"
-                                    data-studio="' . htmlspecialchars($row['studio']) . '"
-                                    data-img="' . htmlspecialchars($row['img']) . '"
-                            >See</button>
+                         <a href="Games_Details.php?id=' . $row['id'] . '" class="btn btn-success btn-sm">See</a>
                         <a href="Games_delete.php?id=' . $row['id'] . '" class="btn btn-danger btn-sm">Delete</a>
                     </div>
                 </div>

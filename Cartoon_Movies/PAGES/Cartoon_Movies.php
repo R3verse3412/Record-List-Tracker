@@ -85,45 +85,6 @@
     </div>
 </section>
 
-
-
-  <!-- Modal -->
-<div class="modal fade" id="cartoonmoviesModal" tabindex="-1" aria-labelledby="cartoonmoviesModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog modal-lg text-center">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title " id="cartoonmoviesModalLabel">Cartoon Movie Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Name:</strong> <span id="cartoonmoviesName"></span></p>
-                <p><strong>Summary:</strong> <span id="cartoonmoviesSummary"></span></p>
-                <p><strong>Genre:</strong> <span id="cartoonmoviesGenre"></span></p>
-                <p><strong>Director:</strong> <span id="cartoonmoviesDirector"></span></p>
-                <p><strong>Cast</strong> <span id="cartoonmoviesCast"></span></p>
-                <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
-                    <div class="carousel-inner mb-5" id="cartoonmoviesCastCarousel">
-                        <!-- Carousel items will be dynamically added here -->
-                    </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev" style="background-color: black;">
-                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Previous</span>
-                    </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next" style="background-color: black;">
-                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                        <span class="visually-hidden">Next</span>
-                    </button>
-                </div>
-                <p><strong>Rating:</strong> <span id="cartoonmoviesRating"></span></p>
-                <p><strong>Year:</strong> <span id="cartoonmoviesYear"></span></p>
-                <img id="cartoonmoviesImage" src="" alt="Image" style="max-width: 250px; max-height: 300px;">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 <?php include "../../Footer.php" ?>
 
     <script src="../JS/Cartoon_Movies_tables.js"> </script> 

@@ -56,31 +56,6 @@
 </div>
 </section>
 
-<!-- Modal -->
-<div class="modal fade" id="mangaModal" tabindex="-1" aria-labelledby="mangaModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog modal-lg text-center">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-center" id="mangaModalLabel">Manga Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Title:</strong> <span id="mangaTitle"></span></p>
-                <p><strong>Author:</strong> <span id="mangaAuthor"></span></p>
-                <p><strong>Description:</strong> <span id="mangaDescription"></span></p>
-                <p><strong>Genre:</strong> <span id="mangaGenre"></span></p>
-                <p><strong>Rating:</strong> <span id="mangaRating"></span></p>
-                <p><strong>Release Date:</strong> <span id="mangarelease_date"></span></p>
-                <p><strong>Status:</strong> <span id="mangaStatus"></span></p>
-                <img id="mangaImage" src="" alt="Image" style="max-width: 250px; max-height: 300px;">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <?php include "../../Footer.php" ?>
 
 <script src="../JS/Manga_Tables.js"></script>

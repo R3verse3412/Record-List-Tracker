@@ -85,35 +85,7 @@
     </div>
 </section>
 
-<!-- Modal -->
-<div class="modal fade" id="gamesModal" tabindex="-1" aria-labelledby="gamesModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog modal-lg text-center">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="gamesModalLabel">Games Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Name:</strong> <span id="gamesName"></span></p>
-                <p><strong>Summary:</strong> <span id="gamesSummary"></span></p>
-                <p><strong>Genre:</strong> <span id="gamesGenre"></span></p>
-                <p><strong>Rating:</strong> <span id="gamesRating"></span></p>
-                <p><strong>Year:</strong> <span id="gamesYear"></span></p>
-                <p><strong>Publisher:</strong> <span id="gamesPublisher"></span></p>
-                <p><strong>Device:</strong> <span id="gamesDevice"></span></p>
-                <p><strong>Developer:</strong> <span id="gamesStudio"></span></p>
-                <img id="gamesImage" src="" alt="Image" style="max-width: 250px; max-height: 300px;">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<?php
-include "../../Footer.php"
-?>
+<?php include "../../Footer.php" ?>
 
 <script src="../JS/Games_tables.js"></script> 
 <script src="../JS/Games_notif.js"></script>

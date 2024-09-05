@@ -1,0 +1,103 @@
+.card-title{
+    font-size: 20px;
+}
+
+.text-header {
+    font-size: 40px;
+    font-family: bold;
+}
+
+.text-body {
+
+    font-size: 20px;
+    color: #fff;
+   
+
+    /* Light grey background */
+    border-radius: 5px;
+    /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  
+}
+
+.card-header {
+    font-size: 20px;
+}
+
+.card-footer {
+    text-align: center;
+}
+
+#tags {
+    text-decoration: none;
+    color:none;
+}
+.gradient-1 {
+    background: linear-gradient(to bottom, #ee9ca7 , #ffdde1);
+    color: #fff;
+}
+
+.gradient-2 {
+    background: linear-gradient(to bottom, #cc2b5e , #753a88);
+    color: #fff;
+}
+
+.gradient-3 {
+background: linear-gradient(to bottom, #2193b0 , #6dd5ed);
+color: #333;
+}
+
+.gradient-4 {
+background: linear-gradient(to bottom, #ffafbd , #ffc3a0);
+color: #333;
+}
+
+.gradient-5 {
+background: linear-gradient(to bottom,  #42275a , #734b6d);
+color: #333;
+}
+
+.gradient-6 {
+background: linear-gradient(to bottom,  #bdc3c7 , #2c3e50);
+color: #333;
+}
+
+.gradient-7 {
+background: linear-gradient(to bottom,  #de6262 , #ffb88c);
+color: #333;
+}
+
+.gradient-8 {
+background: linear-gradient(to bottom,  #06beb6 , #48b1bf);
+color: #333;
+}
+
+.gradient-9 {
+background: linear-gradient(to bottom,   #eb3349 , #f45c43);
+color: #333;
+}
+
+.gradient-10 {
+background: linear-gradient(to bottom,  #dd5e89 , #f7bb97);
+color: #333;
+}
+
+    /* Define styles for the hover effect */
+    .img {
+    transition: transform 0.3s ease-in-out;
+}
+
+/* Scale up the image on hover */
+.img:hover {
+    transform: scale(1.1);
+}
+
+.card {
+transition: background-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover {
+background-color: rgba(0, 0, 0, 0.1);
+box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+transform: scale(1.05);
+}

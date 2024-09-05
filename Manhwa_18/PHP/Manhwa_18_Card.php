@@ -21,16 +21,7 @@ if ($result->num_rows > 0) {
                     <p class="card-text text-year">' . htmlspecialchars($row['release_date']) . '</p>
                     <div class="mt-auto d-flex justify-content-evenly">
                         <a href="Manhwa_18_edit.php?id=' . $row['id'] . '" class="btn btn-warning btn-sm">Edit</a>
-                        <button class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#manhwa_18Modal" 
-                          data-id="' . $row['id'] . '" 
-                                data-title="' . htmlspecialchars($row['title']) . '" 
-                                data-author="' . htmlspecialchars($row['author']) . '"
-                                data-description="' . htmlspecialchars($row['description']) . '" 
-                                data-genre="' . htmlspecialchars($row['genre']) . '" 
-                                data-rating="' . htmlspecialchars($row['rating']) . '" 
-                                data-release_date="' . htmlspecialchars($row['release_date']) . '" 
-                                data-status="' . htmlspecialchars($row['status']) . '"
-                                data-img="' . htmlspecialchars($row['img']) . '">See</button>
+                        <a href="Manhwa_18_Details.php?id=' . $row['id'] . '" class="btn btn-success btn-sm">See</a>
                         <a href="Manhwa_18_delete.php?id=' . $row['id'] . '" class="btn btn-danger btn-sm">Delete</a>
                     </div>
                 </div>

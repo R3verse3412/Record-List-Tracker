@@ -58,34 +58,7 @@
 </div>
 </section>
 
-
-<!-- Modal -->
-<div class="modal fade" id="manhwaModal" tabindex="-1" aria-labelledby="manhwaModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog text-center">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-center" id="manhwaModalLabel">Manhwa Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Title:</strong> <span id="manhwaTitle"></span></p>
-                <p><strong>Author:</strong> <span id="manhwaAuthor"></span></p>
-                <p><strong>Description:</strong> <span id="manhwaDescription"></span></p>
-                <p><strong>Genre:</strong> <span id="manhwaGenre"></span></p>
-                <p><strong>Rating:</strong> <span id="manhwaRating"></span></p>
-                <p><strong>Release Date:</strong> <span id="manhwaRelease_Date"></span></p>
-                <p><strong>Status:</strong> <span id="manhwaStatus"></span></p>
-                <img id="manhwaImage" src="" alt="Image" style="max-width: 250px; max-height: 300px;">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
-<?php
-    include "../../Footer.php"
-?>
+<?php include "../../Footer.php" ?>
 
 <script src="../JS/Manhwa_tables.js"></script>
 <script src="../JS/Manhwa_notif.js"></script>

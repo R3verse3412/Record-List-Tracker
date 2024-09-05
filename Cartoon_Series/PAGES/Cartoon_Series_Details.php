@@ -20,26 +20,25 @@ if ($conn->connect_error) {
 }
 
 // Get the movie ID from the URL
-$movie_id = $_GET['id'];
+$cartoon_series_id = $_GET['id'];
 
 // Fetch the movie details using the movie ID
-$sql = "SELECT * FROM american_movies WHERE id = ?";
+$sql = "SELECT * FROM cartoon_series WHERE id = ?";
 $stmt = $conn->prepare($sql);
-$stmt->bind_param("i", $movie_id);
+$stmt->bind_param("i", $cartoon_series_id);
 $stmt->execute();
 $result = $stmt->get_result();
 
 if ($result->num_rows > 0) {
-    $movie = $result->fetch_assoc();
+    $cartoon_series = $result->fetch_assoc();
 } else {
-    echo "Movie not found.";
+    echo "Series not found.";
     exit();
 }
 
 $stmt->close();
 $conn->close();
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -145,32 +144,32 @@ $conn->close();
 
     <section class="section mb-5">
         <div class="container">
-        <p class="name">MOVIE DETAILS</p>
         <div class="row">
+            <p class="name">MOVIE DETAILS</p>
             <div class="col-md-3">
-                <div class="card card-pics">
-                    <img src="<?php echo htmlspecialchars($movie['img']); ?>" alt="">
+                <div class="card shadow card-pics">
+                    <img src="<?php echo htmlspecialchars($cartoon_series ['img']); ?>" alt="">
                 </div>
             </div>
             <div class="col-md-5">
                 <div class="card shadow card1">
                     <div class="card-body">
-                    <div class="name mb-4"><?php echo htmlspecialchars($movie['name']); ?></div>
-                    <div class="year mb-2"><?php echo htmlspecialchars($movie['year']); ?></div>
-                    <div class="genre mb-2"><?php echo htmlspecialchars($movie['genre']); ?></div>
-                    <div class="ratings">Ratings: <span><?php echo htmlspecialchars($movie['rating']); ?></p></div>
+                    <div class="name mb-4"><?php echo htmlspecialchars($cartoon_series ['name']); ?></div>
+                    <div class="year mb-2"><?php echo htmlspecialchars($cartoon_series ['year']); ?></div>
+                    <div class="genre mb-2"><?php echo htmlspecialchars($cartoon_series ['genre']); ?></div>
+                    <div class="ratings">Ratings: <span><?php echo htmlspecialchars($cartoon_series ['rating']); ?></p></div>
                     </div>
                 </div>
             </div>
             <div class="col-md-1">
                 <div class="card shadow card2">
                 <div class="card-body">
-                <div class="director mb-3">Director</div>
+                <div class="director mb-3">Studio</div>
                 <img class="icons-card" src="" alt="">
-                <span><?php echo htmlspecialchars($movie['director']); ?></p>
-                <div class="cast mb-3">Cast</div>
+                <span><?php echo htmlspecialchars($cartoon_series ['studio']); ?></p>
+                <div class="cast mb-3">Episodes</div>
                 <img class="icons-card" src="" alt="">
-                <span><?php echo htmlspecialchars($movie['cast']); ?></p>
+                <span><?php echo htmlspecialchars($cartoon_series ['episodes']); ?> Episodes</p>
                 </div>
                 </div>
             </div>
@@ -183,7 +182,7 @@ $conn->close();
                 <div class="card shadow card3">
                     <div class="card-body">
                     <div class="plot mb-3">Plot</div>
-                    <div class="summary"><?php echo htmlspecialchars($movie['summary']); ?></div>
+                    <div class="summary"><?php echo htmlspecialchars($cartoon_series ['summary']); ?></div>
                     </div>
                 </div>
             </div>
@@ -211,12 +210,6 @@ $conn->close();
                     </div>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section class="section mb-5">
-            <div class="container">
-                    <div class="plot">REVIEWS</div>
             </div>
         </section>
 
