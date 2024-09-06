@@ -74,12 +74,12 @@ $conn->close();
 
 </style>
 
-<body>
+<body style="background-color: #181818;">
     <?php include "nav.php" ?>
 
     <section class="section mb-5">
         <div class="container">
-            <div class="text mb-3 fs-2">Add New Plan List</div>
+            <div class="text mb-3 fs-2 text-white">Add New Plan List</div>
             <button class="btn btn-success" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New</button>
         </div>
     </section>
@@ -89,7 +89,7 @@ $conn->close();
             <div class="row row-cols-1 row-cols-md-2 row-cols-lg-5 g-4">
                 <?php foreach ($plans as $plan): ?>
                     <div class="col">
-                        <div class="card">
+                        <div class="card h-100">
                             <div class="card-body">
                                 <div class="mb-3 d-flex justify-content-center">
                                     <img src="<?= htmlspecialchars($plan['image_path']) ?>" alt="<?= htmlspecialchars($plan['name']) ?>"class="img-fluid movie-poster"  style="max-height: 100%; max-width: 100%; object-fit: contain;">
@@ -131,8 +131,6 @@ $conn->close();
             </div>
         </div>
     </section>
-
-    <?php include "Footer.php" ?>
 
     <!-- Add New Plan Modal -->
     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

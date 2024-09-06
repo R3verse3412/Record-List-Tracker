@@ -85,9 +85,9 @@
 
             <!-- Previous and Next buttons -->
             <div class="row  d-flex justify-content-center mt-4">
-                <div class="col-md-auto mb-5 ">
-                    <button class="btn btn-primary" id="prev-button">Previous</button>
-                    <button class="btn btn-primary" id="next-button">Next</button>
+                <div class=" col-md-auto mb-5 ">
+                    <list class="btn btn-primary" id="prev-button">Previous</list>
+                    <list class="btn btn-primary" id="next-button">Next</list>
                 </div>
             </div>
         </div>
