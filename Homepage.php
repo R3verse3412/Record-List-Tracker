@@ -55,47 +55,6 @@
 
   <section class="section">
   <div class="container">
-    <div class="arrow">
-      <div class="container-fluid text-center my-3" id="new">
-        <div class="mb-5">
-          <h1 class="text-white" >UPCOMING TO WATCH</h1>
-        </div>
-        <div class="row">
-          <div class="row mx-auto my-auto justify-content-center">
-          <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner" role="listbox">
-    <?php foreach ($uploads as $index => $upload) { ?>
-    <div class="carousel-item <?php echo $index === 0 ? 'active' : ''; ?>">
-      <div class="col-md-3">
-        <div class="card mx-1">
-          <div class="card-img">
-            <img src="<?php echo htmlspecialchars($upload['file_path']); ?>" class="d-block w-100" alt="Slide <?php echo $index + 1; ?>">
-          </div>
-          <div class="card-img-overlay"><?php echo htmlspecialchars($upload['upload_text']); ?></div>
-        </div>
-      </div>
-    </div>
-    <?php } ?>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
-          </div>
-        </div>
-      </div>
-      <div id="visible" class="d-none d-md-block"></div>
-    </div>
-  </div>
-  </section>
-
-  <section class="section">
-  <div class="container">
     <div class="row d-flex justify-content-center text-center" id="about">
       <div class="col">
       <h1 class="text-white">What Is Record List Tracker ?</h1>
@@ -107,7 +66,8 @@
       </div>
     </div>
     </div>
- 
+  </section>
+    <?php include "Footer.php" ?>
 
 </body>
 

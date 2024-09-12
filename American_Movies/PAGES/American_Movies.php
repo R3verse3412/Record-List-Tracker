@@ -1,4 +1,5 @@
 <?php include "../PHP/American_Movies.php";?>
+<?php include "../PHP/American_Movies_Pagination.php" ?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,7 +11,6 @@
     <?php include "../../header.php" ?>
     <link href="../CSS/American_Movies.css" rel="stylesheet">
 </head>
-
 
 <body>
     <?php include "../../nav_user.php" ?>
@@ -79,17 +79,14 @@
                 </div>
 
             </div>
-            <div class="container" id="movies-container">
-             <?php include "../PHP/American_Movies_Card.php" ?>
-            </div>
+            <div class="container mb-5" id="movies-container">
+            <?php include "../PHP/American_Movies_Card.php" ?>
 
-            <!-- Previous and Next buttons -->
-            <div class="row  d-flex justify-content-center mt-4">
-                <div class=" col-md-auto mb-5 ">
-                    <list class="btn btn-primary" id="prev-button">Previous</list>
-                    <list class="btn btn-primary" id="next-button">Next</list>
-                </div>
             </div>
+            <div class="d-flex justify-content-center">
+        <?php include "../PHP/Ameican_Movies_Nav_Pagination.php" ?>
+        </div>
+
         </div>
     </section>
 
@@ -98,6 +95,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="../JS/American_Movies_table.js"></script>
     <script src="../JS/American_Movies_Notif.js"></script>
+    <script src="../JS/American_Movies_Pagination.js"></script>
  
 </body>
 
