@@ -1,8 +1,16 @@
 <nav aria-label="Pagination">
     <ul class="pagination">
-        <!-- Previous Button -->
+        <!-- Get current query string and append it to the pagination links -->
+        <?php
+        $query_string = $_SERVER['QUERY_STRING'];
+        // Remove any existing page parameter from the query string
+        $query_string = preg_replace('/([&?]page=\d+)/', '', $query_string);
+        $query_string = $query_string ? '&' . $query_string : '';
+
+        // Previous Button
+        ?>
         <li class="page-item <?php if ($current_page == 1) echo 'disabled'; ?>">
-            <a class="page-link" href="?page=<?php echo max(1, $current_page - 1); ?>&limit=<?php echo $limit; ?>">Previous</a>
+            <a class="page-link" href="American_Movies.php?page=<?php echo max(1, $current_page - 1) . $query_string; ?>">Previous</a>
         </li>
 
         <!-- Page Numbers -->
@@ -19,7 +27,7 @@
 
         // Show first page and ellipsis if needed
         if ($start_page > 1) {
-            echo '<li class="page-item"><a class="page-link" href="?page=1&limit=' . $limit . '">1</a></li>';
+            echo '<li class="page-item"><a class="page-link" href="American_Movies.php?page=1' . $query_string . '">1</a></li>';
             if ($start_page > 2) {
                 echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
             }
@@ -28,7 +36,7 @@
         // Show range of pages around the current page
         for ($i = $start_page; $i <= $end_page; $i++) {
             echo '<li class="page-item ' . ($i == $current_page ? 'active' : '') . '">
-                    <a class="page-link" href="?page=' . $i . '&limit=' . $limit . '">' . $i . '</a>
+                    <a class="page-link" href="American_Movies.php?page=' . $i . $query_string . '">' . $i . '</a>
                   </li>';
         }
 
@@ -37,13 +45,13 @@
             if ($end_page < $total_pages - 1) {
                 echo '<li class="page-item disabled"><span class="page-link">...</span></li>';
             }
-            echo '<li class="page-item"><a class="page-link" href="?page=' . $total_pages . '&limit=' . $limit . '">' . $total_pages . '</a></li>';
+            echo '<li class="page-item"><a class="page-link" href="American_Movies.php?page=' . $total_pages . $query_string . '">' . $total_pages . '</a></li>';
         }
         ?>
 
         <!-- Next Button -->
         <li class="page-item <?php if ($current_page == $total_pages) echo 'disabled'; ?>">
-            <a class="page-link" href="?page=<?php echo min($total_pages, $current_page + 1); ?>&limit=<?php echo $limit; ?>">Next</a>
+            <a class="page-link" href="American_Movies.php?page=<?php echo min($total_pages, $current_page + 1) . $query_string; ?>">Next</a>
         </li>
     </ul>
 </nav>
