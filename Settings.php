@@ -39,24 +39,46 @@ $conn->close();
     <?php include "header.php" ?>
 </head>
 
+<style>
+    .btn{
+        height: 40px;
+    }
+</style>
+
 <body>
     <?php include "nav.php" ?>
 
     <div class="container">
-        <div class="row row-cols-1 row-cols-lg-3 g-4">
-            <div class="col">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-center">
-                            <img src="img/Adventure Time.png" alt="">
+        <div class="card">
+            <div class="card-body">
+                <p class="fs-1">Account</p>
+                <div class="row row-cols-1 row-cols-lg-2 g-4 mb-3">
+                    <div class="col d-flex">
+                        <img src="img/Adventure Time.png" alt="" style="width: 20%; height: 100px;">
+                        <div class="row-1">
+                            <ul class="list-group">
+                        <li class="list-group-item">Profile Picture</li>
+                        <li class="list-group-item">JPEG</li>
+                        </ul>
                         </div>
-                        <div class="d-flex justify-content-center mb-5">
-                            <p>Hello</p>
-                        </div>
-                        <div class="mb-3">
-                            <p class="fs-5">My Profile</p>
-                            <li>Manage Account</li>
-                        </div>
+                    </div>
+                    <div class="col d-flex">
+                            <input type="file" class="form-control">
+                            <button class="btn btn-danger">Delete</button>
+                    </div>
+                   
+                </div>
+                <div class="row mb-2">
+                    <p class="fs-4">Full name</p>
+                </div>
+                <div class="row row-cols-1 row-cols-lg-2 g-2">
+                    <div class="col">
+                    <span class="input-group-text">First Name</span>
+                    <input type="text" class="form-control">
+                    </div>
+                    <div class="col ">
+                    <span class="input-group-text">Last Name</span>
+                    <input type="text" class="form-control">
                     </div>
                 </div>
             </div>
