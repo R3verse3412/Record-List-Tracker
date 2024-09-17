@@ -71,17 +71,30 @@ $conn->close();
                 <div class="row mb-2">
                     <p class="fs-4">Full name</p>
                 </div>
-                <div class="row row-cols-1 row-cols-lg-2 g-2">
+                <div class="row row-cols-1 row-cols-lg-2 g-2 mb-4">
                     <div class="col">
-                    <span class="input-group-text">First Name</span>
+                    <span>First Name</span>
                     <input type="text" class="form-control">
                     </div>
                     <div class="col ">
-                    <span class="input-group-text">Last Name</span>
+                    <span>Last Name</span>
                     <input type="text" class="form-control">
                     </div>
                 </div>
+                <div class="row mb-2">
+                    <div class="col">
+                <p>Contact emails</p>
+                <p>Manage your accounts email address</p>
+                </div>
             </div>
+            <div class="row">
+                <div class="col">
+                <span>Email</span>
+                <input type="email" class="form-control">
+                </div>
+            </div>
+            </div>
+           
         </div>
     </div>
 
