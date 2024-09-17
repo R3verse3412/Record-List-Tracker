@@ -21,7 +21,7 @@ include "../PHP/Cartoon_Series_Search.php";
 <div class="mb-4">
     <a href="Cartoon_Series_add.php" class="btn btn-success mb-3">Add New Cartoon Series</a>
     <div class="alert alert-info text-center mb-4">
-        <strong>Total Cartoon Series:</strong> <?php echo $total_records; ?>
+        <strong>Cartoon Series:</strong> <?php echo $total_records; ?>
     </div>
     <?php include "../PHP/Cartoon_Series_notif.php"?>
     </div>

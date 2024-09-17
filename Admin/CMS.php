@@ -36,70 +36,24 @@ if ($row) {
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    if (isset($_POST['delete_file_id'])) {
-        // Handle file deletion
-        $file_id = $_POST['delete_file_id'];
-        $stmt = $conn->prepare("DELETE FROM uploads WHERE id = ?");
-        $stmt->bind_param("i", $file_id);
-        $stmt->execute();
-        $stmt->close();
-    } elseif (isset($_POST['update_file'])) {
-        // Handle file update
-        $file_id = $_POST['file_id'];
-        $new_text = $_POST['new_upload_text'];
-        
-        $stmt = $conn->prepare("UPDATE uploads SET upload_text = ? WHERE id = ?");
-        $stmt->bind_param("si", $new_text, $file_id);
-        $stmt->execute();
-        $stmt->close();
+    $title = $_POST['title'];
+    $genre = $_POST['genre'];
+    $about = $_POST['about'];
+
+    // Update the homepage content
+    if ($row) {
+        $stmt = $conn->prepare("UPDATE homepage_content SET title = ?, genre = ?, about = ? WHERE id = 1");
+        $stmt->bind_param("sss", $title, $genre, $about);
     } else {
-        // Handle other form submissions
-        $title = $_POST['title'];
-        $genre = $_POST['genre'];
-        $about = $_POST['about'];
-
-        // Handle file uploads
-        if (isset($_FILES['uploads']) && is_array($_FILES['uploads']['name'])) {
-            $upload_dir = 'uploads/';
-            foreach ($_FILES['uploads']['name'] as $index => $filename) {
-                if ($_FILES['uploads']['error'][$index] == UPLOAD_ERR_OK) {
-                    $upload_file = $upload_dir . basename($filename);
-                    move_uploaded_file($_FILES['uploads']['tmp_name'][$index], $upload_file);
-                    $upload_text = $_POST['upload_text'][$index];
-
-                    // Save file path and upload text in the database
-                    $stmt = $conn->prepare("INSERT INTO uploads (file_path, upload_text) VALUES (?, ?)");
-                    $stmt->bind_param("ss", $upload_file, $upload_text);
-                    $stmt->execute();
-                }
-            }
-            $stmt->close();
-        }
-
-        // Update the homepage content
-        if ($row) {
-            $stmt = $conn->prepare("UPDATE homepage_content SET title = ?, genre = ?, about = ? WHERE id = 1");
-            $stmt->bind_param("sss", $title, $genre, $about);
-        } else {
-            $stmt = $conn->prepare("INSERT INTO homepage_content (title, genre, about) VALUES (?, ?, ?)");
-            $stmt->bind_param("sss", $title, $genre, $about);
-        }
-        $stmt->execute();
-        $stmt->close();
+        $stmt = $conn->prepare("INSERT INTO homepage_content (title, genre, about) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $title, $genre, $about);
     }
+    $stmt->execute();
+    $stmt->close();
 
     // Refresh the page to show updated content
     header("Location: " . $_SERVER['PHP_SELF']);
     exit();
-}
-
-$upload_sql = "SELECT id, file_path, upload_text FROM uploads";
-$upload_result = $conn->query($upload_sql);
-$uploads = [];
-if ($upload_result->num_rows > 0) {
-    while ($upload_row = $upload_result->fetch_assoc()) {
-        $uploads[] = $upload_row;
-    }
 }
 
 ?>
@@ -111,9 +65,7 @@ if ($upload_result->num_rows > 0) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Panel</title>
-    <!-- Include your CSS and JS files -->
     <?php include "../header.php"; ?>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css">
     <link rel="stylesheet" href="Admin.css">
 </head>
@@ -121,92 +73,53 @@ if ($upload_result->num_rows > 0) {
 <body id="body-pd">
     <?php include "Sidebar.php"; ?>
     <div class="height-100 bg-light">
-        <h1 class="text-header mb-5">Content Management</h1>
-        <form method="POST" enctype="multipart/form-data">
-            <p class="text-header">Title:</p>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">@</span>
-                <input type="text" class="form-control" name="title" value="<?php echo htmlspecialchars($title); ?>" aria-label="Title" aria-describedby="basic-addon1">
-            </div>
-            <p class="text-header">Genre:</p>
-            <div class="input-group mb-3">
-                <span class="input-group-text" id="basic-addon1">@</span>
-                <input type="text" class="form-control" name="genre" value="<?php echo htmlspecialchars($genre); ?>" aria-label="Genre" aria-describedby="basic-addon1">
-            </div>
-            <p class="text-header">Upcoming To Watch:</p>
-            <div class="mb-3">
-                <button type="button" class="btn btn-success" id="add-new-upload">Add New</button>
-            </div>
-            <div id="uploads-container">
-                <div class="input-group mb-3">
-                    <input type="file" class="form-control" id="inputGroupFile02" name="uploads[]">
-                    <label class="input-group-text" for="inputGroupFile02">Upload</label>
-                    <span class="input-group-text">@</span>
-                    <input type="text" class="form-control" name="upload_text[]" value="">
-                </div>
-            </div>
-            <div class="mb-3">
-                <!-- Display uploaded files with edit and delete buttons -->
-                <h2>Uploaded Files</h2>
-                <?php foreach ($uploads as $upload): ?>
-                    <div class="upload-item" id="upload-<?php echo $upload['id']; ?>">
-                        <span class="file-path"><?php echo htmlspecialchars($upload['file_path']); ?></span>
-                        <span class="upload-text"><?php echo htmlspecialchars($upload['upload_text']); ?></span>
-                        <button type="button" class="btn btn-primary edit-btn" onclick="editUpload(<?php echo $upload['id']; ?>)">Edit</button>
-                        <form method="POST" style="display:inline;">
-                            <input type="hidden" name="delete_file_id" value="<?php echo $upload['id']; ?>">
-                            <button class="btn btn-danger" type="submit">Delete</button>
-                        </form>
+        <div class="container py-5">
+            <h1 class="mb-5">Content Management</h1>
+            <form method="POST" class="needs-validation" novalidate>
+                <div class="mb-4">
+                    <label for="title" class="form-label">Title:</label>
+                    <input type="text" class="form-control" id="title" name="title" value="<?php echo htmlspecialchars($title); ?>" required>
+                    <div class="invalid-feedback">
+                        Please provide a title.
                     </div>
-                <?php endforeach; ?>
-            </div>
-            <p class="text-header">About:</p>
-            <div class="mb-3">
-                <textarea class="form-control" name="about" rows="3"><?php echo htmlspecialchars($about); ?></textarea>
-            </div>
-            <div class="mb-5 d-flex justify-content-center">
-                <button class="btn btn-success" type="submit">Save</button>
-            </div>
-        </form>
+                </div>
+                <div class="mb-4">
+                    <label for="genre" class="form-label">Genre:</label>
+                    <input type="text" class="form-control" id="genre" name="genre" value="<?php echo htmlspecialchars($genre); ?>" required>
+                    <div class="invalid-feedback">
+                        Please provide a genre.
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label for="about" class="form-label">About:</label>
+                    <textarea class="form-control" id="about" name="about" rows="5" required><?php echo htmlspecialchars($about); ?></textarea>
+                    <div class="invalid-feedback">
+                        Please provide content for the about section.
+                    </div>
+                </div>
+                <div class="d-grid gap-2 col-2 mx-auto">
+                    <button class="btn btn-primary" type="submit">Save Changes</button>
+                </div>
+            </form>
+        </div>
     </div>
     <script src="Admin.js"></script>
     <script>
-        document.getElementById('add-new-upload').addEventListener('click', function () {
-            var uploadsContainer = document.getElementById('uploads-container');
-            var newUploadDiv = document.createElement('div');
-            newUploadDiv.classList.add('input-group', 'mb-3');
-            newUploadDiv.innerHTML = `
-                <input type="file" class="form-control" id="inputGroupFile02" name="uploads[]">
-                <label class="input-group-text" for="inputGroupFile02">Upload</label>
-                <span class="input-group-text">@</span>
-                <input type="text" class="form-control" name="upload_text[]" value="">`;
-            uploadsContainer.appendChild(newUploadDiv);
-        });
-
-        function editUpload(id) {
-            var uploadItem = document.getElementById('upload-' + id);
-            var uploadText = uploadItem.querySelector('.upload-text');
-            var currentText = uploadText.textContent.trim();
-            
-            uploadText.innerHTML = `
-                <form method="POST" class="edit-form">
-                    <input type="hidden" name="update_file" value="1">
-                    <input type="hidden" name="file_id" value="${id}">
-                    <input type="text" name="new_upload_text" value="${currentText}">
-                    <button type="submit" class="btn btn-success">Save</button>
-                    <button type="button" class="btn btn-secondary" onclick="cancelEdit(${id}, '${currentText}')">Cancel</button>
-                </form>
-            `;
-            
-            uploadItem.querySelector('.edit-btn').style.display = 'none';
-        }
-
-        function cancelEdit(id, originalText) {
-            var uploadItem = document.getElementById('upload-' + id);
-            var uploadText = uploadItem.querySelector('.upload-text');
-            uploadText.textContent = originalText;
-            uploadItem.querySelector('.edit-btn').style.display = 'inline-block';
-        }
+        // Form validation
+        (function () {
+            'use strict'
+            var forms = document.querySelectorAll('.needs-validation')
+            Array.prototype.slice.call(forms)
+                .forEach(function (form) {
+                    form.addEventListener('submit', function (event) {
+                        if (!form.checkValidity()) {
+                            event.preventDefault()
+                            event.stopPropagation()
+                        }
+                        form.classList.add('was-validated')
+                    }, false)
+                })
+        })()
     </script>
 </body>
 
