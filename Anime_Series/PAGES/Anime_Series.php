@@ -42,23 +42,14 @@ include "../PHP/Anime_Series_Search.php";
                     ?>
                 </div>
 
-                <!-- Alphabetical Filter Dropdown -->
-                <div class="col-md-2">
-                    <select id="entries-Alphabetical" class="form-select">
-                        <option value="ALL">ALL</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <!-- Add other alphabetical options as needed -->
-                    </select>
-                </div>
-
-                <!-- Entries Per Page Dropdown -->
-                <div class="col-md-2">
-                    <select id="entries-dropdown" class="form-select">
-                        <option value="20">20 entries</option>
-                        <option value="40">40 entries</option>
-                        <option value="80">80 entries</option>
-                        <option value="160">160 entries</option>
+               <!-- Entries Per Page Dropdown -->
+               <div class="col-md-2">
+                    <select id="entries-dropdown" class="form-select" onchange="window.location.href='Anime_Series.php?limit='+this.value+'<?php echo $query_string; ?>'">
+                        <option value="20" <?php if ($limit == 20) echo 'selected'; ?>>20 entries</option>
+                        <option value="50" <?php if ($limit == 50) echo 'selected'; ?>>50 entries</option>
+                        <option value="100" <?php if ($limit == 100) echo 'selected'; ?>>100 entries</option>
+                        <option value="200" <?php if ($limit == 200) echo 'selected'; ?>>200 entries</option>
+                        <option value="500" <?php if ($limit == 500) echo 'selected'; ?>>500 entries</option>
                     </select>
                 </div>
             </div>
@@ -79,7 +70,6 @@ include "../PHP/Anime_Series_Search.php";
 
 <script src="../JS/Anime_Series_tables.js"></script>
 <script src="../JS/Anime_Series_notif.js"></script>
-<script src="../JS/Anime_Series_Pagination.js"></script>
 
 </body>
 </html>

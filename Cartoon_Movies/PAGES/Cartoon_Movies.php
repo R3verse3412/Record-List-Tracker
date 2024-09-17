@@ -1,4 +1,7 @@
-<?php include "../PHP/Cartoon_Movies.php" ?>
+<?php include "../PHP/Cartoon_Movies.php"; 
+include "../PHP/Cartoon_Movies_Pagination.php";
+include "../PHP/Cartoon_Movies_Search.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -19,70 +22,57 @@
     <div class="mb-4">
             <a href="Cartoon_Movies_add.php" class="btn btn-success mb-3">Add New Cartoon Movies</a>
             <div class="alert alert-info text-center">
-                <strong>Total Cartoon Movies:</strong> <?php echo $total_records; ?>
+                <strong>Cartoon Movies:</strong> <?php echo $total_records; ?>
             </div>
             <?php include "../PHP/Cartoon_Movies_notif.php"?>
         </div>
 
-         <!-- Filter Search and Entries Dropdown -->
-         <div class="row d-flex justify-content-between mb-4">
-            <div class="col-md-6">
-                <input type="text" id="filter-search" class="form-control" placeholder="Search for Cartoon Movies by title or year...">
-            </div>
-            <div class="col-md-2">
-                <select id="entries-Alpahabetical" class="form-select">
-                    <option value="ALL">ALL</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
-                    <option value="F">F</option>
-                    <option value="G">G</option>
-                    <option value="H">H</option>
-                    <option value="I">I</option>
-                    <option value="J">J</option>
-                    <option value="K">K</option>
-                    <option value="L">L</option>
-                    <option value="M">M</option>
-                    <option value="N">N</option>
-                    <option value="O">O</option>
-                    <option value="P">P</option>
-                    <option value="Q">Q</option>
-                    <option value="R">R</option>
-                    <option value="S">S</option>
-                    <option value="T">T</option>
-                    <option value="U">U</option>
-                    <option value="V">V</option>
-                    <option value="W">W</option>
-                    <option value="X">X</option>
-                    <option value="Y">Y</option>
-                    <option value="Z">Z</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <select id="entries-dropdown" class="form-select">
-                    <option value="20">20 entries</option>
-                    <option value="40">40 entries</option>
-                    <option value="80">80 entries</option>
-                    <option value="160">160 entries</option>
-                </select>
-            </div>
-        </div>
+        <form method="GET" action="Cartoon_Movies.php" class="d-flex mb-4">
+                <input type="text" name="query" class="form-control me-2" placeholder="Search movies..." value="<?php echo htmlspecialchars($search_query); ?>">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
 
-              <!-- Cartoon Movies Cards -->
-              <div class="row d-flex justify-content-center" id="cartoon-movies-container">
-                <?php include "../PHP/Cartoon_Movies_Card.php" ?>
-        </div>
-        
-        <!-- Previous and Next buttons -->
-        <div class="row d-flex justify-content-center mt-4">
-            <div class="col-md-auto mb-5">
-                <button class="btn btn-primary" id="prev-button">Previous</button>
-                <button class="btn btn-primary" id="next-button">Next</button>
+          <!-- Filter Search and Entries Dropdown -->
+          <div class="row d-flex justify-content-between mb-4">
+                <div class="d-flex justify-content-center">
+                    <?php
+                    include "../PHP/Cartoon_Movies_Nav_Pagination.php";
+                    // Retain search query in pagination links
+                    $query_string = isset($_GET['query']) ? '&query=' . urlencode($_GET['query']) : '';
+                    ?>
+                </div>
+
+                <!-- Alphabetical Filter Dropdown -->
+                <div class="col-md-2">
+                    <select id="entries-Alphabetical" class="form-select">
+                        <option value="ALL">ALL</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <!-- Add other alphabetical options as needed -->
+                    </select>
+                </div>
+
+                <!-- Entries Per Page Dropdown -->
+                <div class="col-md-2">
+                    <select id="entries-dropdown" class="form-select">
+                        <option value="20">20 entries</option>
+                        <option value="40">40 entries</option>
+                        <option value="80">80 entries</option>
+                        <option value="160">160 entries</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Movies List -->
+            <div class="container mb-5" id="movies-container">
+             <?php include "../PHP/Cartoon_Movies_Card.php";?>
+            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center">
+                <?php include "../PHP/Cartoon_Movies_Nav_Pagination.php"; ?>
             </div>
         </div>
-    </div>
 </section>
 
 <?php include "../../Footer.php" ?>

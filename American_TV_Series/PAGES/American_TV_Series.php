@@ -24,12 +24,13 @@ include "../PHP/American_TV_Series_Search.php";
             <div class="mb-4">
                 <a href="American_TV_Series_add.php" class="btn btn-success mb-3">Add New American TV Series</a>
                 <div class="alert alert-info text-center">
-                    <strong>Total TV Series:</strong> <?php echo $total_records; ?>
+                    <strong>TV Series:</strong> <?php echo $total_records; ?>
                 </div>
 
                 <?php include "../PHP/American_TV_Series_notif.php" ?>
             </div>
 
+            <!-- Search Form -->
             <form method="GET" action="American_TV_Series.php" class="d-flex mb-4">
                 <input type="text" name="query" class="form-control me-2" placeholder="Search movies..." value="<?php echo htmlspecialchars($search_query); ?>">
                 <button class="btn btn-primary" type="submit">Search</button>
@@ -39,29 +40,20 @@ include "../PHP/American_TV_Series_Search.php";
             <div class="row d-flex justify-content-between mb-4">
                 <div class="d-flex justify-content-center">
                     <?php
-                    include "../PHP/Ameican_TV_Series_Nav_Pagination.php";
+                    include "../PHP/American_TV_Series_Nav_Pagination.php";
                     // Retain search query in pagination links
                     $query_string = isset($_GET['query']) ? '&query=' . urlencode($_GET['query']) : '';
                     ?>
                 </div>
 
-                <!-- Alphabetical Filter Dropdown -->
-                <div class="col-md-2">
-                    <select id="entries-Alphabetical" class="form-select">
-                        <option value="ALL">ALL</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <!-- Add other alphabetical options as needed -->
-                    </select>
-                </div>
-
                 <!-- Entries Per Page Dropdown -->
                 <div class="col-md-2">
-                    <select id="entries-dropdown" class="form-select">
-                        <option value="20">20 entries</option>
-                        <option value="40">40 entries</option>
-                        <option value="80">80 entries</option>
-                        <option value="160">160 entries</option>
+                    <select id="entries-dropdown" class="form-select" onchange="window.location.href='American_TV_Series.php?limit='+this.value+'<?php echo $query_string; ?>'">
+                        <option value="5" <?php if ($limit == 5) echo 'selected'; ?>>5 entries</option>
+                        <option value="20" <?php if ($limit == 20) echo 'selected'; ?>>20 entries</option>
+                        <option value="40" <?php if ($limit == 40) echo 'selected'; ?>>40 entries</option>
+                        <option value="80" <?php if ($limit == 80) echo 'selected'; ?>>80 entries</option>
+                        <option value="160" <?php if ($limit == 160) echo 'selected'; ?>>160 entries</option>
                     </select>
                 </div>
             </div>
@@ -73,7 +65,7 @@ include "../PHP/American_TV_Series_Search.php";
 
             <!-- Pagination -->
             <div class="d-flex justify-content-center">
-                <?php include "../PHP/Ameican_TV_Series_Nav_Pagination.php"; ?>
+                <?php include "../PHP/American_TV_Series_Nav_Pagination.php"; ?>
             </div>
         </div>
     </section>
@@ -90,7 +82,8 @@ include "../PHP/American_TV_Series_Search.php";
 </html>
 
 <?php
-$stmt->close();
-$count_stmt->close();
+// Close any prepared statements if used and close database connection
+if (isset($stmt)) $stmt->close();
+if (isset($count_stmt)) $count_stmt->close();
 $conn->close();
 ?>
