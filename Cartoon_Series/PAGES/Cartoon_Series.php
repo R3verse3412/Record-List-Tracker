@@ -1,4 +1,8 @@
-<?php include "../PHP/Cartoon_Series.php" ?>
+<?php include "../PHP/Cartoon_Series.php"; 
+include "../PHP/Cartoon_Series_Pagination.php";
+include "../PHP/Cartoon_Series_Search.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,97 +25,45 @@
     </div>
     <?php include "../PHP/Cartoon_Series_notif.php"?>
     </div>
+    <form method="GET" action="Cartoon_Series.php" class="d-flex mb-4">
+                <input type="text" name="query" class="form-control me-2" placeholder="Search Series..." value="<?php echo htmlspecialchars($search_query); ?>">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
 
-        <!-- Filter Search and Entries Dropdown -->
-        <div class="row d-flex justify-content-between mb-4">
-            <div class="col-md-6">
-                <input type="text" id="filter-search" class="form-control" placeholder="Search for Cartoon Series">
-            </div>
-            <div class="col-md-2">
-                <select id="entries-Alpahabetical" class="form-select">
-                    <option value="ALL">ALL</option>
-                    <option value="A">A</option>
-                    <option value="B">B</option>
-                    <option value="C">C</option>
-                    <option value="D">D</option>
-                    <option value="E">E</option>
-                    <option value="F">F</option>
-                    <option value="G">G</option>
-                    <option value="H">H</option>
-                    <option value="I">I</option>
-                    <option value="J">J</option>
-                    <option value="K">K</option>
-                    <option value="L">L</option>
-                    <option value="M">M</option>
-                    <option value="N">N</option>
-                    <option value="O">O</option>
-                    <option value="P">P</option>
-                    <option value="Q">Q</option>
-                    <option value="R">R</option>
-                    <option value="S">S</option>
-                    <option value="T">T</option>
-                    <option value="U">U</option>
-                    <option value="V">V</option>
-                    <option value="W">W</option>
-                    <option value="X">X</option>
-                    <option value="Y">Y</option>
-                    <option value="Z">Z</option>
-                </select>
-            </div>
-            <div class="col-md-2">
-                <select id="entries-dropdown" class="form-select">
-                    <option value="20">20 entries</option>
-                    <option value="40">40 entries</option>
-                    <option value="80">80 entries</option>
-                    <option value="160">160 entries</option>
-                </select>
-            </div>
-        </div>
+          <!-- Filter Search and Entries Dropdown -->
+          <div class="row d-flex justify-content-between mb-4">
+                <div class="d-flex justify-content-center">
+                    <?php
+                    include "../PHP/Cartoon_Series_Nav_Pagination.php";
+                    // Retain search query in pagination links
+                    $query_string = isset($_GET['query']) ? '&query=' . urlencode($_GET['query']) : '';
+                    ?>
+                </div>
 
-      <!-- Movie Cards -->
-      <div class="row d-flex justify-content-center" id="cartoon-series-container">
-    <?php include "../PHP/Cartoon_Series_Card.php" ?>
-      
-        </div>
-        
-        <!-- Previous and Next buttons -->
-        <div class="row  d-flex justify-content-center mt-4">
-            <div class="col-md-auto mb-5">
-                <button class="btn btn-primary" id="prev-button">Previous</button>
-                <button class="btn btn-primary" id="next-button">Next</button>
+                <div class="col-md-2">
+                    <select id="entries-dropdown" class="form-select" onchange="window.location.href='Anime_Series.php?limit='+this.value+'<?php echo $query_string; ?>'">
+                        <option value="20" <?php if ($limit == 20) echo 'selected'; ?>>20 entries</option>
+                        <option value="50" <?php if ($limit == 50) echo 'selected'; ?>>50 entries</option>
+                        <option value="100" <?php if ($limit == 100) echo 'selected'; ?>>100 entries</option>
+                        <option value="200" <?php if ($limit == 200) echo 'selected'; ?>>200 entries</option>
+                        <option value="500" <?php if ($limit == 500) echo 'selected'; ?>>500 entries</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Movies List -->
+            <div class="container mb-5" id="movies-container">
+             <?php include "../PHP/Cartoon_Series_Card.php";?>
+            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center">
+                <?php include "../PHP/Cartoon_Series_Nav_Pagination.php"; ?>
             </div>
         </div>
-    </div>
-    </div>
 </section>
-<!-- Modal -->
-<div class="modal fade" id="cartoonseriesModal" tabindex="-1" aria-labelledby="cartoonseriesModalLabel" aria-hidden="true" data-bs-backdrop="static">
-    <div class="modal-dialog modal-lg text-center">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-center" id="cartoonseriesModalLabel">Cartoon Series Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Name:</strong> <span id="cartoonseriesName"></span></p>
-                <p><strong>Summary:</strong> <span id="cartoonseriesSummary"></span></p>
-                <p><strong>Genre:</strong> <span id="cartoonseriesGenre"></span></p>
-                <p><strong>Rating:</strong> <span id="cartoonseriesRating"></span></p>
-                <p><strong>Year:</strong> <span id="cartoonseriesYear"></span></p>
-                <p><strong>Episodes:</strong> <span id="cartoonseriesEpisodes"></span></p>
-                <p><strong>Studio:</strong> <span id="cartoonseriesStudio"></span></p>
-                <img id="cartoonseriesImage" src="" alt="Image" style="max-width: 250px; max-height: 300px;">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<?php
-    include "../../Footer.php"
-?>
+<?php include "../../Footer.php" ?>
 
 <script src="../JS/Cartoon_Series_tables.js"></script> 
 <script src="../JS/Cartoon_Series_notif.js"></script> 
