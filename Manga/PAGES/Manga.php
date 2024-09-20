@@ -1,4 +1,6 @@
-<?php include "../PHP/Manga.php" ?>
+<?php include "../PHP/Manga.php";
+include "../PHP/Manga_Pagination.php";
+include "../PHP/Manga_Search.php"; ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,36 +26,42 @@
     </div>
     <?php include "../PHP/Manga_notif.php" ?> 
     </div>
+    <form method="GET" action="Manga.php" class="d-flex mb-4">
+                <input type="text" name="query" class="form-control me-2" placeholder="Search Games..." value="<?php echo htmlspecialchars($search_query); ?>">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
 
-    <!-- Filter Search and Entries Dropdown -->
-    <div class="row d-flex justify-content-between mb-4">
-        <div class="col-md-6">
-            <input type="text" id="filter-search" class="form-control" placeholder="Search for Manga by title or year...">
-        </div>
-        <div class="col-md-2">
-            <select id="entries-dropdown" class="form-select">
-                <option value="20">20 entries</option>
-                <option value="40">40 entries</option>
-                <option value="80">80 entries</option>
-                <option value="160">160 entries</option>
-            </select>
-        </div>
-    </div>
+          <!-- Filter Search and Entries Dropdown -->
+          <div class="row d-flex justify-content-between mb-4">
+                <div class="d-flex justify-content-center">
+                    <?php
+                    include "../PHP/Manga_Nav_Pagination.php";
+                    // Retain search query in pagination links
+                    $query_string = isset($_GET['query']) ? '&query=' . urlencode($_GET['query']) : '';
+                    ?>
+                </div>
 
-    <!-- Manga Cards -->
-    <div class="row d-flex justify-content-center" id="manga-container">
-      <?php include "../PHP/Manga_Card.php" ?>
-     
-    </div>
-    
-    <!-- Previous and Next buttons -->
-    <div class="row d-flex justify-content-center mt-4">
-        <div class="col-md-auto mb-5">
-            <button class="btn btn-primary" id="prev-button">Previous</button>
-            <button class="btn btn-primary" id="next-button">Next</button>
+                <div class="col-md-2">
+                    <select id="entries-dropdown" class="form-select" onchange="window.location.href='Anime_Series.php?limit='+this.value+'<?php echo $query_string; ?>'">
+                        <option value="20" <?php if ($limit == 20) echo 'selected'; ?>>20 entries</option>
+                        <option value="50" <?php if ($limit == 50) echo 'selected'; ?>>50 entries</option>
+                        <option value="100" <?php if ($limit == 100) echo 'selected'; ?>>100 entries</option>
+                        <option value="200" <?php if ($limit == 200) echo 'selected'; ?>>200 entries</option>
+                        <option value="500" <?php if ($limit == 500) echo 'selected'; ?>>500 entries</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Movies List -->
+            <div class="container mb-5" id="movies-container">
+             <?php include "../PHP/Manga_Card.php";?>
+            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center">
+                <?php include "../PHP/Manga_Nav_Pagination.php"; ?>
+            </div>
         </div>
-    </div>
-</div>
 </section>
 
 <?php include "../../Footer.php" ?>
