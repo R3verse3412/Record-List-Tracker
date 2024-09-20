@@ -50,7 +50,7 @@
             </ul>
             <div class="d-flex">
                 <?php if (isset($_SESSION['user_id'])): ?>
-                    <span class="me-3 text-dark LOGGED">Logged in as: <?php echo $user['username']; ?></span>
+                    <span class="me-3 text-dark LOGGED"> <?php echo $user['username']; ?></span>
                     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#LogoutModal">
                         <svg xmlns="http://www.w3.org/2000/svg" width="1.2em" height="1.2em" viewBox="0 0 21 21">
                             <g fill="none" fill-rule="evenodd" transform="translate(4 1)">

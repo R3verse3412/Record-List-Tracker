@@ -1,4 +1,7 @@
-<?php include "../PHP/Manhwa_18.php" ?>
+<?php include "../PHP/Manhwa_18.php";
+include "../PHP/Manhwa_18_Pagination.php";
+include "../PHP/Manhwa_18_Search.php"; 
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,66 +22,48 @@
     <div class="mb-4">
     <a href="Manhwa_18_add.php" class="btn btn-success mb-3">Add New Manhwa</a>
     <div class="alert alert-info text-center mb-4">
-        <strong>Total Manhwa 18:</strong> <?php echo $total_records; ?>
+        <strong>Manhwa 18:</strong> <?php echo $total_records; ?>
     </div>
     <?php include "../PHP/Manhwa_18_notif.php" ?>
     </div>
     
-    <!-- Filter Search and Entries Dropdown -->
-    <div class="row d-flex justify-content-between mb-4">
-        <div class="col-md-6">
-            <input type="text" id="filter-search" class="form-control" placeholder="Search for Manhwa by title or year...">
-        </div>
-        <div class="col-md-2">
-            <select id="entries-dropdown" class="form-select">
-                <option value="20">20 entries</option>
-                <option value="40">40 entries</option>
-                <option value="80">80 entries</option>
-                <option value="160">160 entries</option>
-            </select>
-        </div>
-    </div>
+    <form method="GET" action="Manhwa_18.php" class="d-flex mb-4">
+                <input type="text" name="query" class="form-control me-2" placeholder="Search Manhwa..." value="<?php echo htmlspecialchars($search_query); ?>">
+                <button class="btn btn-primary" type="submit">Search</button>
+            </form>
 
-    <!-- Manhwa 18 Cards -->
-    <div class="row d-flex justify-content-center" id="manhwa_18-container">
-    <?php include "../PHP/Manhwa_18_Card.php" ?>
-    </div>
-    
-    <!-- Previous and Next buttons -->
-    <div class="row d-flex justify-content-center mt-4">
-        <div class="col-md-auto mb-5">
-            <button class="btn btn-primary" id="prev-button">Previous</button>
-            <button class="btn btn-primary" id="next-button">Next</button>
-        </div>
-    </div>
+          <!-- Filter Search and Entries Dropdown -->
+          <div class="row d-flex justify-content-between mb-4">
+                <div class="d-flex justify-content-center">
+                    <?php
+                    include "../PHP/Manhwa_18_Nav_Pagination.php";
+                    // Retain search query in pagination links
+                    $query_string = isset($_GET['query']) ? '&query=' . urlencode($_GET['query']) : '';
+                    ?>
+                </div>
 
-</div>
+                <div class="col-md-2">
+                    <select id="entries-dropdown" class="form-select" onchange="window.location.href='Anime_Series.php?limit='+this.value+'<?php echo $query_string; ?>'">
+                        <option value="20" <?php if ($limit == 20) echo 'selected'; ?>>20 entries</option>
+                        <option value="50" <?php if ($limit == 50) echo 'selected'; ?>>50 entries</option>
+                        <option value="100" <?php if ($limit == 100) echo 'selected'; ?>>100 entries</option>
+                        <option value="200" <?php if ($limit == 200) echo 'selected'; ?>>200 entries</option>
+                        <option value="500" <?php if ($limit == 500) echo 'selected'; ?>>500 entries</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Movies List -->
+            <div class="container mb-5" id="movies-container">
+             <?php include "../PHP/Manhwa_18_Card.php";?>
+            </div>
+
+            <!-- Pagination -->
+            <div class="d-flex justify-content-center">
+                <?php include "../PHP/Manhwa_18_Nav_Pagination.php"; ?>
+            </div>
+        </div>
 </section>
-
-<!-- Modal -->
-<div class="modal fade" id="manhwa_18Modal" tabindex="-1" aria-labelledby="manhwa_18ModalLabel" aria-hidden="true">
-    <div class="modal-dialog text-center">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="manhwa_18ModalLabel">Manhwa 18 Details</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p><strong>Title:</strong> <span id="manhwa_18Title"></span></p>
-                <p><strong>Author:</strong> <span id="manhwa_18Author"></span></p>
-                <p><strong>Description:</strong> <span id="manhwa_18Description"></span></p>
-                <p><strong>Genre:</strong> <span id="manhwa_18Genre"></span></p>
-                <p><strong>Rating:</strong> <span id="manhwa_18Rating"></span></p>
-                <p><strong>Release Date:</strong> <span id="manhwa_18Release_Date"></span></p>
-                <p><strong>Status:</strong> <span id="manhwa_18Status"></span></p>
-                <img id="manhwa_18Image" src="" alt="Manhwa Image" style="max-width: 100%; height: auto;">
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 <?php include "../../Footer.php" ?>
 

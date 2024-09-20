@@ -185,11 +185,13 @@ $conn->close();
                 <div class="col">
                     <label class="form-label">Current Password</label>
                     <input type="password" class="form-control" name="current_password" id="pwd">
+                    <label for="">Show</label>
                     <input type="checkbox" id="chk">
                 </div>
                 <div class="col">
                     <label class="form-label">New Password</label>
                     <input type="password" class="form-control" name="new_password" id="pwd">
+                    <label for="">Show</label>
                     <input type="checkbox" id="chk">
                 </div>
             </div>

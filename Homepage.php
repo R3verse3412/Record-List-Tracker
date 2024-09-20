@@ -25,7 +25,6 @@
       <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
   
       <a class="navbar-brand" href="#about">About</a>
-      <a class="navbar-brand" href="#new">New</a>
       <a class="navbar-brand" href="Login.php">Login</a>
       <a class="navbar-brand" href="Register.php">Register</a>
 
