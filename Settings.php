@@ -41,32 +41,36 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
     }
 
-    // Update Password
-    if (isset($_POST['current_password'], $_POST['new_password'])) {
-        $current_password = $_POST['current_password'];
-        $new_password = $_POST['new_password'];
+   // Initialize error flag
+$error_message = '';
 
-        // Verify current password
-        $password_sql = "SELECT password FROM users WHERE id = ?";
-        $stmt = $conn->prepare($password_sql);
-        $stmt->bind_param("i", $user_id);
+if (isset($_POST['current_password'], $_POST['new_password']) && !empty($_POST['current_password']) && !empty($_POST['new_password'])) {
+    $current_password = $_POST['current_password'];
+    $new_password = $_POST['new_password'];
+
+    // Verify current password
+    $password_sql = "SELECT password FROM users WHERE id = ?";
+    $stmt = $conn->prepare($password_sql);
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->bind_result($hashed_password);
+    $stmt->fetch();
+    $stmt->close();
+
+    if (password_verify($current_password, $hashed_password)) {
+        // Hash the new password and update
+        $new_hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
+        $update_password_sql = "UPDATE users SET password = ? WHERE id = ?";
+        $stmt = $conn->prepare($update_password_sql);
+        $stmt->bind_param("si", $new_hashed_password, $user_id);
         $stmt->execute();
-        $stmt->bind_result($hashed_password);
-        $stmt->fetch();
         $stmt->close();
-
-        if (password_verify($current_password, $hashed_password)) {
-            // Hash the new password and update
-            $new_hashed_password = password_hash($new_password, PASSWORD_DEFAULT);
-            $update_password_sql = "UPDATE users SET password = ? WHERE id = ?";
-            $stmt = $conn->prepare($update_password_sql);
-            $stmt->bind_param("si", $new_hashed_password, $user_id);
-            $stmt->execute();
-            $stmt->close();
-        } else {
-            echo "Current password is incorrect.";
-        }
+    } else {
+        // Set error message
+        $error_message = "Current password is incorrect.";
     }
+}
+
 
     // Handle Profile Picture Upload
     if (isset($_FILES['profile_picture']) && $_FILES['profile_picture']['error'] == 0) {
@@ -182,36 +186,51 @@ $conn->close();
                 </div>
         </div>
 
-        <!-- Password Section -->
-        <div class="mb-4">
-            <h2 class="h4 mb-3">Password</h2>
-            <div class="text-muted mb-3">Modify your current password</div>
-            <div class="row align-items-center d-flex mb-5">
-                <div class="col">
-                    <label class="form-label">Current Password</label>
-                    <input type="password" class="form-control" name="current_password" id="pwd">
-                    <label for="">Show</label>
-                    <input type="checkbox" id="chk">
-                </div>
-                <div class="col">
-                    <label class="form-label">New Password</label>
-                    <input type="password" class="form-control" name="new_password" id="pwd">
-                    <label for="">Show</label>
-                    <input type="checkbox" id="chk">
-                </div>
+     <!-- Password Section -->
+<div class="mb-4">
+    <h2 class="h4 mb-3">Password</h2>
+    <div class="text-muted mb-3">Modify your current password</div>
+    <div class="row align-items-center d-flex mb-5">
+        <div class="col">
+            <label class="form-label">Current Password</label>
+            <input type="password" class="form-control" name="current_password" id="current_pwd">
+            <label for="">Show</label>
+            <input type="checkbox" id="show_current_pwd">
+        </div>
+        <div class="col">
+            <label class="form-label">New Password</label>
+            <input type="password" class="form-control" name="new_password" id="new_pwd">
+            <label for="">Show</label>
+            <input type="checkbox" id="show_new_pwd">
+        </div>
+    </div>
+</div>
+
+<!-- Action Buttons -->
+<div class="text-end d-flex justify-content-center">
+    <button class="btn btn-primary" type="submit">
+        <i class="fas fa-save me-2"></i>Save Changes
+    </button>
+</div>
+</form>
+
+<!-- Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="errorModalLabel">Error</h5>
+            </div>
+            <div class="modal-body">
+               <p class="text-center">Current password is incorrect.</p> 
+            </div>
+            <div class="modal-footer">
+             
             </div>
         </div>
-        
-        <!-- Action Buttons -->
-        <div class="text-end d-flex justify-content-center">
-            <button class="btn btn-primary" type="submit">
-                <i class="fas fa-save me-2"></i>Save Changes
-            </button>
-        </div>
-        </form>
     </div>
+</div>
 
-    
 </body>
 </html>
 <script>
@@ -222,3 +241,14 @@ $conn->close();
         pwd.type = chk.checked ? "text" : "password";
     };
 </script>
+
+<script>
+    // Show the error modal if there's an error message
+    <?php if (!empty($error_message)): ?>
+        var myModal = new bootstrap.Modal(document.getElementById('errorModal'), {
+            keyboard: false
+        });
+        myModal.show();
+    <?php endif; ?>
+</script>
+
