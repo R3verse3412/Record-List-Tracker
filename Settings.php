@@ -148,8 +148,8 @@ $conn->close();
                             <input type="file" name="profile_picture" class="form-control" id="inputGroupFile02">
                             <label class="input-group-text" for="inputGroupFile02">Upload</label>
                         </div>
-                        <button class="btn btn-outline-danger btn-sm" type="submit">
-                            <i class="fas fa-trash-alt me-2"></i>Upload Picture
+                        <button class="btn btn-outline-primary btn-sm" type="submit">
+                            Upload Picture
                         </button>
                     </form>
                 </div>
@@ -171,9 +171,14 @@ $conn->close();
         <!-- Contact Information Section -->
         <div class="mb-4">
             <h2 class="h4 mb-3">Contact Information</h2>
-                <div class="mb-3">
+            <div class="row g-1 mb-3 align-items-center">
+                <div class="col md-8">
                     <label for="email" class="form-label">Email address</label>
                     <input type="email" class="form-control" id="email" name="email" value="<?php echo $user['email']; ?>">
+                </div>
+                    <div class="col">
+                    
+                    </div>
                 </div>
         </div>
 
@@ -205,6 +210,8 @@ $conn->close();
         </div>
         </form>
     </div>
+
+    
 </body>
 </html>
 <script>
