@@ -171,7 +171,7 @@ $conn->close();
                     </a>
                 </div>
                 <div class="col-md-auto mb-5 d-flex justify-content-center ">
-                    <a href="Manhwa_18/PAGES/Manhwa_18.php" class="card a Manhwa_18">
+                    <a href="Manhwa_18/PAGES/Manhwa_18.php" class="card a Manhwa_18" >
                         <div class="overlay"></div>
                         <div class="circle">
                             <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
@@ -188,9 +188,8 @@ $conn->close();
     </section>
     </div>
     </div>
-    <?php
-    include "Footer.php"
-  ?>
+    <?php include "Footer.php" ?>
+  
 </body>
 
 </html>
