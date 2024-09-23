@@ -1,3 +1,39 @@
+<style>
+    @media (max-width: 768px) {
+    /* Adjust the pagination item size */
+    .pagination .page-link {
+        padding: 0.5rem 0.75rem; /* Smaller padding for smaller screens */
+        font-size: 14px; /* Reduce font size */
+    }
+
+    /* Stack pagination items vertically (optional) */
+    .pagination {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+
+    /* Hide ellipsis on small screens */
+
+
+    /* Hide some page numbers for compactness */
+    .pagination .page-item:nth-child(n+3):nth-last-child(n+3) {
+        display: none;
+    }
+
+    /* Ensure that 'Previous' and 'Next' buttons are visible */
+    .pagination .page-item:first-child,
+    .pagination .page-item:last-child {
+        display: inline-block;
+    }
+
+    /* Add some spacing */
+    .pagination .page-item {
+        margin: 2px;
+    }
+}
+
+</style>
 <nav aria-label="Pagination">
     <ul class="pagination">
         <!-- Get current query string and append it to the pagination links -->
