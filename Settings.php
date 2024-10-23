@@ -41,6 +41,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->close();
     }
 
+    $success_message = ''; // Initialize success message
+
+// Handle form submission for updating user info
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Update Username and Email
+    if (isset($_POST['username'], $_POST['email'])) {
+        $new_username = $_POST['username'];
+        $new_email = $_POST['email'];
+
+        $update_sql = "UPDATE users SET username = ?, email = ? WHERE id = ?";
+        $stmt = $conn->prepare($update_sql);
+        $stmt->bind_param("ssi", $new_username, $new_email, $user_id);
+        $stmt->execute();
+        $stmt->close();
+
+        // Set success message
+        $success_message = "Profile updated successfully.";
+    }
+
+    // ... (rest of your existing code)
+}
+
+
    // Initialize error flag
 $error_message = '';
 
@@ -231,6 +254,23 @@ $conn->close();
     </div>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-center" id="successModalLabel">Success</h5>
+            </div>
+            <div class="modal-body">
+                <p class="text-center"><?php echo $success_message; ?></p> 
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+
+
 </body>
 </html>
 <script>
@@ -241,6 +281,17 @@ $conn->close();
         pwd.type = chk.checked ? "text" : "password";
     };
 </script>
+
+<script>
+    // Show the success modal if there's a success message
+    <?php if (!empty($success_message)): ?>
+        var myModal = new bootstrap.Modal(document.getElementById('successModal'), {
+            keyboard: false
+        });
+        myModal.show();
+    <?php endif; ?>
+</script>
+
 
 <script>
     // Show the error modal if there's an error message
