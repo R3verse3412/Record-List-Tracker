@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $rating = $_POST['rating'];
     $duration = $_POST['duration'];
     $studio = $_POST['studio'];
+    $reviews = $_POST['reviews'];
 
     // Handle file upload if a new file is uploaded
     if ($_FILES['img']['name']) {
@@ -36,11 +37,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Prepare SQL statement
-    $sql = "UPDATE anime_movies SET name=?, summary=?, year=?, img=?, genre=?, rating=?, duration=?, studio=? WHERE id=?";
+    $sql = "UPDATE anime_movies SET name=?, summary=?, year=?, img=?, genre=?, rating=?, duration=?, studio=?, reviews=? WHERE id=?";
     $stmt = $conn->prepare($sql);
 
     // Bind parameters
-    $stmt->bind_param("ssisssssi", $name, $summary, $year, $img, $genre, $rating, $duration, $studio, $id);
+    $stmt->bind_param("ssissssssi", $name, $summary, $year, $img, $genre, $rating, $duration, $studio, $reviews, $id);
     
     if ($stmt->execute()) {
         header("Location: Anime_Movies.php");
@@ -69,6 +70,7 @@ if ($result->num_rows > 0) {
     $rating = $row['rating'];
     $duration = $row['duration'];
     $studio = $row['studio'];
+    $reviews = $row['reviews'];
 } else {
     echo "No record found.";
     exit();

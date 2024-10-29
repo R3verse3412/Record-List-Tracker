@@ -216,8 +216,10 @@ $conn->close();
 
         <section class="section mb-5">
             <div class="container">
+                <div class="card">
                     <div class="plot">REVIEWS</div>
                     <div class="fs-5 reviews"><?php echo htmlspecialchars($movie['reviews']); ?></div>
+                    </div>
             </div>
         </section>
 
