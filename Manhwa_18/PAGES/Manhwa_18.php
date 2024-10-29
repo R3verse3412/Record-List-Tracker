@@ -43,7 +43,7 @@ include "../PHP/Manhwa_18_Search.php";
                 </div>
 
                 <div class="col-md-2">
-                    <select id="entries-dropdown" class="form-select" onchange="window.location.href='Anime_Series.php?limit='+this.value+'<?php echo $query_string; ?>'">
+                    <select id="entries-dropdown" class="form-select" onchange="window.location.href='Manhwa_18.php?limit='+this.value+'<?php echo $query_string; ?>'">
                         <option value="20" <?php if ($limit == 20) echo 'selected'; ?>>20 entries</option>
                         <option value="50" <?php if ($limit == 50) echo 'selected'; ?>>50 entries</option>
                         <option value="100" <?php if ($limit == 100) echo 'selected'; ?>>100 entries</option>

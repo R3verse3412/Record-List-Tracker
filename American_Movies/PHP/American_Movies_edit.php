@@ -23,6 +23,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $genre = $_POST['genre'];
     $rating = $_POST['rating'];
     $director = $_POST['director'];
+    $reviews = $_POST['reviews'];
 
     // Handle file upload if a new file is uploaded
     if ($_FILES['img']['name']) {
@@ -53,9 +54,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $cast_str = implode(';', $cast);
 
-    $sql = "UPDATE american_movies SET name=?, summary=?, year=?, img=?, genre=?, rating=?, cast=?, director=? WHERE id=?";
+    $sql = "UPDATE american_movies SET name=?, summary=?, year=?, img=?, genre=?, rating=?, cast=?, director=?, reviews=? WHERE id=?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssisssssi", $name, $summary, $year, $img, $genre, $rating, $cast_str, $director, $id);
+    $stmt->bind_param("ssissssssi", $name, $summary, $year, $img, $genre, $rating, $cast_str, $director, $reviews, $id);
     
     if ($stmt->execute()) {
         header("Location: American_Movies.php");
@@ -84,6 +85,7 @@ if ($result->num_rows > 0) {
     $rating = $row['rating'];
     $cast = $row['cast'];
     $director = $row['director'];
+    $reviews = $row['reviews'];
 } else {
     echo "No record found.";
     exit();

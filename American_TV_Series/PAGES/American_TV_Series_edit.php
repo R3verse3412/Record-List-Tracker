@@ -50,6 +50,11 @@ include "../../nav_user.php"
                     <input type="text" class="form-control" name="director" value="<?php echo htmlspecialchars($director); ?>">
                 </div>
                 <div class="mb-3">
+                <label class="form-label">Reviews</label>
+                    <textarea class="form-control" name="reviews"
+                        rows="4"><?php echo htmlspecialchars($reviews); ?></textarea>
+                </div>
+                <div class="mb-3">
                     <label class="form-label">Current Image</label><br>
                     <?php if (!empty($img)): ?>
                     <img src="<?php echo htmlspecialchars($img); ?>" alt="Current Image" style="max-width: 200px;"><br>

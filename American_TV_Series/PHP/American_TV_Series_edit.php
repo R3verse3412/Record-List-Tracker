@@ -24,6 +24,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $season = $_POST['season'];
     $rating = $_POST['rating'];
     $director = $_POST['director'];
+    $reviews = $_POST['reviews'];
 
     // Handle file upload if a new file is uploaded
     if ($_FILES['img']['name']) {
@@ -54,9 +55,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
     $cast_str = implode(';', $cast);
 
-    $sql = "UPDATE american_tv_series SET name=?, summary=?, year=?, img=?, genre=?, rating=?, season=?, cast=?, director=? WHERE id=?";
+    $sql = "UPDATE american_tv_series SET name=?, summary=?, year=?, img=?, genre=?, rating=?, season=?, cast=?, director=?, reviews=? WHERE id=?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("ssissssssi", $name, $summary, $year, $img, $genre, $rating, $season, $cast_str, $director, $id);
+    $stmt->bind_param("ssisssssssi", $name, $summary, $year, $img, $genre, $rating, $season, $cast_str, $director,$reviews, $id);
     
     if ($stmt->execute()) {
         header("Location: American_TV_Series.php");
@@ -86,6 +87,7 @@ if ($result->num_rows > 0) {
     $season = $row['season'];
     $cast = $row['cast'];
     $director = $row['director'];
+    $reviews = $row['reviews'];
 } else {
     echo "No record found.";
     exit();

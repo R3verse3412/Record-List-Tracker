@@ -1,6 +1,7 @@
 <?php include "../PHP/American_Movies_edit.php" ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,9 +10,10 @@
     include "../../header.php"
     ?>
 </head>
+
 <body>
-    
-<?php include "../../nav_user.php" ?>
+
+    <?php include "../../nav_user.php" ?>
 
     <div class="container">
         <div class="text-center mb-4">
@@ -27,23 +29,28 @@
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Summary</label>
-                    <textarea class="form-control" name="summary" rows="3"><?php echo htmlspecialchars($summary); ?></textarea>
+                    <textarea class="form-control" name="summary"
+                        rows="3"><?php echo htmlspecialchars($summary); ?></textarea>
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Genre</label>
-                    <input type="text" class="form-control" name="genre" value="<?php echo htmlspecialchars($genre); ?>">
+                    <input type="text" class="form-control" name="genre"
+                        value="<?php echo htmlspecialchars($genre); ?>">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Year</label>
-                    <input type="number" class="form-control" name="year" value="<?php echo htmlspecialchars($year); ?>">
+                    <input type="number" class="form-control" name="year"
+                        value="<?php echo htmlspecialchars($year); ?>">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Rating</label>
-                    <input type="number" class="form-control" name="rating" value="<?php echo htmlspecialchars($rating); ?>" min="1" max="10">
+                    <input type="number" class="form-control" name="rating"
+                        value="<?php echo htmlspecialchars($rating); ?>" min="1" max="10">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Director</label>
-                    <input type="text" class="form-control" name="director" value="<?php echo htmlspecialchars($director); ?>">
+                    <input type="text" class="form-control" name="director"
+                        value="<?php echo htmlspecialchars($director); ?>">
                 </div>
                 <div class="mb-3">
                     <label class="form-label">Current Image</label><br>
@@ -55,39 +62,49 @@
                     <input type="hidden" name="current_img" value="<?php echo htmlspecialchars($img); ?>">
                 </div>
                 <div class="mb-3">
+                    <label class="form-label">Reviews</label>
+                    <textarea class="form-control" name="reviews"
+                        rows="4"><?php echo htmlspecialchars($reviews); ?></textarea>
+                </div>
+                <div class="mb-3">
                     <label class="form-label">Cast</label>
                     <div id="cast-container">
                         <?php foreach ($cast_names as $index => $cast_name): ?>
                         <div class="cast-member mb-3">
-                            <input type="text" class="form-control mb-2" name="cast_name[]" value="<?php echo htmlspecialchars($cast_name); ?>">
+                            <input type="text" class="form-control mb-2" name="cast_name[]"
+                                value="<?php echo htmlspecialchars($cast_name); ?>">
                             <?php if (!empty($cast_imgs[$index])): ?>
-                            <img src="<?php echo htmlspecialchars($cast_imgs[$index]); ?>" alt="Cast Image" style="max-width: 100px;"><br>
+                            <img src="<?php echo htmlspecialchars($cast_imgs[$index]); ?>" alt="Cast Image"
+                                style="max-width: 100px;"><br>
                             <?php endif; ?>
                             <input type="file" class="form-control mb-2" name="cast_img[]">
-                            <input type="hidden" name="current_cast_img[]" value="<?php echo htmlspecialchars($cast_imgs[$index]); ?>">
-                            <button type="button" class="btn btn-danger" onclick="removeCastMember(this)">Delete</button>
+                            <input type="hidden" name="current_cast_img[]"
+                                value="<?php echo htmlspecialchars($cast_imgs[$index]); ?>">
+                            <button type="button" class="btn btn-danger"
+                                onclick="removeCastMember(this)">Delete</button>
                         </div>
                         <?php endforeach; ?>
                     </div>
                     <button type="button" class="btn btn-secondary" onclick="addCastMember()">Add Cast Member</button>
                 </div>
+
                 <div class="mb-5 d-flex justify-content-center">
                     <div class="col-md-auto">
-                    <button type="submit" class="btn btn-success" name="submit">Update</button>
-                    <button href="American_Movies.php" class="btn btn-danger">Cancel</button>
-                    <input type="hidden" name="id" value="<?php echo $id; ?>">
+                        <button type="submit" class="btn btn-success" name="submit">Update</button>
+                        <button href="American_Movies.php" class="btn btn-danger">Cancel</button>
+                        <input type="hidden" name="id" value="<?php echo $id; ?>">
                     </div>
                 </div>
             </form>
         </div>
     </div>
-    
-<?php
+
+    <?php
     include "../../Footer.php"
 ?>
 
 
     <script src="../JS/American_Movies_Edit.js"> </script>
 </body>
-</html>
 
+</html>

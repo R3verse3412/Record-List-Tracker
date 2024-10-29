@@ -216,6 +216,13 @@ $conn->close();
             </div>
         </section>
 
+        <section class="section mb-5">
+            <div class="container">
+            <div class="plot">REVIEWS</div>
+            <div class="fs-5 reviews"><?php echo htmlspecialchars($tv_series['reviews']); ?></div>
+            </div>
+        </section>
+
         <?php include "../../footer.php" ?>
 </body>
 </html>
