@@ -213,6 +213,15 @@ $conn->close();
             </div>
         </section>
 
+        <section class="section">
+            <div class="container">
+            <div class="card">
+                    <div class="plot">REVIEWS</div>
+                    <div class="fs-5 reviews"><?php echo htmlspecialchars($anime_series['reviews']); ?></div>
+                    </div>
+            </div>
+        </section>
+
         <?php include "../../footer.php" ?>
 </body>
 </html>

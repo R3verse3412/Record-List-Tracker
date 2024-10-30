@@ -51,6 +51,10 @@
                     <input type="hidden" name="current_img" value="<?php echo htmlspecialchars($img); ?>">
                 </div>
                 <div class="mb-3">
+    <label class="form-label">Reviews</label>
+    <textarea class="form-control" name="reviews" rows="4"><?php echo htmlspecialchars($reviews); ?></textarea>
+</div>
+                <div class="mb-3">
                     <label class="form-label">Cast</label>
                     <div id="cast-container">
                         <?php foreach ($cast_names as $index => $cast_name): ?>
