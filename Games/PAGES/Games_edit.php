@@ -54,6 +54,11 @@
                         value="<?php echo htmlspecialchars($studio); ?>">
                 </div>
                 <div class="mb-3">
+                    <label class="form-label">Reviews</label>
+                    <textarea class="form-control" name="reviews"
+                        rows="4"><?php echo htmlspecialchars($reviews); ?></textarea>
+                </div>
+                <div class="mb-3">
                     <label class="form-label">Device</label>
                     <select class="form-control" name="device">
                         <option value="Mobile Phone" <?php if ($device == 'Mobile Phone') echo 'selected'; ?>>Mobile

@@ -25,6 +25,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $publisher = $_POST['publisher'];
     $studio = $_POST['studio'];
     $device = $_POST['device'];
+    $reviews = $_POST['reviews'];
 
     // Handle file upload if a new file is uploaded
     if ($_FILES['img']['name']) {
@@ -37,11 +38,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     }
 
     // Prepare SQL statement
-    $sql = "UPDATE games SET name=?, summary=?, year=?, img=?, genre=?, rating=?, publisher=?, studio=?, device=? WHERE id=?";
+    $sql = "UPDATE games SET name=?, summary=?, year=?, img=?, genre=?, rating=?, publisher=?, studio=?, device=?, reviews=? WHERE id=?";
     $stmt = $conn->prepare($sql);
 
     // Bind parameters
-    $stmt->bind_param("ssissssssi", $name, $summary, $year, $img, $genre, $rating, $publisher, $studio, $device, $id);
+    $stmt->bind_param("ssisssssssi", $name, $summary, $year, $img, $genre, $rating, $publisher, $studio, $device, $reviews, $id);
     
     if ($stmt->execute()) {
         header("Location: Games.php");
@@ -71,6 +72,7 @@ if ($result->num_rows > 0) {
     $publisher = $row['publisher'];
     $studio = $row['studio'];
     $device = $row['device']; // Fetch the device value
+    $reviews = $row['reviews']; // Fetch the device value
 } else {
     echo "No record found.";
     exit();
