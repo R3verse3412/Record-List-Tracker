@@ -141,165 +141,207 @@ $conn->close();
     <title>User Settings</title>
     <?php include "header.php"; ?>
     <style>
-        .profile-picture {
+         .profile-picture {
             width: 150px;
             height: 150px;
             object-fit: cover;
+            border: 3px solid #fff;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-
-        @media screen and (max-width: 768px) {
-            .h4, .card-title, .text-muted{
-                text-align: center;
-                justify-content: center;
-                align-items: center;
-            }
+        .settings-card {
+            border: none;
+            box-shadow: 0 0 15px rgba(0,0,0,0.05);
+            border-radius: 12px;
+            margin-bottom: 1.5rem;
+        }
+        .settings-header {
+            background-color: #f8f9fa;
+            border-radius: 12px 12px 0 0;
+            padding: 1rem;
+        }
+        .form-control:focus {
+            box-shadow: 0 0 0 0.25rem rgba(13,110,253,0.15);
+        }
+        .btn-upload {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-upload input[type=file] {
+            position: absolute;
+            top: 0;
+            right: 0;
+            min-width: 100%;
+            min-height: 100%;
+            opacity: 0;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
     <?php include "nav.php"; ?>
-    <div class="container mb-5">
-        <h1 class="card-title mb-4">Account Settings</h1>
-        
-        <!-- Profile Picture Section -->
-        <div class="mb-4">
-            <h2 class="h4 mb-3">Profile Picture</h2>
-            <div class="row align-items-center">
-                <div class="col-md-3">
-                    <img src="uploads/<?php echo !empty($user['profile_picture']) ? $user['profile_picture'] : 'default.png'; ?>" alt="Profile Picture" class="profile-picture rounded-circle">
-                </div>
-                <div class="col-md-9">
-                    <form method="POST" enctype="multipart/form-data">
-                        <small class="text-muted">JPEG or PNG, max 1MB</small>
-                        <div class="input-group mb-3">
-                            <input type="file" name="profile_picture" class="form-control" id="inputGroupFile02">
-                            <label class="input-group-text" for="inputGroupFile02">Upload</label>
+    <div class="container ">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <h1 class="display-6 mb-4">Account Settings</h1>
+                
+                <!-- Profile Picture Card -->
+                <div class="card settings-card">
+                    <div class="settings-header">
+                        <h5 class="mb-0"><i class="fas fa-user-circle me-2"></i>Profile Picture</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="row align-items-center">
+                            <div class="col-md-4 text-center mb-3 mb-md-0">
+                                <img src="uploads/<?php echo !empty($user['profile_picture']) ? $user['profile_picture'] : 'default.png'; ?>" 
+                                     alt="Profile Picture" 
+                                     class="profile-picture rounded-circle mb-2">
+                            </div>
+                            <div class="col-md-8">
+                                <form method="POST" enctype="multipart/form-data">
+                                    <div class="mb-3">
+                                        <div class="btn-group w-100">
+                                            <button type="button" class="btn btn-outline-primary btn-upload">
+                                                <i class="fas fa-cloud-upload-alt me-2"></i>Choose File
+                                                <input type="file" name="profile_picture" class="form-control" id="inputGroupFile02">
+                                            </button>
+                                            <button class="btn btn-primary" type="submit">
+                                                <i class="fas fa-save me-2"></i>Upload
+                                            </button>
+                                        </div>
+                                        <div class="form-text mt-2">
+                                            <i class="fas fa-info-circle me-1"></i>Accepted formats: JPEG, PNG (Max: 1MB)
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
                         </div>
-                        <button class="btn btn-outline-primary btn-sm" type="submit">
-                            Upload Picture
+                    </div>
+                </div>
+
+                <form method="POST">
+                    <!-- Personal Information Card -->
+                    <div class="card settings-card">
+                        <div class="settings-header">
+                            <h5 class="mb-0"><i class="fas fa-user me-2"></i>Personal Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="username" class="form-label">Username</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-user"></i></span>
+                                    <input type="text" class="form-control" id="username" name="username" 
+                                           value="<?php echo $user['username']; ?>" placeholder="Enter username">
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email Address</label>
+                                <div class="input-group">
+                                    <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                                    <input type="email" class="form-control" id="email" name="email" 
+                                           value="<?php echo $user['email']; ?>" placeholder="Enter email">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Password Card -->
+                    <div class="card settings-card">
+                        <div class="settings-header">
+                            <h5 class="mb-0"><i class="fas fa-lock me-2"></i>Change Password</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="current_pwd" class="form-label">Current Password</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-key"></i></span>
+                                        <input type="password" class="form-control" name="current_password" id="current_pwd">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('current_pwd')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <label for="new_pwd" class="form-label">New Password</label>
+                                    <div class="input-group">
+                                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                                        <input type="password" class="form-control" name="new_password" id="new_pwd">
+                                        <button class="btn btn-outline-secondary" type="button" onclick="togglePassword('new_pwd')">
+                                            <i class="fas fa-eye"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Save Button -->
+                    <div class="text-center mt-4 mb-5">
+                        <button class="btn btn-primary btn-lg px-5" type="submit">
+                            <i class="fas fa-save me-2"></i>Save Changes
                         </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        <!-- Personal Information Section -->
-        <div class="mb-4">
-            <h2 class="h4 mb-3">Personal Information</h2>
-            <form method="POST">
-                <div class="row g-3">
-                    <div class="col-md-6">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" class="form-control" id="username" name="username" value="<?php echo $user['username']; ?>">
                     </div>
-                </div>
-        </div>
-
-        <!-- Contact Information Section -->
-        <div class="mb-4">
-            <h2 class="h4 mb-3">Contact Information</h2>
-            <div class="row g-1 mb-3 align-items-center">
-                <div class="col md-8">
-                    <label for="email" class="form-label">Email address</label>
-                    <input type="email" class="form-control" id="email" name="email" value="<?php echo $user['email']; ?>">
-                </div>
-                    <div class="col">
-                    
-                    </div>
-                </div>
-        </div>
-
-     <!-- Password Section -->
-<div class="mb-4">
-    <h2 class="h4 mb-3">Password</h2>
-    <div class="text-muted mb-3">Modify your current password</div>
-    <div class="row align-items-center d-flex mb-5">
-        <div class="col">
-            <label class="form-label">Current Password</label>
-            <input type="password" class="form-control" name="current_password" id="current_pwd">
-            <label for="">Show</label>
-            <input type="checkbox" id="show_current_pwd">
-        </div>
-        <div class="col">
-            <label class="form-label">New Password</label>
-            <input type="password" class="form-control" name="new_password" id="new_pwd">
-            <label for="">Show</label>
-            <input type="checkbox" id="show_new_pwd">
-        </div>
-    </div>
-</div>
-
-<!-- Action Buttons -->
-<div class="text-end d-flex justify-content-center">
-    <button class="btn btn-primary" type="submit">
-        <i class="fas fa-save me-2"></i>Save Changes
-    </button>
-</div>
-</form>
-
-<!-- Modal -->
-<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-center" id="errorModalLabel">Error</h5>
-            </div>
-            <div class="modal-body">
-               <p class="text-center">Current password is incorrect.</p> 
-            </div>
-            <div class="modal-footer">
-             
+                </form>
             </div>
         </div>
     </div>
-</div>
 
-<!-- Modal -->
-<div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="successModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-center" id="successModalLabel">Success</h5>
-            </div>
-            <div class="modal-body">
-                <p class="text-center"><?php echo $success_message; ?></p> 
-            </div>
-            <div class="modal-footer">
+    <!-- Success Modal -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-4">
+                    <i class="fas fa-check-circle text-success fa-3x mb-3"></i>
+                    <h5>Success!</h5>
+                    <p class="mb-0"><?php echo $success_message; ?></p>
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <button type="button" class="btn btn-primary px-4" data-bs-dismiss="modal">OK</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
+    <!-- Error Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center py-4">
+                    <i class="fas fa-exclamation-circle text-danger fa-3x mb-3"></i>
+                    <h5>Error</h5>
+                    <p class="mb-0"><?php echo $error_message; ?></p>
+                </div>
+                <div class="modal-footer border-0 justify-content-center">
+                    <button type="button" class="btn btn-danger px-4" data-bs-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Password toggle function
+        function togglePassword(inputId) {
+            const input = document.getElementById(inputId);
+            const type = input.type === 'password' ? 'text' : 'password';
+            input.type = type;
+            
+            // Toggle icon
+            const icon = event.currentTarget.querySelector('i');
+            icon.classList.toggle('fa-eye');
+            icon.classList.toggle('fa-eye-slash');
+        }
+
+        // Show modals
+        <?php if (!empty($success_message)): ?>
+            var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            successModal.show();
+        <?php endif; ?>
+
+        <?php if (!empty($error_message)): ?>
+            var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            errorModal.show();
+        <?php endif; ?>
+    </script>
 </body>
 </html>
-<script>
-    const pwd = document.getElementById("pwd");
-    const chk = document.getElementById("chk");
-
-    chk.onchange = function(e) {
-        pwd.type = chk.checked ? "text" : "password";
-    };
-</script>
-
-<script>
-    // Show the success modal if there's a success message
-    <?php if (!empty($success_message)): ?>
-        var myModal = new bootstrap.Modal(document.getElementById('successModal'), {
-            keyboard: false
-        });
-        myModal.show();
-    <?php endif; ?>
-</script>
-
-
-<script>
-    // Show the error modal if there's an error message
-    <?php if (!empty($error_message)): ?>
-        var myModal = new bootstrap.Modal(document.getElementById('errorModal'), {
-            keyboard: false
-        });
-        myModal.show();
-    <?php endif; ?>
-</script>
-

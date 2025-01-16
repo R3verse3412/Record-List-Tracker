@@ -169,7 +169,7 @@ $conn->close();
                 <span><?php echo htmlspecialchars($anime_series['studio']); ?></p>
                 <div class="cast mb-3">Episodes</div>
                 <img class="icons-card" src="" alt="">
-                <span><?php echo htmlspecialchars($anime_series['episodes']); ?>Episodes</p>
+                <span><?php echo htmlspecialchars($anime_series['episodes']); ?> Episodes</p>
                 </div>
                 </div>
             </div>

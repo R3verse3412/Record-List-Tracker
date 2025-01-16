@@ -9,11 +9,11 @@ $search_query = "";
 if (isset($_GET['query'])) {
     $search_query = trim($_GET['query']);
     $sql = "SELECT * FROM anime_series 
-            WHERE name LIKE ? OR year LIKE ? OR studio LIKE ?
+            WHERE name LIKE ? OR year LIKE ? OR studio LIKE ? OR genre LIKE ?
             LIMIT ?, ?";
     $stmt = $conn->prepare($sql);
     $search_term = "%" . $search_query . "%";
-    $stmt->bind_param('sssss', $search_term, $search_term, $search_term, $start, $limit);
+    $stmt->bind_param('ssssii', $search_term, $search_term, $search_term, $search_term, $start, $limit);
 } else {
     // Default query without search
     $sql = "SELECT * FROM anime_series LIMIT ?, ?";

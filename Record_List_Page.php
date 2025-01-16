@@ -40,156 +40,203 @@ $conn->close();
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     <link href="Record_List_Page_1.css" rel="stylesheet">
 </head>
+<style>
+      body {
+            background-color: #f8f9fa;
+        }
+        .category-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 100%;
+        }
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .card-img-wrapper {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 200px;
+        }
+        .card-img-wrapper img {
+            max-height: 120px;
+            width: auto;
+            object-fit: contain;
+        }
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            text-align: center;
+            color: #2c3e50;
+            margin: 1rem 0;
+        }
+        .section-title {
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            font-weight: 700;
+        }
+        .main-container {
+            padding: 4rem 0;
+        }
+</style>
 
 <body class="bg">
 
     <?php include "nav.php" ?>
 
-    <section class="section">
-        <div class="container ">
-            <div class="row ">
-                <div class="col mb-5 d-flex justify-content-center">
-                    <a href="American_Movies/PAGES/American_Movies.php" class="card a American_Movies">
-                        <div class="overlay"></div>
-                        <div class="circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
-
-                                <image href="img/Folder-Movie-icon.png"
-                                    width="131" height="121"  />
-                            </svg>
+    <div class="container main-container">
+        <h1 class="text-center section-title mb-5 text-white">Entertainment Categories</h1>
+        
+        <div class="row g-4">
+            <!-- American Movies -->
+            <div class="col-sm-6 col-lg-3">
+                <a href="American_Movies/PAGES/American_Movies.php" class="text-decoration-none">
+                    <div class="card category-card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="img/Folder-Movie-icon.png" alt="American Movies" class="img-fluid">
                         </div>
-                        <p>American Movies</p>
-                    </a>
-                </div>
-                <div class="col mb-5 d-flex justify-content-center">
-                    <a href="American_TV_Series/PAGES/American_TV_Series.php" class="card a American_TV_Series">
-                        <div class="overlay"></div>
-                        <div class="circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
-
-                                <image href="img/tv-series-icon-13.png"
-                                    width="131" height="121"  />
-                            </svg>
+                        <div class="card-body">
+                            <h5 class="card-title">American Movies</h5>
                         </div>
-                        <p>American TV Series</p>
-                    </a>
-                </div>
-                <div class="col mb-5 d-flex justify-content-center">
-                    <a href="Anime_Movies/PAGES/Anime_Movies.php" class="card a Anime_Movies">
-                        <div class="overlay"></div>
-                        <div class="circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
-                                <image href="img/Deku.png"
-                                    width="131" height="121"  />
-                            </svg>
-                        </div>
-                        <p>Anime Movies</p>
-                    </a>
-                </div>
-                <div class="col mb-5 d-flex justify-content-center">
-                    <a href="Anime_Series/PAGES/Anime_Series.php" class="card a Anime_Series">
-                        <div class="overlay"></div>
-                        <div class="circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
-
-                                <image href="img/naruto_circle_icon_by_knives_by_knives1024_d78ur8v-250t.png"
-                                    width="131" height="121"  />
-                            </svg>
-                        </div>
-                        <p>Anime Series</p>
-                    </a>
-                </div>
-              
+                    </div>
+                </a>
             </div>
-            <div class="row">
-            <div class="col mb-5 d-flex justify-content-center">
-                    <a href="Cartoon_Movies/PAGES/Cartoon_Movies.php" class="card a Cartoon_Movies">
-                        <div class="overlay"></div>
-                        <div class="circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
 
-                                <image href="img/duck.png"
-                                    width="131" height="121"  />
-                            </svg>
+            <!-- American TV Series -->
+            <div class="col-sm-6 col-lg-3">
+                <a href="American_TV_Series/PAGES/American_TV_Series.php" class="text-decoration-none">
+                    <div class="card category-card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="img/tv-series-icon-13.png" alt="American TV Series" class="img-fluid">
                         </div>
-                        <p>Cartoon Movies</p>
-                    </a>
-                </div>
-                <div class="col mb-5 d-flex justify-content-center">
-                    <a href="Cartoon_Series/PAGES/Cartoon_Series.php" class="card a Cartoon_Movies">
-                        <div class="overlay"></div>
-                        <div class="circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
+                        <div class="card-body">
+                            <h5 class="card-title">American TV Series</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
-                                <image href="img/Adventure Time.png"
-                                    width="131" height="121"  />
-                            </svg>
+            <!-- Anime Movies -->
+            <div class="col-sm-6 col-lg-3">
+                <a href="Anime_Movies/PAGES/Anime_Movies.php" class="text-decoration-none">
+                    <div class="card category-card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="img/Deku.png" alt="Anime Movies" class="img-fluid">
                         </div>
-                        <p>Cartoon Series</p>
-                    </a>
-                </div>
-                <div class="col mb-5 d-flex justify-content-center">
-                    <a href="Games/PAGES/Games.php" class="card a Games">
-                        <div class="overlay"></div>
-                        <div class="circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
+                        <div class="card-body">
+                            <h5 class="card-title">Anime Movies</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
-                                <image href="img/COD.png"
-                                    width="131" height="121"  />
-                            </svg>
+            <!-- Anime Series -->
+            <div class="col-sm-6 col-lg-3">
+                <a href="Anime_Series/PAGES/Anime_Series.php" class="text-decoration-none">
+                    <div class="card category-card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="img/naruto_circle_icon_by_knives_by_knives1024_d78ur8v-250t.png" alt="Anime Series" class="img-fluid">
                         </div>
-                        <p>Games</p>
-                    </a>
-                </div>
-                <div class="col mb-5 d-flex justify-content-center">
-                    <a href="Manga/PAGES/Manga.php" class="card a Manga">
-                        <div class="overlay"></div>
-                        <div class="circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
+                        <div class="card-body">
+                            <h5 class="card-title">Anime Series</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
-                                <image href="img/Saitama.png"
-                                    width="131" height="121"  />
-                            </svg>
+            <!-- Cartoon Movies -->
+            <div class="col-sm-6 col-lg-3">
+                <a href="Cartoon_Movies/PAGES/Cartoon_Movies.php" class="text-decoration-none">
+                    <div class="card category-card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="img/duck.png" alt="Cartoon Movies" class="img-fluid">
                         </div>
-                        <p>Manga</p>
-                    </a>
-                </div>
-              
-                </div>
-                <div class="row justify-content-center align-item-center">
-                <div class="col-md-auto mb-5 d-flex justify-content-center">
-                    <a href="Manhwa/PAGES/Manhwa.php" class="card a Manhwa">
-                        <div class="overlay"></div>
-                        <div class="circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
+                        <div class="card-body">
+                            <h5 class="card-title">Cartoon Movies</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
-                                <image href="img/Solo Leveling.png"
-                                    width="131" height="121"  />
-                            </svg>
+            <!-- Cartoon Series -->
+            <div class="col-sm-6 col-lg-3">
+                <a href="Cartoon_Series/PAGES/Cartoon_Series.php" class="text-decoration-none">
+                    <div class="card category-card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="img/Adventure Time.png" alt="Cartoon Series" class="img-fluid">
                         </div>
-                        <p>Manhwa</p>
-                    </a>
-                </div>
-                <div class="col-md-auto mb-5 d-flex justify-content-center ">
-                    <a href="Manhwa_18/PAGES/Manhwa_18.php" class="card a Manhwa_18" >
-                        <div class="overlay"></div>
-                        <div class="circle">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="131" height="131" viewBox="0 0 131 131">
+                        <div class="card-body">
+                            <h5 class="card-title">Cartoon Series</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
 
-                                <image href="img/Young Boss.png"
-                                    width="131" height="121"  />
-                            </svg>
+            <!-- Games -->
+            <div class="col-sm-6 col-lg-3">
+                <a href="Games/PAGES/Games.php" class="text-decoration-none">
+                    <div class="card category-card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="img/COD.png" alt="Games" class="img-fluid">
                         </div>
-                        <p>Manhwa 18</p>
-                    </a>
-                </div>
-                </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Games</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Manga -->
+            <div class="col-sm-6 col-lg-3">
+                <a href="Manga/PAGES/Manga.php" class="text-decoration-none">
+                    <div class="card category-card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="img/Saitama.png" alt="Manga" class="img-fluid">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Manga</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Manhwa -->
+            <div class="col-sm-6 col-lg-3">
+                <a href="Manhwa/PAGES/Manhwa.php" class="text-decoration-none">
+                    <div class="card category-card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="img/Solo Leveling.png" alt="Manhwa" class="img-fluid">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Manhwa</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Manhwa 18 -->
+            <div class="col-sm-6 col-lg-3">
+                <a href="Manhwa_18/PAGES/Manhwa_18.php" class="text-decoration-none">
+                    <div class="card category-card h-100">
+                        <div class="card-img-wrapper">
+                            <img src="img/Young Boss.png" alt="Manhwa 18" class="img-fluid">
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title">Manhwa 18+</h5>
+                        </div>
+                    </div>
+                </a>
+            </div>
         </div>
-    </section>
     </div>
-    </div>
-    <?php include "Footer.php" ?>
-  
-</body>
 
+    <?php include "Footer.php" ?>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
