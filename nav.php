@@ -42,7 +42,7 @@
                     <a class="nav-link" href="Statistics.php">Statistics</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="To-Do-List.php">To-Do-List</a>
+                    <a class="nav-link" href="To-Do-List.php">Plan</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="Settings.php">Settings</a>
