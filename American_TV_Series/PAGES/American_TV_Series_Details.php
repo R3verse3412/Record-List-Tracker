@@ -44,187 +44,193 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Details</title>
+    <title>TV Series Details</title>
     <?php include "../../header.php"?>
+    <style>
+        body {
+            background-color: #0a1019;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
+                url('https://cdnjs.cloudflare.com/ajax/libs/cinema-icons/1.0.0/pattern.svg');
+            background-size: 200px;
+            color: #fff;
+        }
+
+        .card {
+            background-color: rgba(25, 35, 55, 0.9) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(10px);
+        }
+
+        .card-body {
+            color: #fff;
+        }
+
+        .series-title {
+            color: #00ffcc;
+            text-shadow: 0 0 10px rgba(0, 255, 204, 0.3);
+        }
+
+        .section-title {
+            color: #4d79ff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .series-info {
+            background: linear-gradient(135deg, rgba(25, 35, 55, 0.9), rgba(40, 50, 70, 0.9));
+        }
+
+        .rating-badge {
+            background-color: #00ffcc;
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .genre-badge {
+            background-color: #4d79ff;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .season-badge {
+            background-color: #ff6b6b;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .cast-card {
+            transition: transform 0.3s ease;
+        }
+
+        .cast-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .screenshot-img {
+            transition: transform 0.3s ease;
+            border: 3px solid transparent;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .screenshot-img:hover {
+            transform: scale(1.05);
+            border-color: #4d79ff;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a1019;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #4d79ff;
+            border-radius: 5px;
+        }
+    </style>
 </head>
-<style>
-   .card {
-    height: auto;
-    padding: 10px;
-}
-
-.card1 {
-    width: 400px;
-}
-
-.card2 {
-    width: 350px;
-}
-
-.card3 {
-    width: 100%;
-    max-width: 1100px;
-}
-
-.name {
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.section {
-    min-height: 45vh;
-    display: flex;
-    position: relative;
-    justify-content: center;
-}
-
-.icons-card {
-    border-radius: 50px;
-}
-
-.cast, .director, .year, .ratings  {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.genre{
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.plot {
-    font-size: 30px;
-    font-weight: bold;
-}
-
-@media (max-width: 768px) {
-    .card, .card1, .card2, .card3 {
-        width: 100%;
-        max-width: none;
-    }
-
-    .card2 {
-        height: auto;
-    }
-
-    body {
-        text-align: center;
-    }
-
-    .section {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .row {
-        flex-direction: column;
-    }
-
-    .col-md-3, .col-md-5, .col-md-1 {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .screenshot{
-       display: none;
-    }
-
-    .card-screenshot{
-        display: none;
-    }
-}
-
-.screenshot{
-    width: 300px;
-    height: 200px;
-}
-</style>
-<body >
+<body>
     <?php include "../../nav_user.php" ?>
 
-    <section class="section mb-5">
-        <div class="container">
-        <div class="row">
-            <p class="name">TV SERIES DETAILS</p>
+    <div class="container py-5">
+        <!-- TV Series Title -->
+        <h1 class="display-4 mb-5 series-title text-center">TV Series Details</h1>
+
+        <!-- TV Series Info Section -->
+        <div class="row g-4 mb-5">
+            <!-- Series Poster -->
             <div class="col-md-3">
-                <div class="card card-pics">
-                    <img src="<?php echo htmlspecialchars($tv_series['img']); ?>" alt="">
+                <div class="card border-0 shadow-lg">
+                    <img src="<?php echo htmlspecialchars($tv_series['img']); ?>" class="card-img-top" alt="Series Poster">
                 </div>
             </div>
+
+            <!-- Series Details -->
             <div class="col-md-5">
-                <div class="card shadow card1">
+                <div class="card h-100 border-0 shadow-lg series-info">
                     <div class="card-body">
-                    <div class="name mb-4"><?php echo htmlspecialchars($tv_series['name']); ?></div>
-                    <div class="year mb-2"><?php echo htmlspecialchars($tv_series['year']); ?></div>
-                    <div class="genre mb-2"><?php echo htmlspecialchars($tv_series['genre']); ?></div>
-                    <div class="ratings">Ratings: <span><?php echo htmlspecialchars($tv_series['rating']); ?></p></div>
+                        <h2 class="card-title h3 mb-4 series-title"><?php echo htmlspecialchars($tv_series['name']); ?></h2>
+                        <p class="fs-5 mb-3"><strong>Year:</strong> <?php echo htmlspecialchars($tv_series['year']); ?></p>
+                        <span class="genre-badge mb-3 d-inline-block"><?php echo htmlspecialchars($tv_series['genre']); ?></span>
+                        <div class="mt-3 d-flex gap-2 flex-wrap">
+                            <span class="rating-badge">Rating: <?php echo htmlspecialchars($tv_series['rating']); ?></span>
+                            <span class="season-badge">Season: <?php echo htmlspecialchars($tv_series['season']); ?></span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-1">
-                <div class="card shadow card2">
-                <div class="card-body">
-                <div class="director mb-3">Director</div>
-                <img class="icons-card" src="" alt="">
-                <span><?php echo htmlspecialchars($tv_series['director']); ?></p>
-                <div class="cast mb-3">Cast</div>
-                <img class="icons-card" src="" alt="">
-                <span><?php echo htmlspecialchars($tv_series['cast']); ?></p>
-                <div class="cast mb-3">Season</div>
-                <img class="icons-card" src="" alt="">
-                <span><?php echo htmlspecialchars($tv_series['season']); ?></p>
+
+            <!-- Director & Cast -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-lg cast-card">
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <h3 class="h5 mb-3 section-title">Director</h3>
+                            <div class="d-flex align-items-center gap-2">
+                                <img class="rounded-circle" src="" alt="" width="40" height="40">
+                                <span class="fs-5"><?php echo htmlspecialchars($tv_series['director']); ?></span>
+                            </div>
+                        </div>
+                        <div class="mb-4">
+                            <h3 class="h5 mb-3 section-title">Cast</h3>
+                            <div class="d-flex align-items-center gap-2">
+                                <img class="rounded-circle" src="" alt="" width="40" height="40">
+                                <span class="fs-5"><?php echo htmlspecialchars($tv_series['cast']); ?></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                </div>
-            </div>
             </div>
         </div>
-        </section>
 
-        <section class="section mb-5">
-            <div class="container">
-                <div class="card shadow card3">
-                    <div class="card-body">
-                    <div class="plot mb-3">Plot</div>
-                    <div class="summary"><?php echo htmlspecialchars($tv_series['summary']); ?></div>
+        <!-- Plot Section -->
+        <div class="card border-0 shadow-lg mb-5">
+            <div class="card-body">
+                <h3 class="h2 mb-4 section-title">Plot</h3>
+                <p class="fs-5"><?php echo htmlspecialchars($tv_series['summary']); ?></p>
+            </div>
+        </div>
+
+        <!-- Screenshots Section -->
+        <div class="card border-0 shadow-lg mb-5">
+            <div class="card-body">
+                <h3 class="h2 mb-4 section-title">Screenshots</h3>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <img src="uploads/12 strong image 1.jpg" class="img-fluid rounded screenshot-img w-100" alt="Screenshot 1">
+                    </div>
+                    <div class="col-md-4">
+                        <img src="uploads/12 strong image 2.jpg" class="img-fluid rounded screenshot-img w-100" alt="Screenshot 2">
+                    </div>
+                    <div class="col-md-4">
+                        <img src="uploads/12 strong image 3.jpg" class="img-fluid rounded screenshot-img w-100" alt="Screenshot 3">
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="section mb-5">
-            <div class="container">
-            <div class="card shadow card-screenshot">
-                <div class="row">
-               
-                    <div class="col d-flex justify-content-center">
-                     
-                        <img class="screenshot" src="uploads/12 strong image 1.jpg" alt="">
-                       
-                    </div>
-                    <div class="col d-flex justify-content-center">
-                 
-                        <img class="screenshot" src="uploads/12 strong image 2.jpg" alt="">
-                    
-                    </div>
-                    <div class="col d-flex justify-content-center">
-                    
-                        <img class="screenshot" src="uploads/12 strong image 3.jpg" alt="">
-                     
-                    </div>
-                    </div>
-                </div>
+        <!-- Reviews Section -->
+        <div class="card border-0 shadow-lg">
+            <div class="card-body">
+                <h3 class="h2 mb-4 section-title">Reviews</h3>
+                <p class="fs-5"><?php echo htmlspecialchars($tv_series['reviews']); ?></p>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <section class="section mb-5">
-            <div class="container">
-                <div class="card">
-            <div class="plot">REVIEWS</div>
-            <div class="fs-5 reviews"><?php echo htmlspecialchars($tv_series['reviews']); ?></div>
-            </div>
-            </div>
-        </section>
+    <?php include "../../footer.php" ?>
 
-        <?php include "../../footer.php" ?>
+    
 </body>
 </html>

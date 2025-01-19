@@ -40,189 +40,201 @@ $stmt->close();
 $conn->close();
 ?>
 
+<?php
+// Process the screenshots data
+$screenshots_arr = [];
+
+if (!empty($movie['screenshots'])) {
+    // Assuming screenshots are stored as a semicolon-separated string
+    $screenshots_arr = explode(';', $movie['screenshots']);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Details</title>
+    <title>Movie Details</title>
     <?php include "../../header.php"?>
+    <style>
+        body {
+            background-color: #0a1019;
+            background-image: 
+                linear-gradient(rgba(0, 0, 0, 0.9), rgba(0, 0, 0, 0.9)),
+                url('https://cdnjs.cloudflare.com/ajax/libs/cinema-icons/1.0.0/pattern.svg');
+            background-size: 200px;
+            color: #fff;
+        }
+
+        .card {
+            background-color: rgba(25, 35, 55, 0.9) !important;
+            border: 1px solid rgba(255, 255, 255, 0.1) !important;
+            backdrop-filter: blur(10px);
+        }
+
+        .card-body {
+            color: #fff;
+        }
+
+        .movie-title {
+            color: #ffd700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+        }
+
+        .section-title {
+            color: #ff4d4d;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .movie-info {
+            background: linear-gradient(135deg, rgba(25, 35, 55, 0.9), rgba(40, 50, 70, 0.9));
+        }
+
+        .rating-badge {
+            background-color: #ffd700;
+            color: #000;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .genre-badge {
+            background-color: #ff4d4d;
+            color: #fff;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: bold;
+        }
+
+        .cast-card {
+            transition: transform 0.3s ease;
+        }
+
+        .cast-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .screenshot-img {
+            transition: transform 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .screenshot-img:hover {
+            transform: scale(1.05);
+            border-color: #ff4d4d;
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #0a1019;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #ff4d4d;
+            border-radius: 5px;
+        }
+    </style>
 </head>
-<style>
-   .card {
-    height: auto;
-    padding: 10px;
-}
-
-.card1 {
-    width: 400px;
-}
-
-.card2 {
-    width: 350px;
-}
-
-.card3 {
-    width: 100%;
-    max-width: 1100px;
-}
-
-.name {
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.section {
-    min-height: 45vh;
-    display: flex;
-    position: relative;
-    justify-content: center;
-}
-
-.icons-card {
-    border-radius: 50px;
-}
-
-.cast, .director, .year, .ratings  {
-    font-weight: bold;
-    font-size: 18px;
-}
-
-.genre{
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.plot {
-    font-size: 30px;
-    font-weight: bold;
-}
-
-@media (max-width: 768px) {
-    .card, .card1, .card2, .card3 {
-        width: 100%;
-        max-width: none;
-    }
-
-    .card2 {
-        height: auto;
-    }
-
-    body {
-        text-align: center;
-    }
-
-    .section {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .row {
-        flex-direction: column;
-    }
-
-    .col-md-3, .col-md-5, .col-md-1 {
-        width: 100%;
-        margin-bottom: 20px;
-    }
-
-    .screenshot{
-       display: none;
-    }
-
-    .card-screenshot{
-        display: none;
-    }
-}
-
-.screenshot{
-    width: 300px;
-    height: 200px;
-}
-</style>
-<body >
+<body>
     <?php include "../../nav_user.php" ?>
 
-    <section class="section mb-5">
-        <div class="container">
-        <p class="name">MOVIE DETAILS</p>
-        <div class="row">
+    <div class="container py-5">
+        <!-- Movie Title -->
+        <h1 class="display-4 mb-5 movie-title text-center">Movie Details</h1>
+
+        <!-- Movie Info Section -->
+        <div class="row g-4 mb-5">
+            <!-- Movie Poster -->
             <div class="col-md-3">
-                <div class="card card-pics">
-                    <img src="<?php echo htmlspecialchars($movie['img']); ?>" alt="">
+                <div class="card border-0 shadow-lg">
+                    <img src="<?php echo htmlspecialchars($movie['img']); ?>" class="card-img-top" alt="Movie Poster">
                 </div>
             </div>
+
+            <!-- Movie Details -->
             <div class="col-md-5">
-                <div class="card shadow card1">
+                <div class="card h-100 border-0 shadow-lg movie-info">
                     <div class="card-body">
-                    <div class="name mb-4"><?php echo htmlspecialchars($movie['name']); ?></div>
-                    <div class="year mb-2"><?php echo htmlspecialchars($movie['year']); ?></div>
-                    <div class="genre mb-2"><?php echo htmlspecialchars($movie['genre']); ?></div>
-                    <div class="ratings">Ratings: <span><?php echo htmlspecialchars($movie['rating']); ?></p></div>
+                        <h2 class="card-title h3 mb-4 movie-title"><?php echo htmlspecialchars($movie['name']); ?></h2>
+                        <p class="fs-5 mb-3"><strong>Year:</strong> <?php echo htmlspecialchars($movie['year']); ?></p>
+                        <span class="genre-badge mb-3 d-inline-block"><?php echo htmlspecialchars($movie['genre']); ?></span>
+                        <div class="mt-3">
+                            <span class="rating-badge">Rating: <?php echo htmlspecialchars($movie['rating']); ?></span>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="col-md-1">
-                <div class="card shadow card2">
-                <div class="card-body">
-                <div class="director mb-3">Director</div>
-                <img class="icons-card" src="" alt="">
-                <span><?php echo htmlspecialchars($movie['director']); ?></p>
-                <div class="cast mb-3">Cast</div>
-                <img class="icons-card" src="" alt="">
-                <span><?php echo htmlspecialchars($movie['cast']); ?></p>
+
+            <!-- Director & Cast -->
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-lg cast-card">
+                    <div class="card-body">
+                        <div class="mb-4">
+                            <h3 class="h5 mb-3 section-title">Director</h3>
+                            <div class="d-flex align-items-center gap-2">
+                                <img class="rounded-circle" src="" alt="" width="40" height="40">
+                                <span class="fs-5"><?php echo htmlspecialchars($movie['director']); ?></span>
+                            </div>
+                        </div>
+                        <div>
+                            <h3 class="h5 mb-3 section-title">Cast</h3>
+                            <div class="d-flex align-items-center gap-2">
+                                <img class="rounded-circle" src="" alt="" width="40" height="40">
+                                <span class="fs-5"><?php echo htmlspecialchars($movie['cast']); ?></span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                </div>
-            </div>
             </div>
         </div>
-        </section>
 
-        <section class="section mb-5">
-            <div class="container">
-                <div class="card shadow card3">
-                    <div class="card-body">
-                    <div class="plot mb-3">Plot</div>
-                    <div class="summary"><?php echo htmlspecialchars($movie['summary']); ?></div>
-                    </div>
+        <!-- Plot Section -->
+        <div class="card border-0 shadow-lg mb-5">
+            <div class="card-body">
+                <h3 class="h2 mb-4 section-title">Plot</h3>
+                <p class="fs-5"><?php echo htmlspecialchars($movie['summary']); ?></p>
+            </div>
+        </div>
+
+        <!-- Screenshots Section -->
+        <div class="card border-0 shadow-lg mb-5">
+            <div class="card-body">
+                <h3 class="h2 mb-4 section-title">Screenshots</h3>
+                <div class="row g-4">
+                    <?php if (!empty($screenshots_arr)): ?>
+                        <?php foreach ($screenshots_arr as $screenshot): ?>
+                            <div class="col-6 col-md-3">
+                                <img src="<?php echo htmlspecialchars($screenshot); ?>" 
+                                     class="img-fluid rounded screenshot-img" 
+                                     alt="Movie Screenshot">
+                            </div>
+                        <?php endforeach; ?>
+                    <?php else: ?>
+                        <div class="col-12">
+                            <p class="text-muted">No screenshots available.</p>
+                        </div>
+                    <?php endif; ?>
                 </div>
             </div>
-        </section>
+        </div>
 
-        <section class="section mb-5">
-            <div class="container">
-            <div class="card shadow card-screenshot">
-                <div class="row">
-               
-                    <div class="col d-flex justify-content-center">
-                     
-                        <img class="screenshot" src="uploads/12 strong image 1.jpg" alt="">
-                       
-                    </div>
-                    <div class="col d-flex justify-content-center">
-                 
-                        <img class="screenshot" src="uploads/12 strong image 2.jpg" alt="">
-                    
-                    </div>
-                    <div class="col d-flex justify-content-center">
-                    
-                        <img class="screenshot" src="uploads/12 strong image 3.jpg" alt="">
-                     
-                    </div>
-                    </div>
-                </div>
+        <!-- Reviews Section -->
+        <div class="card border-0 shadow-lg">
+            <div class="card-body">
+                <h3 class="h2 mb-4 section-title">Reviews</h3>
+                <p class="fs-5"><?php echo htmlspecialchars($movie['reviews']); ?></p>
             </div>
-        </section>
+        </div>
+    </div>
 
-        <section class="section mb-5">
-            <div class="container">
-                <div class="card">
-                    <div class="plot">REVIEWS</div>
-                    <div class="fs-5 reviews"><?php echo htmlspecialchars($movie['reviews']); ?></div>
-                    </div>
-            </div>
-        </section>
+    <?php include "../../footer.php" ?>
 
-        <?php include "../../footer.php" ?>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

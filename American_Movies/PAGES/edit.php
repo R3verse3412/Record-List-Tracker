@@ -85,7 +85,23 @@
                         </div>
                         <?php endforeach; ?>
                     </div>
-                    <button type="button" class="btn btn-secondary" onclick="addCastMember()">Add Cast Member</button>
+                    <button type="button" class="btn btn-secondary mb-3" onclick="addCastMember()">Add Cast
+                        Member</button>
+                    <div class="mb-3">
+                        <label class="form-label">Current Screenshots</label><br>
+                        <?php foreach ($screenshots_arr as $screenshot): ?>
+                        <?php if (!empty($screenshot)): ?>
+                        <img src="<?php echo htmlspecialchars($screenshot); ?>" alt="Screenshot"
+                            style="max-width: 150px; margin-right: 10px;">
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Add New Screenshots</label>
+                        <input type="file" class="form-control" name="screenshots[]" multiple>
+                    </div>
+
                 </div>
 
                 <div class="mb-5 d-flex justify-content-center">
